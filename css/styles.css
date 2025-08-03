@@ -1,0 +1,4 @@
+/* Eigene Utility-Klasse für glasscheiben-artige Panels */
+.glass-panel {
+  @apply bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 space-y-4;
+}

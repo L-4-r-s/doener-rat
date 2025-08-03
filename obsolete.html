@@ -1,0 +1,17 @@
+<!-- Details Column -->
+<th class="p-2">Details</th>
+<td class="p-2" data-label="${headers[16]}"><button onclick="showDetails('${laden.name}', \`${laden.kommentar?.replace(/'/g, "\\'") ?? ""}\`)" class="text-blue-600 hover:underline">Details</button></td>
+
+<!-- Table for small devices -->
+    /* Ihre bestehende Regel für mobile Geräte */
+    @media (max-width: 768px) {
+      .responsive-table {
+        overflow-x: hidden; /* Scrollen hier deaktivieren, da nicht mehr nötig */
+      }
+      .responsive-table table, .responsive-table thead, .responsive-table tbody, .responsive-table th, .responsive-table td, .responsive-table tr { display: block; }
+      .responsive-table thead tr { position: absolute; top: -9999px; left: -9999px; }
+      .responsive-table tr { border: 1px solid #ddd; border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+      .responsive-table td { border: none; border-bottom: 1px solid #eee; position: relative; padding-left: 50%; text-align: right; padding-top: 0.75rem; padding-bottom: 0.75rem; padding-right: 0.75rem; min-height: 2.5rem; display: flex; align-items: center; justify-content: flex-end; }
+      .responsive-table td:before { content: attr(data-label); position: absolute; top: 0; left: 0; width: 45%; height: 100%; padding-left: 0.75rem; padding-right: 10px; white-space: nowrap; text-align: left; font-weight: 600; display: flex; align-items: center; }
+      .responsive-table td:last-child { border-bottom: 0; }
+    }

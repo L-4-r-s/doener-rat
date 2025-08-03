@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Döner-Rangliste Marburg</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+<style>
+    /* *** NEU: Klasse für kontrollierten Zeilenumbruch *** */
+    .allow-wrap {
+      white-space: normal; /* Erlaubt Zeilenumbrüche wieder */
+      min-width: 8rem;     /* ca. 128px, verhindert, dass die Spalte zu sehr gequetscht wird */
+      max-width: 15rem;    /* ca. 240px, zwingt lange Namen zum Umbruch */
+    }
+
+      /* Large Desktop */
+    @media (max-width: 1680px) {
+      .hide-tier-0 {
+        display: none;
+      }
+    }
+
+    /* Medium Desktop */
+    @media (max-width: 1440px) {
+      .hide-tier-1 {
+        display: none;
+      }
+    }
+
+    /* Small Desktop */
+    @media (max-width: 1280px) {
+      .hide-tier-2 {
+        display: none;
+      }
+    }
+
+    /* Tablets */
+    @media (max-width: 1024px) {
+      .hide-tier-3 {
+        display: none;
+      }
+    }
+
+    /* Ihre bestehende Regel für mobile Geräte */
+    @media (max-width: 768px) {
+      .hide-tier-4 {
+        display: none;
+      }
+    }
+
+    /* 
+      *** NEU: CSS für sortierbare Spalten *** 
+    */
+    th[data-sort] {
+      cursor: pointer;
+      user-select: none; /* Verhindert das Markieren von Text beim Klicken */
+      position: relative;
+    }
+
+    /* Pfeil-Indikator, standardmäßig unsichtbar */
+    .sort-indicator {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      text-align: left;
+      margin-left: 0.25rem;
+      color: #9ca3af; /* gray-400 */
+    }
+    
+    /* Sichtbarer Pfeil für aufsteigende und absteigende Sortierung */
+    .sort-indicator.asc::after {
+      content: '▲';
+      font-size: 0.8em;
+    }
+
+    .sort-indicator.desc::after {
+      content: '▼';
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+<body class="bg-gray-50 text-gray-900 transition-colors duration-300 relative z-0">
+
+  <!-- Hintergrundbilder -->
+  <div class="fixed inset-0 z-[-2]">
+    <img id="bg-1" src="images/bg_mb.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
+    <img id="bg-2" src="images/bg_rat.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300" />
+  </div>
+
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur sticky top-0 z-50 shadow">
+    <div class="max-w-6xl mx-auto p-4">
+      <h1 class="text-2xl font-bold">🥙 Marburger Döner-Rangliste</h1>
+    </div>
+  </header>
+
+  <!-- Hauptinhalt -->
+  <main class="p-4">
+    <div class="flex justify-center">
+      <div class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 space-y-4 w-full md:w-auto">
+        <!-- ... Intro-Text und Suchfeld bleiben gleich ... -->
+
+        <div class="responsive-table">
+          <table class="border-collapse text-sm whitespace-nowrap">
+            <thead class="bg-gray-100 text-left">
+              <tr>
+                <!-- 
+                  *** HIER IST DIE ÄNDERUNG ***
+                  Jeder klickbare Header bekommt ein `data-sort`-Attribut,
+                  dessen Wert dem Schlüssel in der doener.json entspricht.
+                -->
+                <th class="p-2">Platz</th>
+                <th class="p-2 allow-wrap" data-sort="name">Name<span class="sort-indicator"></span></th>
+                <th class="p-2" data-sort="preis">Preis<span class="sort-indicator"></span></th>
+                <th class="p-2" data-sort="geschmack">Geschmack<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-0" data-sort="präsentation">Präsentation<span class="sort-indicator"></span></th>
+                <th class="p-2 allow-wrap hide-tier-1" data-sort="übereinstimmung bestellung">Übereinstimmung Bestellung<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-3" data-sort="menge">Menge<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-3" data-sort="service">Service<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-2" data-sort="ambiente">Ambiente<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-1" data-sort="layering">Layering<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-3" data-sort="zeit">Zeit<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-4" data-sort="fleisch">Fleisch<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-4" data-sort="brot">Brot<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-4" data-sort="gemüse">Gemüse<span class="sort-indicator"></span></th>
+                <th class="p-2 hide-tier-4" data-sort="sauce">Sauce<span class="sort-indicator"></span></th>
+                <th class="p-2 font-bold" data-sort="gesamt">Gesamt<span class="sort-indicator"></span></th>
+              </tr>
+            </thead>
+            <tbody id="ranking-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- Modal -->
+  <div
+    id="modal"
+    class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <div
+      class="bg-white text-gray-900 rounded-xl p-6 w-full max-w-xl shadow-lg transform transition-transform duration-300 scale-95 opacity-0"
+      id="modal-content"
+    >
+      <button
+        onclick="toggleModal(false)"
+        class="float-right text-gray-400 hover:text-black"
+        aria-label="Modal schließen"
+      >
+        ✕
+      </button>
+      <h2 id="modal-title" class="text-xl font-semibold mb-2"></h2>
+      <p id="modal-comment" class="text-gray-700 text-sm whitespace-pre-line"></p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

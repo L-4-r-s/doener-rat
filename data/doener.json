@@ -1,0 +1,40 @@
+[
+  {
+    "name": "Amed Pizza & Döner",
+    "preis": 5.5,
+    "geschmack": 4.8,
+    "präsentation": 4.7,
+    "übereinstimmung bestellung": 5.3,
+    "menge": 5.2 ,
+    "service": "-",
+    "ambiente": "-",
+    "layering": 3,
+    "zeit": 7.2,
+    "fleisch": 4.7,
+    "brot": 4.3,
+    "gemüse": 4.2,
+    "sauce": 3.3,
+    "gesamt": 3.3,
+    "kommentar": "Liefert nur",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224.07397496848384!2d8.778343529920225!3d50.80434139305451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc893dd2b139b7%3A0xb449dead808d32b6!2sAMED%20Pizza%20%26%20D%C3%B6ner!5e1!3m2!1sde!2sde!4v1753121508484!5m2!1sde!2sde"
+  },
+  {
+    "name": "Castello Pizza & Dönerhaus",
+    "preis": 9,
+    "geschmack": 5.4,
+    "präsentation": 6.4,
+    "übereinstimmung bestellung": 10,
+    "menge": 6,
+    "service": 6.5,
+    "ambiente": 5.1,
+    "layering": 7,
+    "zeit": 8.5,
+    "fleisch": 4.6,
+    "brot": 4.9,
+    "gemüse": 5.7,
+    "sauce": 5,
+    "gesamt": 5.3,
+    "kommentar": "Nur Hähnchenspieß, kein Rotkraut",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224.0481900608146!2d8.7717565521598!3d50.8097176449958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc631f905e9c11%3A0x7764e0bdef05f866!2sCastello%20Pizza%20%26%20D%C3%B6nerhaus!5e1!3m2!1sde!2sde!4v1753121658346!5m2!1sde!2sde"
+  }
+]
