@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const gesamt = typeof laden.gesamt === "number" ? laden.gesamt.toFixed(1) : "-";
 
       row.innerHTML = `
-        <td class="p-2" data-label="${headers[0]}">${index + 1}</td>
+        <td class="p-2 font-semibold" data-label="${headers[0]}">${index + 1}</td>
         <td class="p-2 font-medium allow-wrap" data-label="${headers[1]}"><a href="laden.html?name=${encodeURIComponent(laden.name)}" class="text-blue-600 hover:underline">${laden.name}</a></td>
         <td class="p-2" data-label="${headers[2]}">${laden.preis ?? "-"}</td>
         <td class="p-2" data-label="${headers[3]}">${laden.geschmack ?? "-"}</td>
@@ -152,7 +152,25 @@ document.addEventListener("DOMContentLoaded", () => {
       tbody.innerHTML = `<tr><td colspan="17" class="p-4 text-center text-red-500">Daten konnten nicht geladen werden.</td></tr>`;
     }
   }
+  // === NEUER CODE FÜR DEN DETAIL-UMSCHALTER ===
+  const toggleBtn = document.getElementById('toggle-details-btn');
+  const tableContainer = document.getElementById('doener-table-container');
 
+  // Sicherstellen, dass die Elemente existieren, bevor wir den Listener hinzufügen
+  if (toggleBtn && tableContainer) {
+    toggleBtn.addEventListener('click', () => {
+      // Die Klasse 'details-hidden' am Container umschalten
+      tableContainer.classList.toggle('details-hidden');
+
+      // Den Button-Text anpassen, je nachdem, ob die Details versteckt sind oder nicht
+      const areDetailsHidden = tableContainer.classList.contains('details-hidden');
+      if (areDetailsHidden) {
+        toggleBtn.textContent = 'Details anzeigen';
+      } else {
+        toggleBtn.textContent = 'Details ausblenden';
+      }
+    });
+  }
   init(); // Starte die Initialisierung
 });
 

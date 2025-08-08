@@ -16,6 +16,7 @@
     "sauce": 3.3,
     "gesamt": 3.3,
     "kommentar": "Liefert nur",
+    "datum": "07.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224.07397496848384!2d8.778343529920225!3d50.80434139305451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc893dd2b139b7%3A0xb449dead808d32b6!2sAMED%20Pizza%20%26%20D%C3%B6ner!5e1!3m2!1sde!2sde!4v1753121508484!5m2!1sde!2sde"
   },
   {
@@ -35,6 +36,7 @@
     "sauce": 5,
     "gesamt": 5.3,
     "kommentar": "Nur Hähnchenspieß, kein Rotkraut",
+    "datum": "14.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224.0481900608146!2d8.7717565521598!3d50.8097176449958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc631f905e9c11%3A0x7764e0bdef05f866!2sCastello%20Pizza%20%26%20D%C3%B6nerhaus!5e1!3m2!1sde!2sde!4v1753121658346!5m2!1sde!2sde"
   },
   {
@@ -54,6 +56,7 @@
     "sauce": 6,
     "gesamt": 6.7,
     "kommentar": "Eher Restaurant als Dönerladen. Hat selbstgemachten Ayran.",
+    "datum": "28.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d201.6504120322567!2d8.771537662645466!3d50.817590603504286!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63866a1d0679%3A0x1f920e49304f6d80!2sLezzet-i%20Mangal!5e1!3m2!1sde!2sde!4v1754683390759!5m2!1sde!2sde"
   }
 ]

@@ -6,78 +6,118 @@
   <title>Döner-Rangliste Marburg</title>
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://cdn.tailwindcss.com"></script>
-<style>
-    /* *** NEU: Klasse für kontrollierten Zeilenumbruch *** */
-    .allow-wrap {
-      white-space: normal; /* Erlaubt Zeilenumbrüche wieder */
-      min-width: 8rem;     /* ca. 128px, verhindert, dass die Spalte zu sehr gequetscht wird */
-      max-width: 15rem;    /* ca. 240px, zwingt lange Namen zum Umbruch */
-    }
-
-      /* Large Desktop */
-    @media (max-width: 1680px) {
-      .hide-tier-0 {
-        display: none;
+  <style>
+      /* Klasse für kontrollierten Zeilenumbruch auf Desktops */
+      .allow-wrap {
+        white-space: normal;
+        min-width: 8rem;
+        max-width: 15rem;
       }
-    }
 
-    /* Medium Desktop */
-    @media (max-width: 1440px) {
-      .hide-tier-1 {
-        display: none;
+      /* === SAUBERES, GESTAFFELTES AUSBLENDEN (NUR FÜR DESKTOP/TABLET) === */
+      /* Diese Regeln gelten nur für Bildschirme, die breiter als 768px sind. */
+
+      /* Tablets (769px - 1024px) */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .hide-tier-0, .hide-tier-1, .hide-tier-2, .hide-tier-3 { display: none; }
       }
-    }
-
-    /* Small Desktop */
-    @media (max-width: 1280px) {
-      .hide-tier-2 {
-        display: none;
+      /* Small Desktop (1025px - 1280px) */
+      @media (min-width: 1025px) and (max-width: 1280px) {
+        .hide-tier-0, .hide-tier-1, .hide-tier-2 { display: none; }
       }
-    }
-
-    /* Tablets */
-    @media (max-width: 1024px) {
-      .hide-tier-3 {
-        display: none;
+      /* Medium Desktop (1281px - 1440px) */
+      @media (min-width: 1281px) and (max-width: 1440px) {
+        .hide-tier-0, .hide-tier-1 { display: none; }
       }
-    }
-
-    /* Ihre bestehende Regel für mobile Geräte */
-    @media (max-width: 768px) {
-      .hide-tier-4 {
-        display: none;
+      /* Large Desktop (1441px - 1680px) */
+      @media (min-width: 1441px) and (max-width: 1680px) {
+        .hide-tier-0 { display: none; }
       }
-    }
 
-    /* 
-      *** NEU: CSS für sortierbare Spalten *** 
-    */
-    th[data-sort] {
-      cursor: pointer;
-      user-select: none; /* Verhindert das Markieren von Text beim Klicken */
-      position: relative;
-    }
 
-    /* Pfeil-Indikator, standardmäßig unsichtbar */
-    .sort-indicator {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      text-align: left;
-      margin-left: 0.25rem;
-      color: #9ca3af; /* gray-400 */
-    }
-    
-    /* Sichtbarer Pfeil für aufsteigende und absteigende Sortierung */
-    .sort-indicator.asc::after {
-      content: '▲';
-      font-size: 0.8em;
-    }
+      /* === KOMPLETTE KARTENANSICHT FÜR HANDYS (ALLES UNTER 768px) === */
+      @media (max-width: 768px) {
+        
+        /* --- Grundlegendes Mobile-Layout --- */
+        .responsive-table table, 
+        .responsive-table thead, 
+        .responsive-table tbody, 
+        .responsive-table th, 
+        .responsive-table td, 
+        .responsive-table tr {
+          display: block;
+        }
+        .responsive-table thead tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+        .responsive-table tr {
+          border: 1px solid #ddd;
+          border-radius: 0.5rem;
+          margin-bottom: 1rem;
+          overflow: hidden;
+        }
+        .responsive-table td {
+          border: none;
+          border-bottom: 1px solid #eee;
+          position: relative;
+          padding-left: 45%;
+          text-align: right;
+          min-height: 2.5rem;
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+          padding-right: 0.75rem;
+          /* Dies ist der entscheidende Punkt: Der Standard ist 'flex' (sichtbar) */
+          display: flex; 
+          align-items: center;
+          justify-content: flex-end;
+        }
+        .responsive-table td:before {
+          content: attr(data-label);
+          position: absolute;
+          top: 0; left: 0;
+          width: 40%; height: 100%;
+          padding-left: 0.75rem;
+          padding-right: 10px;
+          white-space: normal;
+          text-align: left;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+        }
+        .responsive-table td:last-child {
+          border-bottom: 0;
+        }
+        .responsive-table .allow-wrap {
+          min-width: 0;
+          max-width: none;
+          width: auto;
+        }
 
-    .sort-indicator.desc::after {
-      content: '▼';
-      font-size: 0.8em;
-    }
+        /* --- DIE EINZIGE REGEL ZUM VERSTECKEN AUF DEM HANDY --- */
+        /* Diese Regel greift NUR, wenn die Klasse .details-hidden vorhanden ist. */
+        #doener-table-container.details-hidden td:not([data-label="Name"]):not([data-label="Gesamt"]) {
+          display: none;
+        }
+      }
+
+      /* === CSS FÜR SORTIERBARE SPALTEN (Unverändert) === */
+      th[data-sort] {
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+      }
+      .sort-indicator {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        text-align: left;
+        margin-left: 0.25rem;
+        color: #9ca3af;
+      }
+      .sort-indicator.asc::after { content: '▲'; font-size: 0.8em; }
+      .sort-indicator.desc::after { content: '▼'; font-size: 0.8em; }
   </style>
 </head>
 <body>
@@ -102,33 +142,39 @@
       <div class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 space-y-4 w-full md:w-auto">
         <!-- ... Intro-Text und Suchfeld bleiben gleich ... -->
 
-        <div class="responsive-table">
+        <div class="text-center mb-4 md:hidden">
+          <button id="toggle-details-btn" class="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors shadow">
+            Details anzeigen
+          </button>
+        </div>
+
+        <div id="doener-table-container" class="responsive-table details-hidden">
           <table class="border-collapse text-sm whitespace-nowrap">
-            <thead class="bg-gray-100 text-left">
-              <tr>
-                <!-- 
-                  *** HIER IST DIE ÄNDERUNG ***
-                  Jeder klickbare Header bekommt ein `data-sort`-Attribut,
-                  dessen Wert dem Schlüssel in der doener.json entspricht.
-                -->
-                <th class="p-2">Platz</th>
-                <th class="p-2 allow-wrap" data-sort="name">Name<span class="sort-indicator"></span></th>
-                <th class="p-2" data-sort="preis">Preis<span class="sort-indicator"></span></th>
-                <th class="p-2" data-sort="geschmack">Geschmack<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-0" data-sort="präsentation">Präsentation<span class="sort-indicator"></span></th>
-                <th class="p-2 allow-wrap hide-tier-1" data-sort="übereinstimmung bestellung">Übereinstimmung Bestellung<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-3" data-sort="menge">Menge<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-3" data-sort="service">Service<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-2" data-sort="ambiente">Ambiente<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-1" data-sort="layering">Layering<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-3" data-sort="zeit">Zeit<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-4" data-sort="fleisch">Fleisch<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-4" data-sort="brot">Brot<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-4" data-sort="gemüse">Gemüse<span class="sort-indicator"></span></th>
-                <th class="p-2 hide-tier-4" data-sort="sauce">Sauce<span class="sort-indicator"></span></th>
-                <th class="p-2 font-bold" data-sort="gesamt">Gesamt<span class="sort-indicator"></span></th>
-              </tr>
-            </thead>
+              <thead class="bg-gray-100 text-left">
+                <tr>
+                  <!-- 
+                    *** HIER IST DIE ÄNDERUNG ***
+                    Jeder klickbare Header bekommt ein `data-sort`-Attribut,
+                    dessen Wert dem Schlüssel in der doener.json entspricht.
+                  -->
+                  <th class="p-2 font-bold">Platz</th>
+                  <th class="p-2 allow-wrap" data-sort="name">Name<span class="sort-indicator"></span></th>
+                  <th class="p-2" data-sort="preis">Preis<span class="sort-indicator"></span></th>
+                  <th class="p-2" data-sort="geschmack">Geschmack<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-0" data-sort="präsentation">Präsentation<span class="sort-indicator"></span></th>
+                  <th class="p-2 allow-wrap hide-tier-1" data-sort="übereinstimmung bestellung">Übereinstimmung Bestellung<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-3" data-sort="menge">Menge<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-3" data-sort="service">Service<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-2" data-sort="ambiente">Ambiente<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-1" data-sort="layering">Layering<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-3" data-sort="zeit">Zeit<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-4" data-sort="fleisch">Fleisch<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-4" data-sort="brot">Brot<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-4" data-sort="gemüse">Gemüse<span class="sort-indicator"></span></th>
+                  <th class="p-2 hide-tier-4" data-sort="sauce">Sauce<span class="sort-indicator"></span></th>
+                  <th class="p-2 font-bold" data-sort="gesamt">Gesamt<span class="sort-indicator"></span></th>
+                </tr>
+              </thead>
             <tbody id="ranking-body"></tbody>
           </table>
         </div>
