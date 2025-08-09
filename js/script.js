@@ -18,6 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
   // === FUNKTIONEN ===
+  function getBadgeEmoji(rank) {
+    if (rank === 1) return " 🏆";
+    if (rank === 2) return " 🥈";
+    if (rank === 3) return " 🥉";
+    return "";
+  }
 
   /**
    * Sortiert die 'gefilterteListe' basierend auf dem globalen 'currentSort'-Objekt.
@@ -74,12 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
     
     liste.forEach((laden, index) => {
       const row = document.createElement("tr");
-      row.classList.add("border-b", "md:border-b-0");
+      row.classList.add("border-b", "md:border-b-0", `rank-${index + 1}`);
       const gesamt = typeof laden.gesamt === "number" ? laden.gesamt.toFixed(1) : "-";
+      const badge = getBadgeEmoji(index + 1);
 
       row.innerHTML = `
         <td class="p-2 font-semibold" data-label="${headers[0]}">${index + 1}</td>
-        <td class="p-2 font-medium allow-wrap" data-label="${headers[1]}"><a href="laden.html?name=${encodeURIComponent(laden.name)}" class="text-blue-600 hover:underline">${laden.name}</a></td>
+        <td class="p-2 font-medium allow-wrap" data-label="${headers[1]}">
+          <a href="laden.html?name=${encodeURIComponent(laden.name)}" class="text-blue-600 hover:underline">
+            ${laden.name}
+            <span class="top-badge ml-2" aria-hidden="true">${badge}</span>
+            <span class="sr-only">${badge ? `Platz ${index + 1}` : ''}</span>
+          </a>
+        </td>
         <td class="p-2" data-label="${headers[2]}">${laden.preis ?? "-"}</td>
         <td class="p-2" data-label="${headers[3]}">${laden.geschmack ?? "-"}</td>
         <td class="p-2 hide-tier-0" data-label="${headers[4]}">${laden["präsentation"] ?? "-"}</td>

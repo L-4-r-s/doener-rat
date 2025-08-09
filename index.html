@@ -14,8 +14,20 @@
         max-width: 15rem;
       }
 
+      /* Für Hover Effekt über Tabelle */
+      tbody tr:hover {
+        transform: scale(1.01);
+        background-color: rgba(255, 255, 255, 0.6);
+        transition: all 0.15s ease;
+      }
+
       /* === SAUBERES, GESTAFFELTES AUSBLENDEN (NUR FÜR DESKTOP/TABLET) === */
       /* Diese Regeln gelten nur für Bildschirme, die breiter als 768px sind. */
+
+      /* Standardmäßig ausblenden */
+      .top-badge {
+        display: none;
+      }
 
       /* Tablets (769px - 1024px) */
       @media (min-width: 769px) and (max-width: 1024px) {
@@ -34,9 +46,30 @@
         .hide-tier-0 { display: none; }
       }
 
+      /* Top-3 farbiger Rand (mobile cards oder list items) */
+      .rank-1 { border-left: 5px solid #D4AF37; } /* Gold */
+      .rank-2 { border-left: 5px solid #C0C0C0; } /* Silber */
+      .rank-3 { border-left: 5px solid #CD7F32; } /* Bronze */
+
+      /* optional: Abstand / besserer Look für mobile Cards */
+      @media (max-width: 768px) {
+        .responsive-table tr.rank-1,
+        .responsive-table tr.rank-2,
+        .responsive-table tr.rank-3 {
+          box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+      }
+
 
       /* === KOMPLETTE KARTENANSICHT FÜR HANDYS (ALLES UNTER 768px) === */
       @media (max-width: 768px) {
+         
+        /* Badges einblenden */
+        .top-badge {
+          display: inline;
+          font-size: 1.3rem;
+          vertical-align: middle;
+        }
         
         /* --- Grundlegendes Mobile-Layout --- */
         .responsive-table table, 
@@ -94,7 +127,6 @@
           max-width: none;
           width: auto;
         }
-
         /* --- DIE EINZIGE REGEL ZUM VERSTECKEN AUF DEM HANDY --- */
         /* Diese Regel greift NUR, wenn die Klasse .details-hidden vorhanden ist. */
         #doener-table-container.details-hidden td:not([data-label="Name"]):not([data-label="Gesamt"]) {
@@ -143,6 +175,16 @@
     <div class="flex justify-center">
       <div class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 space-y-4 w-full md:w-auto">
         <!-- ... Intro-Text und Suchfeld bleiben gleich ... -->
+        <!-- HIER DAS SUCHFELD EINFÜGEN -->
+        <div class="relative">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Suchen..." 
+            class="w-full p-2 pl-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+          >
+          <span class="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+        </div>
 
         <div class="text-center mb-4 md:hidden">
           <button id="toggle-details-btn" class="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors shadow">
