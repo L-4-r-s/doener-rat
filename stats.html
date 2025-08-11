@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Döner-Rangliste – Besucherstatistik</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl">
+    <h1 class="text-2xl font-bold mb-4 text-center">Besucherstatistik</h1>
+
+    <p class="text-lg text-center">Seitenaufrufe gesamt:</p>
+    <p id="counter" class="text-4xl font-bold text-blue-600 text-center mt-2">–</p>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2 text-center">Tägliche Aufrufe</h2>
+    <canvas id="visitsChart" height="200"></canvas>
+  </div>
+
+  <script>
+    const API_URL = 'https://api.countapi.xyz/get/doenerrangliste-marburg/aufrufe';
+    const STORAGE_KEY = 'doenerrangliste_visits_history';
+
+    async function loadCounter() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        document.getElementById('counter').innerText = data.value;
+
+        updateDailyHistory(data.value);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('counter').innerText = "Fehler";
+      }
+    }
+
+    function updateDailyHistory(totalCount) {
+      let history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+
+      // Falls heute noch kein Eintrag existiert, neuen hinzufügen
+      if (!history.find(entry => entry.date === today)) {
+        history.push({ date: today, count: totalCount });
+      } else {
+        // Tageswert aktualisieren (nur falls höher)
+        history = history.map(entry =>
+          entry.date === today && totalCount > entry.count
+            ? { date: today, count: totalCount }
+            : entry
+        );
+      }
+
+      // Maximal die letzten 14 Tage speichern
+      if (history.length > 14) {
+        history = history.slice(history.length - 14);
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+      drawChart(history);
+    }
+
+    function drawChart(history) {
+      const ctx = document.getElementById('visitsChart').getContext('2d');
+
+      // Tagesdifferenzen berechnen
+      const dailyData = history.map((entry, index) => {
+        if (index === 0) return 0;
+        return entry.count - history[index - 1].count;
+      });
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: history.map(entry => entry.date),
+          datasets: [{
+            label: 'Aufrufe pro Tag',
+            data: dailyData,
+            backgroundColor: 'rgba(59, 130, 246, 0.7)'
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { precision: 0 }
+            }
+          }
+        }
+      });
+    }
+
+    loadCounter();
+  </script>
+</body>
+</html>

@@ -1,11 +1,11 @@
 [
   {
     "name": "Amed Pizza & Döner",
-    "preis": 5.5,
+    "preis": "7,70€",
     "geschmack": 4.8,
     "präsentation": 4.7,
     "übereinstimmung bestellung": 5.3,
-    "menge": 5.2 ,
+    "menge": "389g" ,
     "service": "-",
     "ambiente": "-",
     "layering": 3,
@@ -21,11 +21,11 @@
   },
   {
     "name": "Castello Pizza & Dönerhaus",
-    "preis": 9,
+    "preis": "5€",
     "geschmack": 5.4,
     "präsentation": 6.4,
     "übereinstimmung bestellung": 10,
-    "menge": 6,
+    "menge": "414g",
     "service": 6.5,
     "ambiente": 5.1,
     "layering": 7,
@@ -41,11 +41,11 @@
   },
   {
     "name": "Lezzet-i Mangal",
-    "preis": 6.8,
+    "preis": "7€",
     "geschmack": 7,
     "präsentation": 8.2,
     "übereinstimmung bestellung": 8.2,
-    "menge": 8.3,
+    "menge": "563g",
     "service": 8.3,
     "ambiente": 8.2,
     "layering": 8.2,
@@ -58,5 +58,56 @@
     "kommentar": "Eher Restaurant als Dönerladen. Hat selbstgemachten Ayran.",
     "datum": "28.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d201.6504120322567!2d8.771537662645466!3d50.817590603504286!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63866a1d0679%3A0x1f920e49304f6d80!2sLezzet-i%20Mangal!5e1!3m2!1sde!2sde!4v1754683390759!5m2!1sde!2sde"
+  },
+  {
+    "name": "Stadt Döner - Jawoll Jawoll (demnächst)"
+  },
+  {
+    "name": "Mr. King (demnächst)"
+  },
+  {
+    "name": "Sefa's Döner und Pizzahaus (demnächst)"
+  },
+  {
+    "name": "Süleyman Usta (demnächst)"
+  },
+  {
+    "name": "Haus des Döners (demnächst)"
+  },
+  {
+    "name": "Südviertel Döner (demnächst)"
+  },
+  {
+    "name": "Helal Döner (demnächst)"
+  },
+  {
+    "name": "Star Döner & Pizzahaus (demnächst)"
+  },
+  {
+    "name": "Memo's Döner Pizzahaus (demnächst)"
+  },
+  {
+    "name": "Uni Döner (demnächst)"
+  },
+  {
+    "name": "Crunchy Kebab (demnächst)"
+  },
+  {
+    "name": "Memo's Döner Pizzahaus (demnächst)"
+  },
+  {
+    "name": "Istanbul Döner (demnächst)"
+  },
+  {
+    "name": "Leon's Döner & Pizza (demnächst)"
+  },
+  {
+    "name": "Royal Döner Kebab und Pizzahaus (demnächst)"
+  },
+  {
+    "name": "Bay Döner (demnächst)"
+  },
+  {
+    "name": "Sinan's Kebaphaus (demnächst)"
   }
 ]

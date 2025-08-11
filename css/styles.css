@@ -1,4 +1,136 @@
-/* Eigene Utility-Klasse für glasscheiben-artige Panels */
-.glass-panel {
-  @apply bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 space-y-4;
+/* Klasse für kontrollierten Zeilenumbruch auf Desktops */
+.allow-wrap {
+  white-space: normal;
+  min-width: 8rem;
+  max-width: 15rem;
 }
+
+/* Für Hover Effekt über Tabelle */
+tbody tr:hover {
+  transform: scale(1.01);
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: all 0.15s ease;
+}
+
+/* Standardmäßig ausblenden */
+.top-badge {
+  display: none;
+}
+
+/* Tablets (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hide-tier-0, .hide-tier-1, .hide-tier-2, .hide-tier-3 { display: none; }
+}
+/* Small Desktop (1025px - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .hide-tier-0, .hide-tier-1, .hide-tier-2 { display: none; }
+}
+/* Medium Desktop (1281px - 1440px) */
+@media (min-width: 1281px) and (max-width: 1440px) {
+  .hide-tier-0, .hide-tier-1 { display: none; }
+}
+/* Large Desktop (1441px - 1680px) */
+@media (min-width: 1441px) and (max-width: 1680px) {
+  .hide-tier-0 { display: none; }
+}
+
+/* Top-3 farbiger Rand (mobile cards oder list items) */
+.rank-1 { border-left: 5px solid #D4AF37; } /* Gold */
+.rank-2 { border-left: 5px solid #C0C0C0; } /* Silber */
+.rank-3 { border-left: 5px solid #CD7F32; } /* Bronze */
+
+/* optional: Abstand / besserer Look für mobile Cards */
+@media (max-width: 768px) {
+  /* Badges einblenden */
+  .top-badge {
+    display: inline;
+    font-size: 1.3rem;
+    vertical-align: middle;
+  }
+
+  .responsive-table tr.rank-1,
+  .responsive-table tr.rank-2,
+  .responsive-table tr.rank-3 {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+}
+
+/* === KOMPLETTE KARTENANSICHT FÜR HANDYS (ALLES UNTER 768px) === */
+@media (max-width: 768px) {
+  /* --- Grundlegendes Mobile-Layout --- */
+  .responsive-table table, 
+  .responsive-table thead, 
+  .responsive-table tbody, 
+  .responsive-table th, 
+  .responsive-table td, 
+  .responsive-table tr {
+    display: block;
+  }
+  .responsive-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .responsive-table tr {
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .responsive-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 45%;
+    text-align: right;
+    min-height: 2.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-right: 0.75rem;
+    display: flex; 
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .responsive-table td:before {
+    content: attr(data-label);
+    position: absolute;
+    top: 0; left: 0;
+    width: 40%; height: 100%;
+    padding-left: 0.75rem;
+    padding-right: 10px;
+    white-space: normal;
+    text-align: left;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  .responsive-table td:last-child {
+    border-bottom: 0;
+  }
+  .responsive-table .allow-wrap {
+    min-width: 0;
+    max-width: none;
+    width: auto;
+  }
+  /* Regel zum Verstecken auf dem Handy */
+  #doener-table-container.details-hidden td:not([data-label="Name"]):not([data-label="Gesamt"]) {
+    display: none;
+  }
+}
+
+/* === CSS FÜR SORTIERBARE SPALTEN === */
+th[data-sort] {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.sort-indicator {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  text-align: left;
+  margin-left: 0.25rem;
+  color: #9ca3af;
+}
+.sort-indicator.asc::after { content: '▲'; font-size: 0.8em; }
+.sort-indicator.desc::after { content: '▼'; font-size: 0.8em; }

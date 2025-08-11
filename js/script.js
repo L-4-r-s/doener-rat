@@ -84,14 +84,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const gesamt = typeof laden.gesamt === "number" ? laden.gesamt.toFixed(1) : "-";
       const badge = getBadgeEmoji(index + 1);
 
-      row.innerHTML = `
-        <td class="p-2 font-semibold" data-label="${headers[0]}">${index + 1}</td>
-        <td class="p-2 font-medium allow-wrap" data-label="${headers[1]}">
+      // Name-Spalte abhängig von vorhandener Bewertung
+      let nameCellContent;
+      if (typeof laden.gesamt === "number") {
+        // Mit Link und Badge
+        nameCellContent = `
           <a href="laden.html?name=${encodeURIComponent(laden.name)}" class="text-blue-600 hover:underline">
             ${laden.name}
             <span class="top-badge ml-2" aria-hidden="true">${badge}</span>
             <span class="sr-only">${badge ? `Platz ${index + 1}` : ''}</span>
           </a>
+        `;
+      } else {
+        // Nur schwarzer Text
+        nameCellContent = `
+          <span class="text-gray-900">
+            ${laden.name}
+            <span class="top-badge ml-2" aria-hidden="true">${badge}</span>
+          </span>
+        `;
+      }
+
+      row.innerHTML = `
+        <td class="p-2 font-semibold" data-label="${headers[0]}">${index + 1}</td>
+        <td class="p-2 font-medium allow-wrap" data-label="${headers[1]}">
+          ${nameCellContent}
         </td>
         <td class="p-2" data-label="${headers[2]}">${laden.preis ?? "-"}</td>
         <td class="p-2" data-label="${headers[3]}">${laden.geschmack ?? "-"}</td>
