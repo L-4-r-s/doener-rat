@@ -7,37 +7,76 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="bg-gray-100 text-gray-900 min-h-screen relative z-0">
+<body class="bg-gray-50 text-gray-900 min-h-screen relative z-0">
 
-  <!-- Hintergrundbilder -->
+  <!-- Hintergrundbilder wie auf index.html -->
   <div class="fixed inset-0 z-[-2]">
     <img id="bg-1" src="images/bg_mb.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
     <img id="bg-2" src="images/bg_rat.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300" />
   </div>
 
-  <!-- Hauptinhalt mit glass-panel -->
-  <div class="max-w-3xl mx-auto p-4">
-    <div class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6">
-      <a href="index.html" class="text-blue-600 hover:underline">← Zurück zur Rangliste</a>
-      
-      <h1 id="laden-name" class="text-2xl font-bold">Ladenname</h1>
-      
+  <!-- NEUE STRUKTUR: Hauptinhalt mit Zentrierung und Glas-Panel -->
+  <main class="p-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Das ist der Glas-Panel-Container von Ihrer index.html -->
+      <div id="main-content-panel" class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 md:p-8 space-y-8">
+
+      <!-- NEU: Ein Container, der den Link und den Header gruppiert -->
       <div>
-        <img id="laden-bild" src="" alt="Bild vom Döner" class="w-full max-h-96 object-cover rounded shadow" />
+        <!-- "Zurück"-Link mit definiertem unterem Abstand -->
+        <a href="index.html" class="inline-block text-blue-600 hover:underline mb-4">&larr; Zurück zur Rangliste</a>
+        <header>
+          <h1 id="laden-name" class="text-3xl font-bold"></h1>
+          <p id="laden-subtitle" class="text-lg text-gray-600 italic mt-1"></p>
+        </header>
       </div>
-      
-      <div>
-        <iframe id="map-frame" class="w-full h-64 rounded shadow" loading="lazy"></iframe>
-      </div>
-      
-      <div>
-        <h2 class="text-lg font-semibold mb-2">Details</h2>
-        <p id="laden-kommentar" class="whitespace-pre-line text-gray-800"></p>
+
+        <section>
+          <img id="laden-bild" src="" alt="" class="w-full rounded-xl shadow-md object-cover max-h-[400px]">
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-4">Offizielle Döner-Rat Bewertung</h2>
+          <div id="bewertung-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4"></div>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-2">Anmerkungen:</h2>
+          <p id="laden-kommentar" class="text-gray-800 whitespace-pre-line"></p>
+        </section>
+
+        <section>
+          <h2 id="colorstory" class="text-xl font-semibold mb-2"></h2>
+          <p id="laden-story" class="text-gray-700 leading-relaxed"></p>
+        </section>
+
+        <section>
+          <h2 class="text-xl font-semibold mb-2">Lage</h2>
+          <iframe id="map-frame" class="w-full h-64 rounded-xl shadow" loading="lazy"></iframe>
+        </section>
+        
+        <!-- Die Nutzerbewertungen können ebenfalls in eine Sektion, um den Abstand zu wahren -->
+        <section>
+          <h2 class="text-xl font-semibold mb-2">Deine Bewertung</h2>
+          <div class="flex items-center space-x-2 mb-4">
+            <input id="user-rating" type="number" min="1" max="10" step="1" class="border rounded px-3 py-1 w-20" placeholder="1-10">
+            <button id="submit-rating" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Abschicken</button>
+          </div>
+          <p class="mb-4 text-gray-600">User-Bewertung: <span id="avg-rating">–</span> / 10</p>
+
+          <h3 class="text-lg font-semibold mb-2">Kommentare</h3>
+          <textarea id="user-comment" class="w-full border rounded p-2 mb-2" rows="3" placeholder="Dein Kommentar..."></textarea>
+          <button id="submit-comment" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Kommentar posten</button>
+
+          <div id="comments-list" class="mt-4 space-y-3"></div>
+        </section>
+
       </div>
     </div>
-  </div>
+  </main>
 
   <script>
+    // Ihr JavaScript bleibt komplett unverändert.
     async function ladeLadenDetails() {
       const urlParams = new URLSearchParams(window.location.search);
       const name = urlParams.get("name");
@@ -52,12 +91,44 @@
         return;
       }
 
-      document.getElementById("laden-name").textContent = laden.name;
-      document.getElementById("laden-kommentar").textContent = laden.kommentar;
+      document.getElementById("colorstory").textContent = `Das ${laden.name} Erlebnis`;
 
+      document.getElementById("laden-name").textContent = laden.name;
+      document.getElementById("laden-subtitle").textContent = laden.subtitle || "Wer das ließt ist doof";
+      
       const bildPfad = `images/${encodeURIComponent(laden.name)}.jpg`;
       document.getElementById("laden-bild").src = bildPfad;
       document.getElementById("laden-bild").alt = `Bild von ${laden.name}`;
+
+      const bewertungen = [
+        { label: "Preis", value: laden.preis },
+        { label: "Geschmack", value: laden.geschmack },
+        { label: "Präsentation", value: laden["präsentation"] },
+        { label: "Bestellung", value: laden["übereinstimmung bestellung"] },
+        { label: "Menge", value: laden.menge },
+        { label: "Service", value: laden.service },
+        { label: "Ambiente", value: laden.ambiente },
+        { label: "Layering", value: laden.layering },
+        { label: "Zeit", value: laden.zeit },
+        { label: "Fleisch", value: laden.fleisch },
+        { label: "Brot", value: laden.brot },
+        { label: "Gemüse", value: laden.gemüse },
+        { label: "Sauce", value: laden.sauce },
+        { label: "Gesamt", value: laden.gesamt }
+      ];
+
+      const grid = document.getElementById("bewertung-grid");
+      bewertungen.forEach(b => {
+        if (b.value !== undefined && b.value !== "-") {
+          const div = document.createElement("div");
+          div.className = "bg-gray-100/80 backdrop-blur p-3 rounded shadow-sm text-center";
+          div.innerHTML = `<div class="text-lg font-bold">${b.value}</div><div class="text-sm text-gray-600">${b.label}</div>`;
+          grid.appendChild(div);
+        }
+      });
+
+      document.getElementById("laden-kommentar").textContent = laden.kommentar || "–";
+      document.getElementById("laden-story").textContent = laden.story || "Keine Story verfügbar.";
 
       if (laden.mapsUrl) {
         document.getElementById("map-frame").src = laden.mapsUrl;
@@ -68,14 +139,77 @@
 
     ladeLadenDetails();
 
-    // Scroll-Fade-Effekt für Hintergrund
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const fadeStart = 100;
-      const fadeEnd = 600;
-      const opacity = Math.min(1, Math.max(0, (scrollY - fadeStart) / (fadeEnd - fadeStart)));
-      document.getElementById('bg-2').style.opacity = opacity;
-    });
+    // === UNIFIED SCROLL AND OVERSCROLL LOGIC ===
+
+    // Get all necessary elements once
+    const bg1 = document.getElementById("bg-1");
+    const bg2 = document.getElementById("bg-2");
+    const contentPanel = document.getElementById('main-content-panel');
+
+    // Make sure all elements exist before adding listeners
+    if (bg1 && bg2 && contentPanel) {
+      let overscrollAmount = 0;
+      const OVERSCROLL_SENSITIVITY = 2000;
+      let lastTouchY = 0;
+      
+      const isAtBottom = () => window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
+      
+      const updatePanelOpacity = () => {
+        const opacity = Math.max(0, 1 - (overscrollAmount / OVERSCROLL_SENSITIVITY));
+        contentPanel.style.opacity = opacity;
+      };
+
+      // --- 1. THE UNIFIED SCROLL LISTENER ---
+      window.addEventListener('scroll', () => {
+        // --- Part A: Background Fade Logic (from before) ---
+        const scrollTop = window.scrollY;
+        const scrollHeight = document.documentElement.scrollHeight;
+        const clientHeight = document.documentElement.clientHeight;
+        const maxScroll = scrollHeight - clientHeight;
+        const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+        bg2.style.opacity = progress;
+
+        // --- Part B: Overscroll Reset Logic (from before) ---
+        if (!isAtBottom() && overscrollAmount > 0) {
+          overscrollAmount = 0;
+          updatePanelOpacity();
+        }
+      });
+      
+      // --- 2. THE WHEEL AND TOUCH LISTENERS (for overscroll detection) ---
+      window.addEventListener('wheel', (e) => {
+        if (isAtBottom() && e.deltaY > 0) {
+          e.preventDefault();
+          overscrollAmount = Math.min(OVERSCROLL_SENSITIVITY + 50, overscrollAmount + e.deltaY);
+          updatePanelOpacity();
+        } else if (e.deltaY < 0 && overscrollAmount > 0) {
+          e.preventDefault();
+          overscrollAmount = Math.max(0, overscrollAmount + e.deltaY);
+          updatePanelOpacity();
+        }
+      }, { passive: false });
+
+      window.addEventListener('touchstart', (e) => {
+        lastTouchY = e.touches[0].clientY;
+      }, { passive: false });
+
+      window.addEventListener('touchmove', (e) => {
+        const currentTouchY = e.touches[0].clientY;
+        const deltaY = lastTouchY - currentTouchY;
+        lastTouchY = currentTouchY;
+        
+        if (isAtBottom() && deltaY > 0) {
+          e.preventDefault();
+          overscrollAmount = Math.min(OVERSCROLL_SENSITIVITY + 50, overscrollAmount + deltaY);
+          updatePanelOpacity();
+        } else if (deltaY < 0 && overscrollAmount > 0) {
+          e.preventDefault();
+          overscrollAmount = Math.max(0, overscrollAmount + deltaY);
+          updatePanelOpacity();
+        }
+      }, { passive: false });
+    }
   </script>
+
 </body>
 </html>
