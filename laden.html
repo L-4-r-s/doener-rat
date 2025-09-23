@@ -58,10 +58,15 @@
         <!-- User Interaction Section -->
         <section>
           <h2 class="text-xl font-semibold mb-2">Deine Bewertung</h2>
-          <!-- ... your rating input and button ... -->
+          <div class="flex items-center space-x-2 mb-4">
+            <input id="user-rating" type="number" min="1" max="10" step="1" class="border rounded px-3 py-1 w-20" placeholder="1-10">
+            <button id="submit-rating" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Abschicken</button>
+          </div>
+          
           <p class="mb-4 text-gray-600">User-Bewertung: <span id="avg-rating">–</span> / 10</p>
 
           <h3 class="text-lg font-semibold mb-2">Kommentare</h3>
+          <input id="user-name" type="text" placeholder="Dein Name (optional)" class="w-full border rounded p-2 mb-2">
           <textarea id="user-comment" class="w-full border rounded p-2 mb-2" rows="3" placeholder="Dein Kommentar..."></textarea>
           <button id="submit-comment" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Kommentar posten</button>
 
@@ -82,27 +87,44 @@
   <!-- IMPORTANT: The script tag is now a module and imports from firebase.js -->
   <script type="module">
     // Import functions from firebase.js
-    import { postComment, loadInitialComments, loadAllRemainingComments, renderComment } from './js/firebase.js';
+    import { 
+      postComment, loadInitialComments, loadAllRemainingComments, renderComment,
+      getAnonymousUserId, postRating, loadRatingsAndCalculateAverage
+    } from './js/firebase.js';
 
     // Get the name of the shop from the URL once
     const urlParams = new URLSearchParams(window.location.search);
     const ladenName = urlParams.get("name");
 
+    // Logic for remembering the user's name ---
+    const nameInput = document.getElementById('user-name');
+
+    // On page load, check if a name is saved in localStorage
+    const storedName = localStorage.getItem('doenerUserName');
+    if (storedName) {
+      nameInput.value = storedName;
+    }
+
     // --- EVENT LISTENERS ---
     document.getElementById("submit-comment").addEventListener("click", async () => {
+      const userName = nameInput.value.trim();
       const commentText = document.getElementById("user-comment").value.trim();
+
       if (ladenName && commentText) {
         
         // Disable button to prevent double-posting
         const submitButton = document.getElementById("submit-comment");
         submitButton.disabled = true;
 
-        // 1. Post the comment to Firebase
-        await postComment(ladenName, commentText);
+        // When posting, save the current name to localStorage
+        localStorage.setItem('doenerUserName', userName);
+
+        await postComment(ladenName, commentText, userName);
         
         // 2. "Optimistic Update": Create a temporary comment object to render instantly.
         //    The timestamp from new Date() is close enough for immediate display.
         const optimisticComment = {
+            name: userName,
             comment: commentText,
             timestamp: { toDate: () => new Date() } // Mimic Firestore timestamp object
         };
@@ -119,8 +141,41 @@
       }
     });
 
+    // Event listener for the "Alle Kommentare laden" button
+    document.getElementById("load-all-comments-btn").addEventListener("click", () => {
+      if (ladenName) {
+        loadAllRemainingComments(ladenName);
+      }
+    });
 
-    // --- NEW HELPER FUNCTION TO FETCH THE STORY ---
+
+    // --- Event listener for the "Abschicken" rating button ---
+    document.getElementById("submit-rating").addEventListener("click", async () => {
+        const userRatingInput = document.getElementById("user-rating");
+        const rating = parseInt(userRatingInput.value, 10); // Get rating as an integer
+
+        if (ladenName && !isNaN(rating) && rating >= 1 && rating <= 10) {
+            const submitRatingButton = document.getElementById("submit-rating");
+            submitRatingButton.disabled = true; // Disable while saving
+
+            try {
+                await postRating(ladenName, rating);
+                console.log("Rating submitted successfully!");
+                // Reload ratings to update the average and reflect the new/changed rating
+                await loadRatingsAndCalculateAverage(ladenName); 
+            } catch (error) {
+                console.error("Failed to submit rating:", error);
+                alert("Fehler beim Speichern der Bewertung.");
+            } finally {
+                submitRatingButton.disabled = false; // Re-enable after attempt
+            }
+        } else {
+            alert("Bitte gib eine Bewertung zwischen 1 und 10 ein.");
+        }
+    });
+
+
+    // --- HELPER FUNCTION TO FETCH THE STORY ---
     /**
      * Fetches the story for a given shop from its dedicated .txt file.
      * @param {string} name - The name of the Dönerladen.
@@ -154,6 +209,7 @@
 
       // Load comments (remains the same)
       loadInitialComments(ladenName);
+      loadRatingsAndCalculateAverage(ladenName);
 
       // Fetch main shop data from JSON (remains the same)
       const response = await fetch("data/doener.json");
@@ -165,7 +221,6 @@
         return;
       }
 
-      // --- THIS IS THE KEY CHANGE ---
       // 1. Fetch the story from the new text file
       const storyText = await ladeLadenStory(laden.name);
       
