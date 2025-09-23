@@ -1,11 +1,11 @@
 [
   {
     "name": "Amed Pizza & Döner",
-    "preis": "7,70€",
+    "preis": "7.70",
     "geschmack": 4.8,
     "präsentation": 4.7,
     "übereinstimmung bestellung": 5.3,
-    "menge": "389g" ,
+    "menge": "389" ,
     "service": "-",
     "ambiente": "-",
     "layering": 3,
@@ -21,11 +21,11 @@
   },
   {
     "name": "Castello Pizza & Dönerhaus",
-    "preis": "5€",
+    "preis": "5",
     "geschmack": 5.4,
     "präsentation": 6.4,
     "übereinstimmung bestellung": 10,
-    "menge": "414g",
+    "menge": "414",
     "service": 6.5,
     "ambiente": 5.1,
     "layering": 7,
@@ -41,11 +41,11 @@
   },
   {
     "name": "Lezzet-i Mangal",
-    "preis": "7€",
+    "preis": "7",
     "geschmack": 7,
     "präsentation": 8.2,
     "übereinstimmung bestellung": 8.2,
-    "menge": "563g",
+    "menge": "563",
     "service": 8.3,
     "ambiente": 8.2,
     "layering": 8.2,
@@ -60,7 +60,32 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d201.6504120322567!2d8.771537662645466!3d50.817590603504286!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63866a1d0679%3A0x1f920e49304f6d80!2sLezzet-i%20Mangal!5e1!3m2!1sde!2sde!4v1754683390759!5m2!1sde!2sde"
   },
   {
-    "name": "Stadt Döner - Jawoll Jawoll (demnächst)"
+    "name": "Stadt Döner - Jawoll Jawoll",
+    "preis": "7",
+    "geschmack": 8.6,
+    "präsentation": 8.8,
+    "übereinstimmung bestellung": 10,
+    "menge": "512",
+    "service": 10,
+    "ambiente": 8,
+    "layering": 9.8,
+    "zeit": 9.9,
+    "fleisch": 8.4,
+    "brot": 8.1,
+    "gemüse": 8.3,
+    "sauce": 8.3,
+    "gesamt": 8.6,
+    "kommentar": "Eher Restaurant als Dönerladen. Hat selbstgemachten Ayran.",
+    "datum": "18.08.2025",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d590.7604529957412!2d8.773811770895396!3d50.809734658054694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc630046588645%3A0xb74e6a6251f4566e!2sStadt%20D%C3%B6ner%20-%20Jawoll%20Jawoll!5e1!3m2!1sde!2sde!4v1758046413519!5m2!1sde!2sde"
+  },
+  {
+    "name": "Südviertel Döner (demnächst)",
+    "datum": "20.09.2025",
+    "kommentar": "Ein Döner mit Hähnchenfleisch kostet 7,50€, mit Kalbsfleisch 8,50€."
+  },
+  {
+    "name": "Leon's Döner & Pizza (demnächst)"
   },
   {
     "name": "Mr. King (demnächst)"
@@ -73,9 +98,6 @@
   },
   {
     "name": "Haus des Döners (demnächst)"
-  },
-  {
-    "name": "Südviertel Döner (demnächst)"
   },
   {
     "name": "Helal Döner (demnächst)"
@@ -94,9 +116,6 @@
   },
   {
     "name": "Istanbul Döner (demnächst)"
-  },
-  {
-    "name": "Leon's Döner & Pizza (demnächst)"
   },
   {
     "name": "Royal Döner Kebab und Pizzahaus (demnächst)"

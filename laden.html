@@ -55,13 +55,10 @@
           <iframe id="map-frame" class="w-full h-64 rounded-xl shadow" loading="lazy"></iframe>
         </section>
         
-        <!-- Die Nutzerbewertungen können ebenfalls in eine Sektion, um den Abstand zu wahren -->
+        <!-- User Interaction Section -->
         <section>
           <h2 class="text-xl font-semibold mb-2">Deine Bewertung</h2>
-          <div class="flex items-center space-x-2 mb-4">
-            <input id="user-rating" type="number" min="1" max="10" step="1" class="border rounded px-3 py-1 w-20" placeholder="1-10">
-            <button id="submit-rating" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Abschicken</button>
-          </div>
+          <!-- ... your rating input and button ... -->
           <p class="mb-4 text-gray-600">User-Bewertung: <span id="avg-rating">–</span> / 10</p>
 
           <h3 class="text-lg font-semibold mb-2">Kommentare</h3>
@@ -69,30 +66,115 @@
           <button id="submit-comment" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Kommentar posten</button>
 
           <div id="comments-list" class="mt-4 space-y-3"></div>
-        </section>
 
+          <!-- UPDATED: Container and Button -->
+          <div id="load-more-container" class="mt-4 text-left">
+            <!-- STYLED BUTTON: Now looks like a link. The 'hidden' class is still important. -->
+            <button id="load-all-comments-btn" class="text-blue-600 hover:underline font-semibold hidden">
+              Alle Kommentare laden
+            </button>
+          </div>
+        </section>
       </div>
     </div>
   </main>
 
-  <script>
-    // Ihr JavaScript bleibt komplett unverändert.
-    async function ladeLadenDetails() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const name = urlParams.get("name");
-      if (!name) return;
+  <!-- IMPORTANT: The script tag is now a module and imports from firebase.js -->
+  <script type="module">
+    // Import functions from firebase.js
+    import { postComment, loadInitialComments, loadAllRemainingComments, renderComment } from './js/firebase.js';
 
+    // Get the name of the shop from the URL once
+    const urlParams = new URLSearchParams(window.location.search);
+    const ladenName = urlParams.get("name");
+
+    // --- EVENT LISTENERS ---
+    document.getElementById("submit-comment").addEventListener("click", async () => {
+      const commentText = document.getElementById("user-comment").value.trim();
+      if (ladenName && commentText) {
+        
+        // Disable button to prevent double-posting
+        const submitButton = document.getElementById("submit-comment");
+        submitButton.disabled = true;
+
+        // 1. Post the comment to Firebase
+        await postComment(ladenName, commentText);
+        
+        // 2. "Optimistic Update": Create a temporary comment object to render instantly.
+        //    The timestamp from new Date() is close enough for immediate display.
+        const optimisticComment = {
+            comment: commentText,
+            timestamp: { toDate: () => new Date() } // Mimic Firestore timestamp object
+        };
+
+        // 3. Render the new comment at the top of the list.
+        renderComment(optimisticComment, true); // The 'true' flag tells it to prepend
+
+        // 4. Clear the textarea and re-enable the button
+        document.getElementById("user-comment").value = "";
+        submitButton.disabled = false;
+        
+        // IMPORTANT: We no longer call loadInitialComments() here, preventing the race condition
+        // and preserving any "loaded all" comments the user might have open.
+      }
+    });
+
+
+    // --- NEW HELPER FUNCTION TO FETCH THE STORY ---
+    /**
+     * Fetches the story for a given shop from its dedicated .txt file.
+     * @param {string} name - The name of the Dönerladen.
+     * @returns {Promise<string>} The story text or a fallback message.
+     */
+    async function ladeLadenStory(name) {
+      // encodeURIComponent is important to handle names with spaces or special characters in URLs.
+      const storyPath = `stories/${encodeURIComponent(name)}.txt`;
+      
+      try {
+        const response = await fetch(storyPath);
+        // Check if the file was found (HTTP status 200 OK)
+        if (response.ok) {
+          return await response.text();
+        } else {
+          // If the file is not found (404 error), return a default message.
+          console.warn(`Story file not found for "${name}" at path: ${storyPath}`);
+          return "Für diesen Dönerladen ist keine Story verfügbar.";
+        }
+      } catch (error) {
+        // Handle network errors, etc.
+        console.error("Error fetching story:", error);
+        return "Fehler beim Laden der Story.";
+      }
+    }
+
+
+    // --- UPDATED PAGE INITIALIZATION ---
+    async function ladeLadenDetails() {
+      if (!ladenName) return;
+
+      // Load comments (remains the same)
+      loadInitialComments(ladenName);
+
+      // Fetch main shop data from JSON (remains the same)
       const response = await fetch("data/doener.json");
       const daten = await response.json();
-      const laden = daten.find(l => l.name === name);
+      const laden = daten.find(l => l.name === ladenName);
 
       if (!laden) {
         document.getElementById("laden-name").textContent = "Dönerladen nicht gefunden.";
         return;
       }
 
+      // --- THIS IS THE KEY CHANGE ---
+      // 1. Fetch the story from the new text file
+      const storyText = await ladeLadenStory(laden.name);
+      
+      // 2. Set the content of the story paragraph
+      document.getElementById("laden-story").textContent = storyText;
+      // Note: The old line `laden.story || "..."` is no longer needed.
+      
+      // (The rest of your function remains exactly the same)
       document.getElementById("colorstory").textContent = `Das ${laden.name} Erlebnis`;
-
       document.getElementById("laden-name").textContent = laden.name;
       document.getElementById("laden-subtitle").textContent = laden.subtitle || "Wer das ließt ist doof";
       
@@ -101,23 +183,17 @@
       document.getElementById("laden-bild").alt = `Bild von ${laden.name}`;
 
       const bewertungen = [
-        { label: "Preis", value: laden.preis },
-        { label: "Geschmack", value: laden.geschmack },
-        { label: "Präsentation", value: laden["präsentation"] },
-        { label: "Bestellung", value: laden["übereinstimmung bestellung"] },
-        { label: "Menge", value: laden.menge },
-        { label: "Service", value: laden.service },
-        { label: "Ambiente", value: laden.ambiente },
-        { label: "Layering", value: laden.layering },
-        { label: "Zeit", value: laden.zeit },
-        { label: "Fleisch", value: laden.fleisch },
-        { label: "Brot", value: laden.brot },
-        { label: "Gemüse", value: laden.gemüse },
-        { label: "Sauce", value: laden.sauce },
-        { label: "Gesamt", value: laden.gesamt }
+        { label: "Preis", value: laden.preis }, { label: "Geschmack", value: laden.geschmack },
+        { label: "Präsentation", value: laden["präsentation"] }, { label: "Übereinstimmung Bestellung", value: laden["übereinstimmung bestellung"] },
+        { label: "Menge", value: laden.menge }, { label: "Service", value: laden.service },
+        { label: "Ambiente", value: laden.ambiente }, { label: "Layering", value: laden.layering },
+        { label: "Zeit", value: laden.zeit }, { label: "Fleisch", value: laden.fleisch },
+        { label: "Brot", value: laden.brot }, { label: "Gemüse", value: laden.gemüse },
+        { label: "Sauce", value: laden.sauce }, { label: "Gesamt", value: laden.gesamt }
       ];
 
       const grid = document.getElementById("bewertung-grid");
+      grid.innerHTML = ''; // Clear grid before populating
       bewertungen.forEach(b => {
         if (b.value !== undefined && b.value !== "-") {
           const div = document.createElement("div");
@@ -128,8 +204,7 @@
       });
 
       document.getElementById("laden-kommentar").textContent = laden.kommentar || "–";
-      document.getElementById("laden-story").textContent = laden.story || "Keine Story verfügbar.";
-
+      
       if (laden.mapsUrl) {
         document.getElementById("map-frame").src = laden.mapsUrl;
       } else {
@@ -137,6 +212,7 @@
       }
     }
 
+    // Load everything when the page starts
     ladeLadenDetails();
 
     // === UNIFIED SCROLL AND OVERSCROLL LOGIC ===
