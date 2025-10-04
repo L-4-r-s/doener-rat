@@ -31,8 +31,22 @@
         </header>
       </div>
 
-        <section>
-          <img id="laden-bild" src="" alt="" class="w-full rounded-xl shadow-md object-cover max-h-[400px]">
+        <!-- === IMAGE CAROUSEL SECTION === -->
+        <section class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-xl shadow-md h-[26rem] bg-black/10">
+          <!-- This is the container your JS is looking for -->
+          <div id="carousel-container" class="flex transition-transform duration-500 ease-in-out h-full">
+            <!-- Images will be inserted here by JavaScript -->
+          </div>
+
+          <!-- Previous Button -->
+          <button id="prev-btn" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 focus:outline-none">
+            &#10094;
+          </button>
+          
+          <!-- Next Button -->
+          <button id="next-btn" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 focus:outline-none">
+            &#10095;
+          </button>
         </section>
 
         <section>
@@ -47,7 +61,7 @@
 
         <section>
           <h2 id="colorstory" class="text-xl font-semibold mb-2"></h2>
-          <p id="laden-story" class="text-gray-700 leading-relaxed"></p>
+          <p id="laden-story" class="text-gray-700 leading-relaxed whitespace-pre-line"></p>
         </section>
 
         <section>
@@ -70,11 +84,12 @@
           <textarea id="user-comment" class="w-full border rounded p-2 mb-2" rows="3" placeholder="Dein Kommentar..."></textarea>
           <button id="submit-comment" class="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">Kommentar posten</button>
 
-          <div id="comments-list" class="mt-4 space-y-3"></div>
+          <!-- The div below is intentionally empty. Comments will be added here by JavaScript. -->
+          <!-- The old "space-y-3" is removed because the new comment style handles its own spacing. -->
+          <div id="comments-list" class="mt-4"></div>
 
-          <!-- UPDATED: Container and Button -->
+          <!-- Container and Button for loading more comments -->
           <div id="load-more-container" class="mt-4 text-left">
-            <!-- STYLED BUTTON: Now looks like a link. The 'hidden' class is still important. -->
             <button id="load-all-comments-btn" class="text-blue-600 hover:underline font-semibold hidden">
               Alle Kommentare laden
             </button>
@@ -84,90 +99,78 @@
     </div>
   </main>
 
-  <!-- IMPORTANT: The script tag is now a module and imports from firebase.js -->
   <script type="module">
-    // Import functions from firebase.js
+    // Import all necessary functions from firebase.js
     import { 
       postComment, loadInitialComments, loadAllRemainingComments, renderComment,
       getAnonymousUserId, postRating, loadRatingsAndCalculateAverage
     } from './js/firebase.js';
 
-    // Get the name of the shop from the URL once
+    // --- GLOBAL SETUP ---
     const urlParams = new URLSearchParams(window.location.search);
-    const ladenName = urlParams.get("name");
+    // Make ladenName globally accessible for the upvote function in firebase.js
+    window.ladenName = urlParams.get("name");
 
-    // Logic for remembering the user's name ---
+    // --- LOCALSTORAGE & NAME SETUP ---
     const nameInput = document.getElementById('user-name');
-
-    // On page load, check if a name is saved in localStorage
     const storedName = localStorage.getItem('doenerUserName');
     if (storedName) {
       nameInput.value = storedName;
     }
 
     // --- EVENT LISTENERS ---
+
+    // Event listener for posting a new comment
     document.getElementById("submit-comment").addEventListener("click", async () => {
       const userName = nameInput.value.trim();
       const commentText = document.getElementById("user-comment").value.trim();
 
-      if (ladenName && commentText) {
-        
-        // Disable button to prevent double-posting
+      if (window.ladenName && commentText) {
         const submitButton = document.getElementById("submit-comment");
         submitButton.disabled = true;
 
-        // When posting, save the current name to localStorage
         localStorage.setItem('doenerUserName', userName);
-
-        await postComment(ladenName, commentText, userName);
+        await postComment(window.ladenName, commentText, userName);
         
-        // 2. "Optimistic Update": Create a temporary comment object to render instantly.
-        //    The timestamp from new Date() is close enough for immediate display.
         const optimisticComment = {
             name: userName,
             comment: commentText,
-            timestamp: { toDate: () => new Date() } // Mimic Firestore timestamp object
+            timestamp: { toDate: () => new Date() },
+            upvotes: 0 // Initialize with 0 upvotes for correct rendering
         };
 
-        // 3. Render the new comment at the top of the list.
-        renderComment(optimisticComment, true); // The 'true' flag tells it to prepend
+        // Pass a 'null' ID for the optimistic comment; its upvote button won't work until reload.
+        renderComment(null, optimisticComment, true);
 
-        // 4. Clear the textarea and re-enable the button
         document.getElementById("user-comment").value = "";
         submitButton.disabled = false;
-        
-        // IMPORTANT: We no longer call loadInitialComments() here, preventing the race condition
-        // and preserving any "loaded all" comments the user might have open.
       }
     });
 
     // Event listener for the "Alle Kommentare laden" button
     document.getElementById("load-all-comments-btn").addEventListener("click", () => {
-      if (ladenName) {
-        loadAllRemainingComments(ladenName);
+      if (window.ladenName) {
+        loadAllRemainingComments(window.ladenName);
       }
     });
 
-
-    // --- Event listener for the "Abschicken" rating button ---
+    // Event listener for the "Abschicken" rating button
     document.getElementById("submit-rating").addEventListener("click", async () => {
         const userRatingInput = document.getElementById("user-rating");
-        const rating = parseInt(userRatingInput.value, 10); // Get rating as an integer
+        const rating = parseInt(userRatingInput.value, 10);
 
-        if (ladenName && !isNaN(rating) && rating >= 1 && rating <= 10) {
+        if (window.ladenName && !isNaN(rating) && rating >= 1 && rating <= 10) {
             const submitRatingButton = document.getElementById("submit-rating");
-            submitRatingButton.disabled = true; // Disable while saving
+            submitRatingButton.disabled = true;
 
             try {
-                await postRating(ladenName, rating);
-                console.log("Rating submitted successfully!");
-                // Reload ratings to update the average and reflect the new/changed rating
-                await loadRatingsAndCalculateAverage(ladenName); 
+                await postRating(window.ladenName, rating);
+                await loadRatingsAndCalculateAverage(window.ladenName); 
             } catch (error) {
                 console.error("Failed to submit rating:", error);
                 alert("Fehler beim Speichern der Bewertung.");
             } finally {
-                submitRatingButton.disabled = false; // Re-enable after attempt
+                submitRatingButton.disabled = false;
             }
         } else {
             alert("Bitte gib eine Bewertung zwischen 1 und 10 ein.");
@@ -176,66 +179,146 @@
 
 
     // --- HELPER FUNCTION TO FETCH THE STORY ---
-    /**
-     * Fetches the story for a given shop from its dedicated .txt file.
-     * @param {string} name - The name of the Dönerladen.
-     * @returns {Promise<string>} The story text or a fallback message.
-     */
     async function ladeLadenStory(name) {
-      // encodeURIComponent is important to handle names with spaces or special characters in URLs.
       const storyPath = `stories/${encodeURIComponent(name)}.txt`;
-      
       try {
         const response = await fetch(storyPath);
-        // Check if the file was found (HTTP status 200 OK)
         if (response.ok) {
           return await response.text();
         } else {
-          // If the file is not found (404 error), return a default message.
           console.warn(`Story file not found for "${name}" at path: ${storyPath}`);
           return "Für diesen Dönerladen ist keine Story verfügbar.";
         }
       } catch (error) {
-        // Handle network errors, etc.
         console.error("Error fetching story:", error);
         return "Fehler beim Laden der Story.";
       }
     }
 
 
-    // --- UPDATED PAGE INITIALIZATION ---
+    // --- PAGE INITIALIZATION ---
     async function ladeLadenDetails() {
-      if (!ladenName) return;
+      if (!window.ladenName) {
+        document.getElementById("laden-name").textContent = "Dönerladen nicht gefunden.";
+        return;
+      }
 
-      // Load comments (remains the same)
-      loadInitialComments(ladenName);
-      loadRatingsAndCalculateAverage(ladenName);
+      // Load dynamic data from Firebase
+      loadInitialComments(window.ladenName);
+      loadRatingsAndCalculateAverage(window.ladenName);
 
-      // Fetch main shop data from JSON (remains the same)
+      // Fetch static shop data from JSON
       const response = await fetch("data/doener.json");
       const daten = await response.json();
-      const laden = daten.find(l => l.name === ladenName);
+      const laden = daten.find(l => l.name === window.ladenName);
 
       if (!laden) {
         document.getElementById("laden-name").textContent = "Dönerladen nicht gefunden.";
         return;
       }
 
-      // 1. Fetch the story from the new text file
+      // Fetch story from text file
       const storyText = await ladeLadenStory(laden.name);
-      
-      // 2. Set the content of the story paragraph
       document.getElementById("laden-story").textContent = storyText;
-      // Note: The old line `laden.story || "..."` is no longer needed.
       
-      // (The rest of your function remains exactly the same)
+      // Populate the rest of the page
       document.getElementById("colorstory").textContent = `Das ${laden.name} Erlebnis`;
       document.getElementById("laden-name").textContent = laden.name;
-      document.getElementById("laden-subtitle").textContent = laden.subtitle || "Wer das ließt ist doof";
+      document.getElementById("laden-subtitle").textContent = laden.subtitle || "";
       
-      const bildPfad = `images/${encodeURIComponent(laden.name)}.jpg`;
-      document.getElementById("laden-bild").src = bildPfad;
-      document.getElementById("laden-bild").alt = `Bild von ${laden.name}`;
+// === IMAGE CAROUSEL SETUP (v3 - Dynamic & Flexible) ===
+      const carouselContainer = document.getElementById("carousel-container");
+      carouselContainer.innerHTML = ""; // Clear previous content
+
+      const basePath = `images/${encodeURIComponent(laden.name)}`;
+      const extensions = ['.jpeg', '.jpg', '.png']; // Define the order of extensions to check
+      const MAX_IMAGES_TO_CHECK = 4; // Set how many images you might have per store
+      const foundImages = [];
+
+      // --- NEW: Asynchronously check for each possible image file ---
+      // This loop checks for "_1.jpeg", then "_1.jpg", then "_1.png", etc.
+      for (let i = 1; i <= MAX_IMAGES_TO_CHECK; i++) {
+        for (const ext of extensions) {
+          const imagePath = `${basePath}_${i}${ext}`;
+          try {
+            // We use fetch to see if the image actually exists on the server.
+            const response = await fetch(imagePath);
+            if (response.ok) {
+              // If response.ok is true, the file was found (status 200).
+              foundImages.push(imagePath);
+              // Break the inner loop to move to the next image number (e.g., from _1 to _2).
+              break; 
+            }
+          } catch (error) {
+            // This catches network errors, but the response.ok check handles 404s.
+            console.warn(`Error while checking for image: ${imagePath}`, error);
+          }
+        }
+      }
+
+      // The rest of the logic uses the 'foundImages' array, which only contains valid URLs.
+      const imageList = foundImages;
+
+      if (imageList.length === 0) {
+        // If no images were found after checking all possibilities, show a placeholder.
+        const placeholder = document.createElement("img");
+        placeholder.src = "images/placeholder.jpg"; // Ensure you have a placeholder image
+        placeholder.alt = "Kein Bild verfügbar";
+        placeholder.className = "w-full object-cover";
+        carouselContainer.appendChild(placeholder);
+        // Hide navigation buttons if there are no images to cycle through
+        document.getElementById("prev-btn").style.display = 'none';
+        document.getElementById("next-btn").style.display = 'none';
+      } else {
+        // Show navigation buttons if images were found
+        document.getElementById("prev-btn").style.display = 'block';
+        document.getElementById("next-btn").style.display = 'block';
+
+        imageList.forEach((src, index) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = `${laden.name} Bild ${index + 1}`;
+          img.className = "w-full h-full object-contain flex-shrink-0";
+          carouselContainer.appendChild(img);
+        });
+      }
+
+      let currentIndex = 0;
+      const total = imageList.length;
+      let autoRotateTimer = null; // Variable to hold our timer
+
+      function showImage(index) {
+        if (index < 0 || index >= total) return;
+        carouselContainer.style.transform = `translateX(-${index * 100}%)`;
+      }
+      
+      function startAutoRotate(interval = 5000) {
+        if (autoRotateTimer) clearTimeout(autoRotateTimer);
+        
+        autoRotateTimer = setTimeout(() => {
+          currentIndex = (currentIndex + 1) % total;
+          showImage(currentIndex);
+          startAutoRotate(5000); // Resume normal 5-second rotation
+        }, interval);
+      }
+
+      document.getElementById("prev-btn").addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + total) % total;
+        showImage(currentIndex);
+        startAutoRotate(10000); // Reset timer for 10 seconds on user interaction
+      });
+
+      document.getElementById("next-btn").addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % total;
+        showImage(currentIndex);
+        startAutoRotate(10000); // Reset timer for 10 seconds on user interaction
+      });
+
+      // Start the initial rotation only if there is more than one image
+      if (total > 1) {
+          startAutoRotate();
+      }
+      
 
       const bewertungen = [
         { label: "Preis", value: laden.preis }, { label: "Geschmack", value: laden.geschmack },
@@ -248,7 +331,7 @@
       ];
 
       const grid = document.getElementById("bewertung-grid");
-      grid.innerHTML = ''; // Clear grid before populating
+      grid.innerHTML = '';
       bewertungen.forEach(b => {
         if (b.value !== undefined && b.value !== "-") {
           const div = document.createElement("div");
@@ -270,14 +353,11 @@
     // Load everything when the page starts
     ladeLadenDetails();
 
-    // === UNIFIED SCROLL AND OVERSCROLL LOGIC ===
-
-    // Get all necessary elements once
+    // === UNIFIED SCROLL AND OVERSCROLL LOGIC (unchanged) ===
     const bg1 = document.getElementById("bg-1");
     const bg2 = document.getElementById("bg-2");
     const contentPanel = document.getElementById('main-content-panel');
 
-    // Make sure all elements exist before adding listeners
     if (bg1 && bg2 && contentPanel) {
       let overscrollAmount = 0;
       const OVERSCROLL_SENSITIVITY = 2000;
@@ -290,9 +370,7 @@
         contentPanel.style.opacity = opacity;
       };
 
-      // --- 1. THE UNIFIED SCROLL LISTENER ---
       window.addEventListener('scroll', () => {
-        // --- Part A: Background Fade Logic (from before) ---
         const scrollTop = window.scrollY;
         const scrollHeight = document.documentElement.scrollHeight;
         const clientHeight = document.documentElement.clientHeight;
@@ -300,14 +378,12 @@
         const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
         bg2.style.opacity = progress;
 
-        // --- Part B: Overscroll Reset Logic (from before) ---
         if (!isAtBottom() && overscrollAmount > 0) {
           overscrollAmount = 0;
           updatePanelOpacity();
         }
       });
       
-      // --- 2. THE WHEEL AND TOUCH LISTENERS (for overscroll detection) ---
       window.addEventListener('wheel', (e) => {
         if (isAtBottom() && e.deltaY > 0) {
           e.preventDefault();

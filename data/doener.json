@@ -16,6 +16,7 @@
     "sauce": 3.3,
     "gesamt": 3.3,
     "kommentar": "Liefert nur",
+    "subtitle": "",
     "datum": "07.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224.07397496848384!2d8.778343529920225!3d50.80434139305451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc893dd2b139b7%3A0xb449dead808d32b6!2sAMED%20Pizza%20%26%20D%C3%B6ner!5e1!3m2!1sde!2sde!4v1753121508484!5m2!1sde!2sde"
   },
@@ -54,7 +55,7 @@
     "brot": 6,
     "gemüse": 6.7,
     "sauce": 6,
-    "gesamt": 6.7,
+    "gesamt": 6.67,
     "kommentar": "Eher Restaurant als Dönerladen. Hat selbstgemachten Ayran.",
     "datum": "28.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d201.6504120322567!2d8.771537662645466!3d50.817590603504286!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63866a1d0679%3A0x1f920e49304f6d80!2sLezzet-i%20Mangal!5e1!3m2!1sde!2sde!4v1754683390759!5m2!1sde!2sde"
@@ -75,14 +76,29 @@
     "gemüse": 8.3,
     "sauce": 8.3,
     "gesamt": 8.6,
-    "kommentar": "Eher Restaurant als Dönerladen. Hat selbstgemachten Ayran.",
+    "kommentar": "TODO",
     "datum": "18.08.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d590.7604529957412!2d8.773811770895396!3d50.809734658054694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc630046588645%3A0xb74e6a6251f4566e!2sStadt%20D%C3%B6ner%20-%20Jawoll%20Jawoll!5e1!3m2!1sde!2sde!4v1758046413519!5m2!1sde!2sde"
   },
   {
-    "name": "Südviertel Döner (demnächst)",
+    "name": "Südviertel Döner",
+    "preis": "8",
+    "geschmack": 7,
+    "präsentation": 6.9,
+    "übereinstimmung bestellung": 10,
+    "menge": "513",
+    "service": 9,
+    "ambiente": 6.9,
+    "layering": 5.9,
+    "zeit": 9.2,
+    "fleisch": 7,
+    "brot": 6.3,
+    "gemüse": 6.8,
+    "sauce": 6.5,
+    "gesamt": 6.71,
+    "kommentar": "TODO",
     "datum": "20.09.2025",
-    "kommentar": "Ein Döner mit Hähnchenfleisch kostet 7,50€, mit Kalbsfleisch 8,50€."
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4726.80718086113!2d8.757334106832865!3d50.80258258435769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc626461cba5d1%3A0x48408ad2ac6b7a02!2zU8O8ZHZpZXJ0ZWwgRMO2bmVy!5e1!3m2!1sde!2sde!4v1759576801482!5m2!1sde!2sde"
   },
   {
     "name": "Leon's Döner & Pizza (demnächst)"
@@ -125,5 +141,8 @@
   },
   {
     "name": "Sinan's Kebaphaus (demnächst)"
+  },
+  {
+    "name": "Somat (demnächst)"
   }
 ]
