@@ -101,7 +101,25 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4726.80718086113!2d8.757334106832865!3d50.80258258435769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc626461cba5d1%3A0x48408ad2ac6b7a02!2zU8O8ZHZpZXJ0ZWwgRMO2bmVy!5e1!3m2!1sde!2sde!4v1759576801482!5m2!1sde!2sde"
   },
   {
-    "name": "Leon's Döner & Pizza (demnächst)"
+    "name": "Leon's Döner & Pizza",
+    "preis": "8",
+    "geschmack": 6,
+    "präsentation": 7.4,
+    "übereinstimmung bestellung": 8.7,
+    "menge": "431",
+    "service": 7.3,
+    "ambiente": 7.1,
+    "layering": 6.7,
+    "zeit": 8.2,
+    "fleisch": 5.8,
+    "brot": 6.9,
+    "gemüse": 7.5,
+    "sauce": 5.6,
+    "gesamt": 5.9,
+    "kommentar": "TODO",
+    "datum": "12.10.2025",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3340.5653814115417!2d8.76683147728681!3d50.82763007166674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63b9d233f763%3A0x97951bc6f57a29db!2sLeon&#39;s%20D%C3%B6ner%20%26%20Pizza!5e1!3m2!1sde!2sde!4v1760873770801!5m2!1sde!2sde"
+  
   },
   {
     "name": "Mr. King (demnächst)"
