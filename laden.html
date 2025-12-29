@@ -54,11 +54,13 @@
           <div id="bewertung-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4"></div>
         </section>
 
-        <section>
-          <h2 class="text-xl font-semibold mb-2">Anmerkungen:</h2>
-          <p id="laden-kommentar" class="text-gray-800 whitespace-pre-line"></p>
+        <section id="besonderheiten-container" class="hidden">
+          <h2 class="text-xl font-semibold mb-4">Besonderheiten</h2>
+          <div id="besonderheiten-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Content will be injected here by JS -->
+          </div>
         </section>
-
+        
         <section>
           <h2 id="colorstory" class="text-xl font-semibold mb-2"></h2>
           <p id="laden-story" class="text-gray-700 leading-relaxed whitespace-pre-line"></p>
@@ -226,122 +228,210 @@
       document.getElementById("laden-name").textContent = laden.name;
       document.getElementById("laden-subtitle").textContent = laden.subtitle || "";
       
-// === IMAGE CAROUSEL SETUP (v3 - Dynamic & Flexible) ===
-      const carouselContainer = document.getElementById("carousel-container");
-      carouselContainer.innerHTML = ""; // Clear previous content
+    // === IMAGE CAROUSEL SETUP (v6.1 - Fixed ReferenceErrors & Encoding) ===
+    const carouselContainer = document.getElementById("carousel-container");
+    carouselContainer.innerHTML = ""; 
 
-      const basePath = `images/${encodeURIComponent(laden.name)}`;
-      const extensions = ['.jpeg', '.jpg', '.png']; // Define the order of extensions to check
-      const MAX_IMAGES_TO_CHECK = 4; // Set how many images you might have per store
-      const foundImages = [];
+    // --- 1. Global Carousel Variables (CRITICAL: Must be declared here) ---
+    let currentIndex = 0;
+    let autoRotateTimer = null;
 
-      // --- NEW: Asynchronously check for each possible image file ---
-      // This loop checks for "_1.jpeg", then "_1.jpg", then "_1.png", etc.
-      for (let i = 1; i <= MAX_IMAGES_TO_CHECK; i++) {
-        for (const ext of extensions) {
-          const imagePath = `${basePath}_${i}${ext}`;
-          try {
-            // We use fetch to see if the image actually exists on the server.
-            const response = await fetch(imagePath);
-            if (response.ok) {
-              // If response.ok is true, the file was found (status 200).
-              foundImages.push(imagePath);
-              // Break the inner loop to move to the next image number (e.g., from _1 to _2).
-              break; 
+    const nameEncoded = encodeURIComponent(laden.name);
+    const basePath = `images/${nameEncoded}`;
+    const extensions = ['.jpg', '.jpeg', '.png', '.webp']; 
+    const foundImages = [];
+
+    let imageIndex = 1;      
+    let detectedExt = null;  
+    const MAX_SAFETY = 20;   
+
+    // --- 2. Sequential Image Probing ---
+    async function findImages() {
+        while (imageIndex <= MAX_SAFETY) {
+            let foundThisRound = false;
+            const extsToCheck = detectedExt ? [detectedExt] : extensions;
+
+            for (const ext of extsToCheck) {
+                const imagePath = `${basePath}_${imageIndex}${ext}`;
+                try {
+                    const response = await fetch(imagePath, { method: 'HEAD' });
+                    if (response.ok) {
+                        foundImages.push(imagePath);
+                        detectedExt = ext; 
+                        foundThisRound = true;
+                        break; 
+                    }
+                } catch (error) { /* Ignore network errors */ }
             }
-          } catch (error) {
-            // This catches network errors, but the response.ok check handles 404s.
-            console.warn(`Error while checking for image: ${imagePath}`, error);
-          }
+
+            if (!foundThisRound) break; 
+            imageIndex++;
         }
-      }
+        renderCarousel();
+    }
 
-      // The rest of the logic uses the 'foundImages' array, which only contains valid URLs.
-      const imageList = foundImages;
+    // --- 3. Rendering Logic ---
+    function renderCarousel() {
+        const total = foundImages.length;
 
-      if (imageList.length === 0) {
-        // If no images were found after checking all possibilities, show a placeholder.
-        const placeholder = document.createElement("img");
-        placeholder.src = "images/placeholder.jpg"; // Ensure you have a placeholder image
-        placeholder.alt = "Kein Bild verfügbar";
-        placeholder.className = "w-full object-cover";
-        carouselContainer.appendChild(placeholder);
-        // Hide navigation buttons if there are no images to cycle through
-        document.getElementById("prev-btn").style.display = 'none';
-        document.getElementById("next-btn").style.display = 'none';
-      } else {
-        // Show navigation buttons if images were found
-        document.getElementById("prev-btn").style.display = 'block';
-        document.getElementById("next-btn").style.display = 'block';
+        if (total === 0) {
+            const placeholder = document.createElement("img");
+            placeholder.src = "images/placeholder.jpg"; 
+            placeholder.className = "w-full h-full object-contain";
+            carouselContainer.appendChild(placeholder);
+            
+            document.getElementById("prev-btn").style.display = 'none';
+            document.getElementById("next-btn").style.display = 'none';
+        } else {
+            foundImages.forEach((src, index) => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.className = "w-full h-full object-contain flex-shrink-0";
+                carouselContainer.appendChild(img);
+            });
 
-        imageList.forEach((src, index) => {
-          const img = document.createElement("img");
-          img.src = src;
-          img.alt = `${laden.name} Bild ${index + 1}`;
-          img.className = "w-full h-full object-contain flex-shrink-0";
-          carouselContainer.appendChild(img);
-        });
-      }
+            const displayStyle = total > 1 ? 'block' : 'none';
+            document.getElementById("prev-btn").style.display = displayStyle;
+            document.getElementById("next-btn").style.display = displayStyle;
+            
+            if (total > 1) startAutoRotate();
+        }
 
-      let currentIndex = 0;
-      const total = imageList.length;
-      let autoRotateTimer = null; // Variable to hold our timer
+        // Helper Functions
+        window.showImage = (index) => {
+            if (index < 0 || index >= total) return;
+            currentIndex = index;
+            carouselContainer.style.transform = `translateX(-${index * 100}%)`;
+        };
 
-      function showImage(index) {
-        if (index < 0 || index >= total) return;
-        carouselContainer.style.transform = `translateX(-${index * 100}%)`;
-      }
-      
-      function startAutoRotate(interval = 5000) {
-        if (autoRotateTimer) clearTimeout(autoRotateTimer);
-        
-        autoRotateTimer = setTimeout(() => {
-          currentIndex = (currentIndex + 1) % total;
-          showImage(currentIndex);
-          startAutoRotate(5000); // Resume normal 5-second rotation
-        }, interval);
-      }
+        function startAutoRotate(interval = 5000) {
+            if (autoRotateTimer) clearTimeout(autoRotateTimer);
+            autoRotateTimer = setTimeout(() => {
+                let nextIndex = (currentIndex + 1) % total;
+                window.showImage(nextIndex);
+                startAutoRotate(5000); 
+            }, interval);
+        }
 
-      document.getElementById("prev-btn").addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + total) % total;
-        showImage(currentIndex);
-        startAutoRotate(10000); // Reset timer for 10 seconds on user interaction
-      });
+        // Event Listeners
+        document.getElementById("prev-btn").onclick = () => {
+            let prevIndex = (currentIndex - 1 + total) % total;
+            window.showImage(prevIndex);
+            startAutoRotate(10000); 
+        };
 
-      document.getElementById("next-btn").addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % total;
-        showImage(currentIndex);
-        startAutoRotate(10000); // Reset timer for 10 seconds on user interaction
-      });
+        document.getElementById("next-btn").onclick = () => {
+            let nextIndex = (currentIndex + 1) % total;
+            window.showImage(nextIndex);
+            startAutoRotate(10000); 
+        };
+    }
 
-      // Start the initial rotation only if there is more than one image
-      if (total > 1) {
-          startAutoRotate();
-      }
+    // Start the search
+    findImages();
       
 
-      const bewertungen = [
-        { label: "Preis", value: laden.preis }, { label: "Geschmack", value: laden.geschmack },
-        { label: "Präsentation", value: laden["präsentation"] }, { label: "Übereinstimmung Bestellung", value: laden["übereinstimmung bestellung"] },
-        { label: "Menge", value: laden.menge }, { label: "Service", value: laden.service },
-        { label: "Ambiente", value: laden.ambiente }, { label: "Layering", value: laden.layering },
-        { label: "Zeit", value: laden.zeit }, { label: "Fleisch", value: laden.fleisch },
-        { label: "Brot", value: laden.brot }, { label: "Gemüse", value: laden.gemüse },
-        { label: "Sauce", value: laden.sauce }, { label: "Gesamt", value: laden.gesamt }
+    const bewertungen = [
+      { label: "Preis", value: laden.preis }, { label: "Geschmack", value: laden.geschmack },
+      { label: "Präsentation", value: laden["präsentation"] }, { label: "Übereinstimmung Bestellung", value: laden["übereinstimmung bestellung"] },
+      { label: "Menge", value: laden.menge }, { label: "Service", value: laden.service },
+      { label: "Ambiente", value: laden.ambiente }, { label: "Layering", value: laden.layering },
+      { label: "Zeit", value: laden.zeit }, { label: "Fleisch", value: laden.fleisch },
+      { label: "Brot", value: laden.brot }, { label: "Gemüse", value: laden.gemüse },
+      { label: "Sauce", value: laden.sauce }, { label: "Gesamt", value: laden.gesamt }
+    ];
+
+    const grid = document.getElementById("bewertung-grid");
+    grid.innerHTML = '';
+    bewertungen.forEach(b => {
+      if (b.value !== undefined && b.value !== "-") {
+        const div = document.createElement("div");
+        div.className = "bg-gray-100/80 backdrop-blur p-3 rounded shadow-sm text-center";
+        div.innerHTML = `<div class="text-lg font-bold">${b.value}</div><div class="text-sm text-gray-600">${b.label}</div>`;
+        grid.appendChild(div);
+      }
+    });
+      
+    // === BESONDERHEITEN SECTION SETUP (v2.0 - Always Visible) ===
+    const featuresContainer = document.getElementById("besonderheiten-container");
+    const featuresGrid = document.getElementById("besonderheiten-grid");
+
+    // We show the section if the 'besonderheiten' object exists at all
+    if (laden.besonderheiten) {
+      featuresContainer.classList.remove("hidden");
+      featuresGrid.innerHTML = ""; 
+
+      // Define the three categories to render
+      const categories = [
+        {
+          key: 'positiv',
+          title: 'Highlights',
+          emoji: '👍',
+          bgColor: 'bg-green-50',
+          borderColor: 'border-green-200',
+          titleColor: 'text-green-800',
+          bulletColor: 'bg-green-500',
+          emptyText: 'Keine besonderen Highlights gelistet.'
+        },
+        {
+          key: 'neutral',
+          title: 'Geschmackssache',
+          emoji: 'ℹ️',
+          bgColor: 'bg-blue-50',
+          borderColor: 'border-blue-200',
+          titleColor: 'text-blue-800',
+          bulletColor: 'bg-blue-500',
+          emptyText: 'Keine Besonderheiten gelistet'
+        },
+        {
+          key: 'negativ',
+          title: 'Luft nach oben',
+          emoji: '👎',
+          bgColor: 'bg-red-50',
+          borderColor: 'border-red-200',
+          titleColor: 'text-red-800',
+          bulletColor: 'bg-red-500',
+          emptyText: 'Keine negativen Punkte gelistet.'
+        }
       ];
 
-      const grid = document.getElementById("bewertung-grid");
-      grid.innerHTML = '';
-      bewertungen.forEach(b => {
-        if (b.value !== undefined && b.value !== "-") {
-          const div = document.createElement("div");
-          div.className = "bg-gray-100/80 backdrop-blur p-3 rounded shadow-sm text-center";
-          div.innerHTML = `<div class="text-lg font-bold">${b.value}</div><div class="text-sm text-gray-600">${b.label}</div>`;
-          grid.appendChild(div);
+      categories.forEach(cat => {
+        const items = laden.besonderheiten[cat.key] || [];
+        const div = document.createElement("div");
+        div.className = `${cat.bgColor} border ${cat.borderColor} rounded-xl p-4 shadow-sm flex flex-col`;
+        
+        // Header
+        let contentHtml = `
+          <h3 class="flex items-center ${cat.titleColor} font-bold mb-3">
+            <span class="mr-2 text-xl">${cat.emoji}</span> ${cat.title}
+          </h3>
+        `;
+
+        // List logic
+        if (items.length > 0) {
+          contentHtml += `
+            <ul class="space-y-2">
+              ${items.map(item => `
+                <li class="flex items-start text-gray-800 text-sm">
+                  <span class="mr-2 mt-1 w-1.5 h-1.5 ${cat.bulletColor} rounded-full flex-shrink-0"></span>
+                  ${item}
+                </li>
+              `).join('')}
+            </ul>
+          `;
+        } else {
+          // Placeholder if array is empty
+          contentHtml += `<p class="text-gray-400 text-sm italic mt-auto">${cat.emptyText}</p>`;
         }
+
+        div.innerHTML = contentHtml;
+        featuresGrid.appendChild(div);
       });
 
-      document.getElementById("laden-kommentar").textContent = laden.kommentar || "–";
+    } else {
+      // If the key doesn't exist in JSON at all, hide the whole section
+      featuresContainer.classList.add("hidden");
+    }
       
       if (laden.mapsUrl) {
         document.getElementById("map-frame").src = laden.mapsUrl;

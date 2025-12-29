@@ -15,7 +15,18 @@
     "gemüse": 4.2,
     "sauce": 3.3,
     "gesamt": 3.3,
-    "kommentar": "Liefert nur",
+    "besonderheiten": {
+      "positiv": [
+      ],
+      "negativ": [
+        "Rissiges Brot",
+        "Verbranntes Brot",
+        "Mini-Portion"
+      ],
+      "neutral": [
+        "Lieferservice only"
+      ]
+    },
     "subtitle": "",
     "datum": "07.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224.07397496848384!2d8.778343529920225!3d50.80434139305451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc893dd2b139b7%3A0xb449dead808d32b6!2sAMED%20Pizza%20%26%20D%C3%B6ner!5e1!3m2!1sde!2sde!4v1753121508484!5m2!1sde!2sde"
@@ -36,6 +47,21 @@
     "gemüse": 5.7,
     "sauce": 5,
     "gesamt": 5.3,
+    "besonderheiten": {
+      "positiv": [
+        "Sehr billig",
+        "Gutes Layering"
+      ],
+      "negativ": [
+        "Kein Rotkraut",
+        "Kein Kalbsfleisch",
+        "Kleine Portion"
+      ],
+      "neutral": [
+        "Keine Dönermann-Witze",
+        "Gemächliche Zubereitung"
+      ]
+    },
     "kommentar": "Nur Hähnchenspieß, kein Rotkraut",
     "datum": "14.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224.0481900608146!2d8.7717565521598!3d50.8097176449958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc631f905e9c11%3A0x7764e0bdef05f866!2sCastello%20Pizza%20%26%20D%C3%B6nerhaus!5e1!3m2!1sde!2sde!4v1753121658346!5m2!1sde!2sde"
@@ -56,6 +82,25 @@
     "gemüse": 6.7,
     "sauce": 6,
     "gesamt": 6.67,
+    "besonderheiten": {
+      "positiv": [
+        "Selbstgemachter Ayran",
+        "Sehr große Portion",
+        "Tee aufs Haus & Kolonya beim Verlassen"
+      ],
+      "negativ": [
+        "Kein Kalbsfleisch",
+        "Kein Rotkraut",
+        "Rissiges Brot"
+      ],
+      "neutral": [
+        "Türkisches Restaurant statt Döner-Imbiss",
+        "Essen wird an den Tisch gebracht",
+        "Ggf. Reservierung nötig",
+        "Andere Gerichte sehen besser aus als Döner",
+        "Rucola als Standartzutat"
+      ]
+    },
     "kommentar": "Eher Restaurant als Dönerladen. Hat selbstgemachten Ayran.",
     "datum": "28.07.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d201.6504120322567!2d8.771537662645466!3d50.817590603504286!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63866a1d0679%3A0x1f920e49304f6d80!2sLezzet-i%20Mangal!5e1!3m2!1sde!2sde!4v1754683390759!5m2!1sde!2sde"
@@ -76,6 +121,22 @@
     "gemüse": 8.3,
     "sauce": 8.3,
     "gesamt": 8.6,
+    "besonderheiten": {
+      "positiv": [
+        "Dönermann (der Chef) ist ein Bro",
+        "Schnelle Zubereitung",
+        "Gutes Layering",
+        "Zitronenträufel als Extra auf Wunsch",
+        "After-Party Öffnungszeiten"
+      ],
+      "negativ": [
+        
+      ],
+      "neutral": [
+        "Jawohl Jawohl! ist hier Marke und Meme",
+        "Qualität bei Zubereitung und Erlebnis schwankt wenn nicht der Chef bedient"
+      ]
+    },
     "kommentar": "TODO",
     "datum": "18.08.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d590.7604529957412!2d8.773811770895396!3d50.809734658054694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc630046588645%3A0xb74e6a6251f4566e!2sStadt%20D%C3%B6ner%20-%20Jawoll%20Jawoll!5e1!3m2!1sde!2sde!4v1758046413519!5m2!1sde!2sde"
@@ -95,6 +156,20 @@
     "brot": 6.3,
     "gemüse": 6.8,
     "sauce": 6.5,
+    "besonderheiten": {
+      "positiv": [
+        "Klassischer Döner-Laden-Flair",
+        "Vegane Soße & Seitan-Option"
+      ],
+      "negativ": [
+        "Teuer",
+        "Schlechtes Layering"
+      ],
+      "neutral": [
+        "Große Saucenauswahl",
+        "Blinde (aber sehr kompetente) Bedienung"
+      ]
+    },
     "gesamt": 6.71,
     "kommentar": "TODO",
     "datum": "20.09.2025",
@@ -116,16 +191,134 @@
     "gemüse": 7.5,
     "sauce": 5.6,
     "gesamt": 5.9,
+    "besonderheiten": {
+      "positiv": [
+      ],
+      "negativ": [
+        "Teuer!",
+        "Paprika als Standartzutat",
+        "Vegan → Überforderung",
+        "Eher kleine Portion"
+      ],
+      "neutral": [
+        "Keine 0,3l Cola",
+        "Pizzabrot-ähnliche Tasche",
+        "Petersilie als Standartzutat"
+      ]
+    },
     "kommentar": "TODO",
     "datum": "12.10.2025",
-    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3340.5653814115417!2d8.76683147728681!3d50.82763007166674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63b9d233f763%3A0x97951bc6f57a29db!2sLeon&#39;s%20D%C3%B6ner%20%26%20Pizza!5e1!3m2!1sde!2sde!4v1760873770801!5m2!1sde!2sde"
-  
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3340.5653814115417!2d8.76683147728681!3d50.82763007166674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63b9d233f763%3A0x97951bc6f57a29db!2sLeon's%20D%C3%B6ner%20%26%20Pizza!5e1!3m2!1sde!2sde!4v1765036296865!5m2!1sde!2sde"
+  },
+  {
+    "name": "Memo's Döner Pizzahaus",
+    "preis": "7",
+    "geschmack": 5.7,
+    "präsentation": 6,
+    "übereinstimmung bestellung": 10,
+    "menge": "472",
+    "service": 7.8,
+    "ambiente": 7,
+    "layering": 4.9,
+    "zeit": 9,
+    "fleisch": 6.2,
+    "brot": 4.7,
+    "gemüse": 7.2,
+    "sauce": 5.8,
+    "gesamt": 6,
+    "besonderheiten": {
+      "positiv": [
+        "Schnelle Zubereitung"
+      ],
+      "negativ": [
+        "Döner mit trockenem Pizzabrot-Ende",
+        "Rissiges Brot",
+        "Schlechtes Layering"
+      ],
+      "neutral": [
+        "Ketchup als einzige vegane Sauce",
+        "Scharfes Scharf"
+      ]
+    },
+    "kommentar": "TODO",
+    "datum": "26.10.2025",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3343.096474554213!2d8.782701177285295!3d50.79224997165949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc89b8daca3971%3A0xbbc691412cf7f079!2sMemo's%20D%C3%B6ner%20Pizzahaus!5e1!3m2!1sde!2sde!4v1765034585705!5m2!1sde!2sde"
+  },
+  {
+    "name": "Sinan's Kebaphaus",
+    "preis": "7.50",
+    "geschmack": 4.7,
+    "präsentation": 5.6,
+    "übereinstimmung bestellung": 10,
+    "menge": "447",
+    "service": 5.7,
+    "ambiente": 5.6,
+    "layering": 5,
+    "zeit": 6.8,
+    "fleisch": 3.6,
+    "brot": 4.9,
+    "gemüse": 6,
+    "sauce": 4.2,
+    "gesamt": 4.6,
+    "besonderheiten": {
+      "positiv": [
+        
+      ],
+      "negativ": [
+        "Kein Kalbsfleisch",
+        "Kein Weißkraut",
+        "Rissiges Brot",
+        "Eher kleiner Döner",
+        "Schlechtes Layering"
+      ],
+      "neutral": [
+        "Curry-lastige Sauce",
+        "Hohe Schwankung bei Portionsgröße",
+        "Petersilie als Standartzutat",
+        "Ketchup als einzige vegane Sauce"
+      ]
+    },
+    "kommentar": "TODO",
+    "datum": "09.11.2025",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6687.73313931696!2d8.7681229!3d50.781481899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63b12b1de6c9%3A0x64f8460a16020e7c!2sSinan's%20Kebaphaus!5e1!3m2!1sde!2sde!4v1765035626690!5m2!1sde!2sde"
+  },
+  {
+    "name": "Sefa's Döner und Pizzahaus",
+    "preis": "8",
+    "geschmack": 8,
+    "präsentation": 6.7,
+    "übereinstimmung bestellung": 10,
+    "menge": "501",
+    "service": 8,
+    "ambiente": 8.5,
+    "layering": 6.7,
+    "zeit": 7.3,
+    "fleisch": 8,
+    "brot": 6.3,
+    "gemüse": 9,
+    "sauce": 7.7,
+    "gesamt": 7.7,
+    "besonderheiten": {
+      "positiv": [
+        "Cocktailbar + Billiardtische im UG",
+        "Guter Vibe"
+      ],
+      "negativ": [
+        "Teuer"
+      ],
+      "neutral": [
+        "Sehr viele Sitzgelegenheiten"
+      ]
+    },
+    "kommentar": "TODO",
+    "datum": "07.12.2025",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3342.0132785184446!2d8.768849377285912!3d50.80739327166254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc627e06328f1b%3A0x80271b9b3aec85f1!2sSefa's%20D%C3%B6ner%20und%20Pizzahaus!5e1!3m2!1sde!2sde!4v1765193327972!5m2!1sde!2sde"
+  },
+  {
+    "name": "Crunchy Kebab (demnächst)"
   },
   {
     "name": "Mr. King (demnächst)"
-  },
-  {
-    "name": "Sefa's Döner und Pizzahaus (demnächst)"
   },
   {
     "name": "Süleyman Usta (demnächst)"
@@ -140,13 +333,7 @@
     "name": "Star Döner & Pizzahaus (demnächst)"
   },
   {
-    "name": "Memo's Döner Pizzahaus (demnächst)"
-  },
-  {
     "name": "Uni Döner (demnächst)"
-  },
-  {
-    "name": "Crunchy Kebab (demnächst)"
   },
   {
     "name": "Istanbul Döner (demnächst)"
@@ -156,9 +343,6 @@
   },
   {
     "name": "Bay Döner (demnächst)"
-  },
-  {
-    "name": "Sinan's Kebaphaus (demnächst)"
   },
   {
     "name": "Somat (demnächst)"
