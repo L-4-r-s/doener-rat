@@ -315,7 +315,40 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3342.0132785184446!2d8.768849377285912!3d50.80739327166254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc627e06328f1b%3A0x80271b9b3aec85f1!2sSefa's%20D%C3%B6ner%20und%20Pizzahaus!5e1!3m2!1sde!2sde!4v1765193327972!5m2!1sde!2sde"
   },
   {
-    "name": "Crunchy Kebab (demnächst)"
+    "name": "Crunchy Kebab",
+    "preis": "7.50",
+    "geschmack": 7.1,
+    "präsentation": 7,
+    "übereinstimmung bestellung": 9.3,
+    "menge": "436",
+    "service": 5.9,
+    "ambiente": 7.7,
+    "layering": 6.1,
+    "zeit": 9.3,
+    "fleisch": 7.4,
+    "brot": 6,
+    "gemüse": 6.2,
+    "sauce": 7,
+    "gesamt": 6.9,
+    "besonderheiten": {
+      "positiv": [
+        "Vollkornbrot (optional)",
+        "Vegane Optionen"
+      ],
+      "negativ": [
+        "Preis-Leistung vor allem bei veganem Döner"
+      ],
+      "neutral": [
+        "Hip mit Cocktailbar & Rapmusik",
+        "Remouladen-lastige Sauce"
+      ]
+    },
+    "kommentar": "TODO",
+    "datum": "09.01.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d993.5831685790367!2d8.774532767339924!3d50.80754954856169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63005f209b81%3A0xd21bd8e6e26c572f!2sCrunchy%20Kebab!5e1!3m2!1sde!2sde!4v1768147421225!5m2!1sde!2sde"  
+  },
+  {
+    "name": "Bay Döner (demnächst)"
   },
   {
     "name": "Mr. King (demnächst)"
@@ -340,9 +373,6 @@
   },
   {
     "name": "Royal Döner Kebab und Pizzahaus (demnächst)"
-  },
-  {
-    "name": "Bay Döner (demnächst)"
   },
   {
     "name": "Somat (demnächst)"
