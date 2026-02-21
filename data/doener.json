@@ -106,7 +106,7 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d201.6504120322567!2d8.771537662645466!3d50.817590603504286!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63866a1d0679%3A0x1f920e49304f6d80!2sLezzet-i%20Mangal!5e1!3m2!1sde!2sde!4v1754683390759!5m2!1sde!2sde"
   },
   {
-    "name": "Stadt Döner - Jawoll Jawoll",
+    "name": "Stadt Döner - Jawoll Jawoll (geschlossen)",
     "preis": "7",
     "geschmack": 8.6,
     "präsentation": 8.8,
@@ -137,7 +137,6 @@
         "Qualität bei Zubereitung und Erlebnis schwankt wenn nicht der Chef bedient"
       ]
     },
-    "kommentar": "TODO",
     "datum": "18.08.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d590.7604529957412!2d8.773811770895396!3d50.809734658054694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc630046588645%3A0xb74e6a6251f4566e!2sStadt%20D%C3%B6ner%20-%20Jawoll%20Jawoll!5e1!3m2!1sde!2sde!4v1758046413519!5m2!1sde!2sde"
   },
@@ -171,7 +170,6 @@
       ]
     },
     "gesamt": 6.71,
-    "kommentar": "TODO",
     "datum": "20.09.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4726.80718086113!2d8.757334106832865!3d50.80258258435769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc626461cba5d1%3A0x48408ad2ac6b7a02!2zU8O8ZHZpZXJ0ZWwgRMO2bmVy!5e1!3m2!1sde!2sde!4v1759576801482!5m2!1sde!2sde"
   },
@@ -206,7 +204,6 @@
         "Petersilie als Standartzutat"
       ]
     },
-    "kommentar": "TODO",
     "datum": "12.10.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3340.5653814115417!2d8.76683147728681!3d50.82763007166674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63b9d233f763%3A0x97951bc6f57a29db!2sLeon's%20D%C3%B6ner%20%26%20Pizza!5e1!3m2!1sde!2sde!4v1765036296865!5m2!1sde!2sde"
   },
@@ -240,7 +237,6 @@
         "Scharfes Scharf"
       ]
     },
-    "kommentar": "TODO",
     "datum": "26.10.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3343.096474554213!2d8.782701177285295!3d50.79224997165949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc89b8daca3971%3A0xbbc691412cf7f079!2sMemo's%20D%C3%B6ner%20Pizzahaus!5e1!3m2!1sde!2sde!4v1765034585705!5m2!1sde!2sde"
   },
@@ -278,7 +274,6 @@
         "Ketchup als einzige vegane Sauce"
       ]
     },
-    "kommentar": "TODO",
     "datum": "09.11.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6687.73313931696!2d8.7681229!3d50.781481899999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63b12b1de6c9%3A0x64f8460a16020e7c!2sSinan's%20Kebaphaus!5e1!3m2!1sde!2sde!4v1765035626690!5m2!1sde!2sde"
   },
@@ -310,7 +305,6 @@
         "Sehr viele Sitzgelegenheiten"
       ]
     },
-    "kommentar": "TODO",
     "datum": "07.12.2025",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3342.0132785184446!2d8.768849377285912!3d50.80739327166254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc627e06328f1b%3A0x80271b9b3aec85f1!2sSefa's%20D%C3%B6ner%20und%20Pizzahaus!5e1!3m2!1sde!2sde!4v1765193327972!5m2!1sde!2sde"
   },
@@ -343,12 +337,77 @@
         "Remouladen-lastige Sauce"
       ]
     },
-    "kommentar": "TODO",
     "datum": "09.01.2026",
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d993.5831685790367!2d8.774532767339924!3d50.80754954856169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63005f209b81%3A0xd21bd8e6e26c572f!2sCrunchy%20Kebab!5e1!3m2!1sde!2sde!4v1768147421225!5m2!1sde!2sde"  
   },
   {
-    "name": "Bay Döner (demnächst)"
+    "name": "Bay Döner",
+    "preis": "7",
+    "geschmack": 6,
+    "präsentation": 5.5,
+    "übereinstimmung bestellung": 9,
+    "menge": "452",
+    "service": 7.7,
+    "ambiente": 6.5,
+    "layering": 5,
+    "zeit": 4.3,
+    "fleisch": 5,
+    "brot": 5.5,
+    "gemüse": 6.5,
+    "sauce": 6.2,
+    "gesamt": 6,
+    "besonderheiten": {
+      "positiv": [
+        "Leckere Gewürze auf Brot"
+      ],
+      "negativ": [
+        "Sauce kann bei Bissen spritzen"
+        
+      ],
+      "neutral": [
+        "Portionsgröße stark schwankend",
+        "Sehr dickes Brot"
+      ]
+    },
+    "datum": "26.01.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26743.265845618505!2d8.724882602691661!3d50.794881893215816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63eb3cf1845f%3A0x82da7245bb2b3ec3!2sBay%20D%C3%B6ner!5e1!3m2!1sde!2sde!4v1769455167319!5m2!1sde!2sde"  
+  },
+  {
+    "name": "Istanbul Döner",
+    "preis": "7.50",
+    "geschmack": 7.6,
+    "präsentation": 6.1,
+    "übereinstimmung bestellung": 10,
+    "menge": "470",
+    "service": 6.6,
+    "ambiente": 6.8,
+    "layering":6.6,
+    "zeit": 4.7,
+    "fleisch": 7.3,
+    "brot": 6.3,
+    "gemüse": 7.3,
+    "sauce": 7.1,
+    "gesamt": 7,
+    "besonderheiten": {
+      "positiv": [
+        "Zuverlässige Portionsgrößen",
+        "Steak-Spieß",
+        "Vegane Optionen (Seitan & veg. Sauce)"
+      ],
+      "negativ": [
+        "Rissanfälliges Brot"
+      ],
+      "neutral": [
+        "Viele Sitzgelegenheiten",
+        "Kein Hähnchen-Spieß"
+      ]
+    },
+    
+    "datum": "26.01.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d855422.2961088103!2d7.615394546874994!3d50.8146609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc6285b8c4bf5f%3A0xba2c4d6ad06568e1!2sIstanbul%20D%C3%B6ner!5e1!3m2!1sde!2sde!4v1771667025725!5m2!1sde!2sde"
+  },
+  {
+    "name": "Helal Döner (demnächst)"
   },
   {
     "name": "Mr. King (demnächst)"
@@ -360,16 +419,10 @@
     "name": "Haus des Döners (demnächst)"
   },
   {
-    "name": "Helal Döner (demnächst)"
-  },
-  {
     "name": "Star Döner & Pizzahaus (demnächst)"
   },
   {
     "name": "Uni Döner (demnächst)"
-  },
-  {
-    "name": "Istanbul Döner (demnächst)"
   },
   {
     "name": "Royal Döner Kebab und Pizzahaus (demnächst)"
