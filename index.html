@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="css/styles.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
 <body class="bg-gray-50 text-gray-900 transition-colors duration-300 relative z-0">
 
   <!-- Hintergrundbilder -->
@@ -29,19 +28,28 @@
   <main class="p-4">
     <div class="flex justify-center">
       <div class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 space-y-4 w-full md:w-auto">
-        <!-- ... Intro-Text und Suchfeld bleiben gleich ... -->
-        <!-- HIER DAS SUCHFELD EINFÜGEN -->
-        <div class="relative">
-          <input 
-            type="text" 
-            id="search-input" 
-            placeholder="Suchen..." 
-            class="w-full p-2 pl-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
-          >
-          <span class="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+        
+        <!-- NEU: Suchfeld und Info-Button in einem Flex-Container -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <div class="relative flex-grow">
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Suchen..." 
+              class="w-full p-2 pl-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
+            >
+            <span class="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+          </div>
+          
+          <button id="info-btn" class="flex-shrink-0 bg-blue-50 text-blue-600 hover:bg-blue-100 font-semibold px-4 py-2 rounded-lg border border-blue-200 transition-colors shadow-sm flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Kategorien erklärt
+          </button>
         </div>
 
-        <div class="text-center mb-4 md:hidden">
+        <div class="text-center mb-4 mt-2 md:hidden">
           <button id="toggle-details-btn" class="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors shadow">
             Details anzeigen
           </button>
@@ -51,11 +59,6 @@
           <table class="border-collapse text-sm whitespace-nowrap">
               <thead class="bg-gray-100 text-left">
                 <tr>
-                  <!-- 
-                    *** HIER IST DIE ÄNDERUNG ***
-                    Jeder klickbare Header bekommt ein `data-sort`-Attribut,
-                    dessen Wert dem Schlüssel in der doener.json entspricht.
-                  -->
                   <th class="p-2 font-bold">Platz</th>
                   <th class="p-2 allow-wrap" data-sort="name">Name<span class="sort-indicator"></span></th>
                   <th class="p-2" data-sort="preis">Preis (€)<span class="sort-indicator"></span></th>
@@ -81,6 +84,46 @@
     </div>
   </main>
 
+  <!-- === NEU: INFO MODAL FÜR KATEGORIEN === -->
+  <div id="info-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 transition-opacity duration-300 opacity-0">
+    <!-- Modal Container -->
+    <div id="info-modal-content" class="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col transform scale-95 transition-transform duration-300">
+      
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center p-5 border-b border-gray-200">
+        <h2 class="text-xl md:text-2xl font-bold flex items-center text-gray-800">
+          <span class="text-2xl mr-2">📋</span> So bewertet der Dönerrat
+        </h2>
+        <button id="close-info-modal" class="text-gray-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-full transition-colors leading-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollbar wenn nötig) -->
+      <div class="p-6 overflow-y-auto space-y-4 text-gray-700 text-sm md:text-base">
+        <p class="font-medium text-blue-700 bg-blue-50 p-3 rounded-lg border border-blue-100">Jede Kategorie (außer der Preis und die Menge) wird auf einer Skala von 1 (schlecht) bis 10 (gut) bewertet.</p>
+        
+        <ul class="space-y-3">
+          <li><strong>💸 Preis:</strong> Der Preis eines normalen Döners in € (Kosten Hähnchen und Kalb unterschiedlich viel wird der Durchschnitt angegeben).</li>
+          <li><strong>⭐ Geschmack:</strong> Wenn man alle äußeren Faktoren ignoriert: Wie lecker ist das Endprodukt bzw. das Zusammenspiel aller Zutaten?</li>
+          <li><strong>🎨 Präsentation:</strong> Ist der Döner auf dem Teller appetitlich angerichtet inkl. Papierserviette? </li>
+          <li><strong>✅ Übereinstimmung Bestellung:</strong> Wurde der Döner so zubereitet wie bestellt (richtige Sauce, ohne Zutat XY...)?</li>
+          <li><strong>⚖️ Menge:</strong> Das Gewicht in Gramm. </li>
+          <li><strong>🤝 Service:</strong> Freundlichkeit, Aufmerksamkeit und allgemeiner Umgang mit den Gästen.</li>
+          <li><strong>🛋️ Ambiente:</strong> Sauberkeit des Ladens, optisch Ansprechende Zutatenauslage, Sitzmöglichkeiten und "Dönermann-Vibe".</li>
+          <li><strong>🥪 Layering:</strong> Die Verteilung der Zutaten. Hat man beim ersten Bissen nur Salat und am Ende nur Fleisch (1), oder ist jeder Bissen ein Zusammenspiel aus allen Zutaten (10)?</li>
+          <li><strong>⏱️ Zeit:</strong> Die Wartezeit von der Bestellung bis zum Dönergenuss.</li>
+          <li><strong>🥩🥖 Einzelkomponenten:</strong> <b><em>Fleisch, Brot, Gemüse & Sauce</em></b> werden nochmals einzeln auf ihren Geschmack geprüft.</li>
+          <li><strong>💯 Gesamt:</strong> Der Gesamteindruck inkl. Geschmack, Preis-Leistung, Ambiente und Service. Dies ist kein Durchschnitt über die anderen Kategorien - jeder Tester darf selber priorisieren.</li>
+        </ul>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-gray-200 bg-gray-50 rounded-b-2xl text-right">
+        <button id="close-info-modal-btn" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition shadow-sm">Verstanden</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/script.js"></script>
 </body>

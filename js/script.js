@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   // === GLOBALE VARIABLEN UND DOM-ELEMENTE ===
-  let doenerListe = [];        // Hier speichern wir die Originaldaten aus der JSON
-  let gefilterteListe = [];    // Dies ist die Liste, die wir tatsächlich anzeigen (sortiert/gefiltert)
+  let doenerListe =[];        // Hier speichern wir die Originaldaten aus der JSON
+  let gefilterteListe =[];    // Dies ist die Liste, die wir tatsächlich anzeigen (sortiert/gefiltert)
   
   // Zustand der aktuellen Sortierung
   let currentSort = {
@@ -30,6 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
    */
   function sortData() {
     gefilterteListe.sort((a, b) => {
+      // --- NEU: Geschlossene Läden immer ans Ende packen ---
+      const isAClosed = a.name.toLowerCase().includes('geschlossen');
+      const isBClosed = b.name.toLowerCase().includes('geschlossen');
+      
+      if (isAClosed && !isBClosed) return 1;  // Laden A ist zu, B offen -> A nach unten
+      if (!isAClosed && isBClosed) return -1; // Laden B ist zu, A offen -> B nach unten
+      // -----------------------------------------------------
+
       const key = currentSort.key;
       let valA = a[key];
       let valB = b[key];
@@ -72,33 +80,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /**
    * Rendert die Tabelle. Die übergebene Liste wird als bereits sortiert angenommen.
-   * Das interne .sort() wurde entfernt!
    */
   function renderTabelle(liste) {
-    const headers = ["Platz", "Name", "Preis", "Geschmack", "Präsentation", "Bestellung", "Menge", "Service", "Ambiente", "Layering", "Zeit", "Fleisch", "Brot", "Gemüse", "Sauce", "Gesamt", "Details"];
+    const headers =["Platz", "Name", "Preis", "Geschmack", "Präsentation", "Bestellung", "Menge", "Service", "Ambiente", "Layering", "Zeit", "Fleisch", "Brot", "Gemüse", "Sauce", "Gesamt", "Details"];
     tbody.innerHTML = "";
     
-    liste.forEach((laden, index) => {
-      const row = document.createElement("tr");
-      row.classList.add("border-b", "md:border-b-0", `rank-${index + 1}`);
-      const gesamt = typeof laden.gesamt === "number" ? laden.gesamt.toFixed(1) : "-";
-      const badge = getBadgeEmoji(index + 1);
+    let currentRank = 1; // Zähler für die echten Platzierungen
 
-      // Name-Spalte abhängig von vorhandener Bewertung
+    liste.forEach((laden) => {
+      const row = document.createElement("tr");
+      
+      // --- NEU: Prüfen, ob der Laden geschlossen ist ---
+      const isClosed = laden.name.toLowerCase().includes('geschlossen');
+      
+      let displayRank;
+      if (isClosed) {
+        displayRank = "–"; // Strich statt Rangzahl
+        // Ausgrauen mit Tailwind CSS Klassen
+        row.classList.add("border-b", "md:border-b-0", "bg-gray-200/40", "opacity-60", "grayscale");
+      } else {
+        displayRank = currentRank++; // Nur hochzählen, wenn der Laden offen ist
+        row.classList.add("border-b", "md:border-b-0", `rank-${displayRank}`);
+      }
+
+      const gesamt = typeof laden.gesamt === "number" ? laden.gesamt.toFixed(1) : "-";
+      // Keine Badges für geschlossene Läden
+      const badge = (!isClosed) ? getBadgeEmoji(displayRank) : "";
+
+      // Name-Spalte abhängig von vorhandener Bewertung und Status
       let nameCellContent;
       if (typeof laden.gesamt === "number") {
-        // Mit Link und Badge
+        // Mit Link und Badge (Farbe ändert sich, wenn geschlossen)
+        const linkColor = isClosed ? "text-gray-700 hover:text-gray-900 underline decoration-gray-400" : "text-blue-600 hover:underline";
         nameCellContent = `
-          <a href="laden.html?name=${encodeURIComponent(laden.name)}" class="text-blue-600 hover:underline">
+          <a href="laden.html?name=${encodeURIComponent(laden.name)}" class="${linkColor}">
             ${laden.name}
             <span class="top-badge ml-2" aria-hidden="true">${badge}</span>
-            <span class="sr-only">${badge ? `Platz ${index + 1}` : ''}</span>
+            <span class="sr-only">${badge ? `Platz ${displayRank}` : ''}</span>
           </a>
         `;
       } else {
-        // Nur schwarzer Text
+        // Nur Text
+        const textColor = isClosed ? "text-gray-600" : "text-gray-900";
         nameCellContent = `
-          <span class="text-gray-900">
+          <span class="${textColor}">
             ${laden.name}
             <span class="top-badge ml-2" aria-hidden="true">${badge}</span>
           </span>
@@ -106,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       row.innerHTML = `
-        <td class="p-2 font-semibold" data-label="${headers[0]}">${index + 1}</td>
+        <td class="p-2 font-semibold" data-label="${headers[0]}">${displayRank}</td>
         <td class="p-2 font-medium allow-wrap" data-label="${headers[1]}">
           ${nameCellContent}
         </td>
@@ -182,17 +207,13 @@ document.addEventListener("DOMContentLoaded", () => {
       tbody.innerHTML = `<tr><td colspan="17" class="p-4 text-center text-red-500">Daten konnten nicht geladen werden.</td></tr>`;
     }
   }
-  // === NEUER CODE FÜR DEN DETAIL-UMSCHALTER ===
+  // === DETAIL-UMSCHALTER ===
   const toggleBtn = document.getElementById('toggle-details-btn');
   const tableContainer = document.getElementById('doener-table-container');
 
-  // Sicherstellen, dass die Elemente existieren, bevor wir den Listener hinzufügen
   if (toggleBtn && tableContainer) {
     toggleBtn.addEventListener('click', () => {
-      // Die Klasse 'details-hidden' am Container umschalten
       tableContainer.classList.toggle('details-hidden');
-
-      // Den Button-Text anpassen, je nachdem, ob die Details versteckt sind oder nicht
       const areDetailsHidden = tableContainer.classList.contains('details-hidden');
       if (areDetailsHidden) {
         toggleBtn.textContent = 'Details anzeigen';
@@ -201,10 +222,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  init(); // Starte die Initialisierung
+  init(); 
 });
 
-// ----- Der restliche Code bleibt unverändert und außerhalb von DOMContentLoaded -----
+// === MODAL & SCROLL EFFEKTE (Bleiben unverändert) ===
 
 function showDetails(name, kommentar) {
   const modal = document.getElementById("modal");
@@ -251,4 +272,50 @@ window.addEventListener("scroll", () => {
     bg1.style.transform = `translateY(${scrollTop * 0.1}px)`;
     bg2.style.transform = `translateY(${scrollTop * 0.05}px)`;
   }
+});
+
+
+// === NEU: INFO MODAL LOGIK (KATEGORIEN ERKLÄRT) ===
+const infoBtn = document.getElementById('info-btn');
+const infoModal = document.getElementById('info-modal');
+const infoModalContent = document.getElementById('info-modal-content');
+const closeInfoModalIcons =[
+  document.getElementById('close-info-modal'),
+  document.getElementById('close-info-modal-btn')
+];
+
+// Funktion zum Ein-/Ausblenden des Info-Modals mit geschmeidiger Animation
+function toggleInfoModal(show) {
+  if (!infoModal) return;
+
+  if (show) {
+    infoModal.classList.remove('hidden');
+    // Winziger Timeout, damit die CSS-Transition (Fade & Scale) greifen kann
+    setTimeout(() => {
+      infoModal.classList.remove('opacity-0');
+      infoModalContent.classList.remove('scale-95');
+    }, 10);
+  } else {
+    infoModal.classList.add('opacity-0');
+    infoModalContent.classList.add('scale-95');
+    // Warten bis die Ausblend-Animation (300ms) fertig ist, dann aus dem DOM verstecken
+    setTimeout(() => {
+      infoModal.classList.add('hidden');
+    }, 300);
+  }
+}
+
+// Event Listener an die Buttons binden
+if (infoBtn) {
+  infoBtn.addEventListener('click', () => toggleInfoModal(true));
+}
+
+// Schließen-Buttons aktivieren
+closeInfoModalIcons.forEach(btn => {
+  if (btn) btn.addEventListener('click', () => toggleInfoModal(false));
+});
+
+// Modal schließen, wenn man außerhalb (auf den grauen Hintergrund) klickt
+window.addEventListener("click", (e) => {
+  if (e.target === infoModal) toggleInfoModal(false);
 });

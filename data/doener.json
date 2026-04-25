@@ -407,16 +407,44 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d855422.2961088103!2d7.615394546874994!3d50.8146609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc6285b8c4bf5f%3A0xba2c4d6ad06568e1!2sIstanbul%20D%C3%B6ner!5e1!3m2!1sde!2sde!4v1771667025725!5m2!1sde!2sde"
   },
   {
-    "name": "Helal Döner (demnächst)"
+    "name": "Helal Döner",
+    "preis": "8",
+    "geschmack": 6.8,
+    "präsentation": 7.4,
+    "übereinstimmung bestellung": 10,
+    "menge": "427",
+    "service": 7.8,
+    "ambiente": 7,
+    "layering":5.4,
+    "zeit": 7.5,
+    "fleisch": 5.25,
+    "brot": 7.8,
+    "gemüse": 7,
+    "sauce": 6.4,
+    "gesamt": 6.6,
+    "besonderheiten": {
+      "positiv": [
+        "Sehr gutes Brot"
+      ],
+      "negativ": [
+        "Schlechtes Preis-Leistungsverhältnis"
+      ],
+      "neutral": [
+        "Wenige Sitzgelegenheiten"
+      ]
+    },
+    
+    "datum": "01.03.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.331745300835!2d8.767584577286351!3d50.816919571664506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc628519fdceb7%3A0xef46885c16da4a03!2sHelal%20D%C3%B6ner%20Marburg!5e1!3m2!1sde!2sde!4v1777052048286!5m2!1sde!2sde"
+  },
+  {
+    "name": "Haus des Döners (demnächst)"
   },
   {
     "name": "Mr. King (demnächst)"
   },
   {
     "name": "Süleyman Usta (demnächst)"
-  },
-  {
-    "name": "Haus des Döners (demnächst)"
   },
   {
     "name": "Star Döner & Pizzahaus (demnächst)"
