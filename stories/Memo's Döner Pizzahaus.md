@@ -8,5 +8,5 @@ Die restlichen Zutaten außerhalb des Brotes waren hingegen absolut in Ordnung u
 
 Was das Zwischenmenschliche angeht: Das Ambiente und der Service sind solide und funktional. Es reicht zwar nicht ganz für eine tiefgreifende „Dönermann-Dönermampfer-Bromance“, aber man kann auch nicht meckern.
 
-Fazit:
+### Fazit
 Memo’s Döner und Pizzahaus ist sehr flott, aber in den Kurven (dem Layering) fehlt die Präzision. Wer schnell einen aus soliden Zutaten gezimmerten Döner auf die Hand will und kein Problem damit hat, Gemüse und Fleisch eher getrennt voneinander zu essen, wird hier glücklich. Ein alles in allem durchschnittliches Erlebnis mit Luft nach oben bei der Handwerkskunst.
