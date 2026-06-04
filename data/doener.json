@@ -438,13 +438,75 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3341.331745300835!2d8.767584577286351!3d50.816919571664506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc628519fdceb7%3A0xef46885c16da4a03!2sHelal%20D%C3%B6ner%20Marburg!5e1!3m2!1sde!2sde!4v1777052048286!5m2!1sde!2sde"
   },
   {
-    "name": "Haus des Döners (demnächst)"
+    "name": "Haus des Döners",
+    "preis": "8.50",
+    "geschmack": 5.4,
+    "präsentation": 6.3,
+    "übereinstimmung bestellung": 10,
+    "menge": "483",
+    "service": 7.3,
+    "ambiente": 6.1,
+    "layering":4.3,
+    "zeit": 8,
+    "fleisch": 6.8,
+    "brot": 5.6,
+    "gemüse": 6.1,
+    "sauce": 6,
+    "gesamt": 5.3,
+    "besonderheiten": {
+      "positiv": [
+        "Schnelle Zubereitung",
+        "Sitzgelegenheiten drinnen und draußen"
+      ],
+      "negativ": [
+        "Teuer",
+        "Rotkraut überlagert alles",
+        "Kein Dönermann-Charme"
+      ],
+      "neutral": [
+        "Spieß-Schneidemaschine 'Der Gerät'"
+      ]
+    },
+    
+    "datum": "01.03.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d496.77470704778267!2d8.773438046634773!3d50.80913661369318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc6300107ecd55%3A0xb1a974f44f3e72ab!2sDas%20Haus%20des%20D%C3%B6ners!5e1!3m2!1sde!2sde!4v1778264652907!5m2!1sde!2sde"
+  },
+  {
+    "name": "Süleyman Usta",
+    "preis": "8",
+    "geschmack": 3.4,
+    "präsentation": 6,
+    "übereinstimmung bestellung": 8.6,
+    "menge": "506",
+    "service": 10,
+    "ambiente": 7.2,
+    "layering":3.2,
+    "zeit": 5,
+    "fleisch": 3.75,
+    "brot": 3.8,
+    "gemüse": 3.8,
+    "sauce": 2.2,
+    "gesamt": 3.6,
+    "besonderheiten": {
+      "positiv": [
+        "Super nettes Personal",
+        "Kostenloser Chai",
+        "Viele Sitzgelegenheiten"
+      ],
+      "negativ": [
+        "Schlechter Döner (siehe Text)"
+      ],
+      "neutral": [
+        "Eher Restaurant als Dönerladen",
+        "Kein Hähnchenfleisch"
+      ]
+    },
+    
+    "datum": "17.05.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5620.925125873638!2d8.771359588272134!3d50.804474490417306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc627dcd35867d%3A0xa503d9baef951327!2sS%C3%BCleyman%20usta%27nin%20yeri!5e1!3m2!1sde!2sde!4v1780257888099!5m2!1sde!2sde"
   },
   {
     "name": "Mr. King (demnächst)"
-  },
-  {
-    "name": "Süleyman Usta (demnächst)"
   },
   {
     "name": "Star Döner & Pizzahaus (demnächst)"
