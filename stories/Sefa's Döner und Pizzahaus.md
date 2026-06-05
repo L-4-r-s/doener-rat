@@ -10,5 +10,5 @@ Inhaltlich spielt Sefa jedoch in der oberen Liga. Das Gemüse war knackig und fr
 
 Mengenmäßig bewegt sich der Döner mit etwa 500 Gramm in einem soliden Bereich. Allerdings muss man für dieses Gesamtpaket auch tiefer in die Tasche greifen: 8,00 € sind für einen Marburger Döner im Zentrum eine Ansage. Sefa ist damit definitiv kein Preis-Leistungs-Sieger, sondern eher etwas für den Döner-Genießer, der bereit ist, für das Ambiente und die Professionalität einen Aufschlag zu zahlen.
 
-Fazit:
+### Fazit
 Sefa wird seinem Ruf am oberen Ende der Marburger Döner-Hierarchie größtenteils gerecht. Wer Wert auf ein sauberes, professionelles Umfeld und qualitativ hochwertige Zutaten legt (und wen die Billard-Option im Keller reizt), ist hier goldrichtig. Man erhält einen überdurchschnittlichen Döner, muss aber mit den kleinen Schwächen des selbstgebackenen Brotes und einem stolzen Preis leben.

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dönerladen Details</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen relative z-0">
@@ -63,7 +65,7 @@
         
         <section>
           <h2 id="colorstory" class="text-xl font-semibold mb-2"></h2>
-          <p id="laden-story" class="text-gray-700 leading-relaxed whitespace-pre-line"></p>
+          <div id="laden-story" class="prose max-w-none text-gray-700 leading-relaxed"></div>
         </section>
 
         <section>
@@ -182,7 +184,7 @@
 
     // --- HELPER FUNCTION TO FETCH THE STORY ---
     async function ladeLadenStory(name) {
-      const storyPath = `stories/${encodeURIComponent(name)}.txt`;
+      const storyPath = `stories/${encodeURIComponent(name)}.md`;
       try {
         const response = await fetch(storyPath);
         if (response.ok) {
@@ -221,7 +223,7 @@
 
       // Fetch story from text file
       const storyText = await ladeLadenStory(laden.name);
-      document.getElementById("laden-story").textContent = storyText;
+      document.getElementById("laden-story").innerHTML = marked.parse(storyText);
       
       // Populate the rest of the page
       document.getElementById("colorstory").textContent = `Das ${laden.name} Erlebnis`;

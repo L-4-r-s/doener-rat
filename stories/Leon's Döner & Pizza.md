@@ -10,5 +10,5 @@ Inhaltlich bietet Leon eine interessante Mischung: Neben den Standardzutaten fin
 
 Das größte Sorgenkind bei Leon ist jedoch das Preis-Leistungs-Verhältnis. Mit einem Preis von 8,50 € bewegt sich der Laden an der preislichen Spitze Marburgs. Das wäre verkraftbar, wenn die Menge stimmen würde. Doch leider waren die Döner eher klein und die Menge insgesamt unterdurchschnittlich. Für 8,50 € erwartet der Döner-Rat eigentlich ein Schwergewicht, das einen sicher durch den Tag bringt.
 
-Fazit:
+### Fazit
 Leons Döner und Pizza ist ein sauberer Laden mit freundlichem, wenn auch bei Sonderwünschen (vegan) leicht überfordertem Service. Man bekommt hier einen durchschnittlichen Döner mit experimentellem Brot und einer unkonventionellen Gemüse-Mischung. Aufgrund des hohen Preises bei gleichzeitig eher kleiner Portionsgröße fällt das Preis-Leistungs-Verhältnis jedoch sehr schwach aus. Wer in der Nähe ist und Lust auf ein sehr festes, pizzabrotähnliches Brot hat, kann Leon einen Besuch abstatten. Für den großen Hunger bei schmalem Geldbeutel gibt es in Marburg jedoch passendere Alternativen.
