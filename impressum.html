@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum - Dönerrat Marburg</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen relative z-0">
+
+  <!-- Hintergrundbilder (analog zu index/laden.html) -->
+  <div class="fixed inset-0 z-[-2]">
+    <img id="bg-1" src="images/bg_mb.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
+    <img id="bg-2" src="images/bg_rat.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300" />
+  </div>
+
+  <main class="p-4">
+    <div class="max-w-2xl mx-auto">
+      
+      <!-- Haupt-Panel im passenden Glass-Look -->
+      <div class="bg-white/90 backdrop-blur-md rounded-xl shadow-lg p-6 md:p-8 space-y-6 mt-8">
+        
+        <div>
+          <a href="index.html" class="inline-block text-blue-600 hover:underline mb-4">&larr; Zurück zur Rangliste</a>
+          <header class="border-b border-gray-100 pb-4">
+            <h1 class="text-3xl font-bold text-gray-800">Impressum</h1>
+            <p class="text-sm text-gray-500 mt-1">Angaben gemäß gesetzlicher Vorgaben <br> <b>Work in Progress!</b></p>
+          </header>
+        </div>
+
+        <!-- Diensteanbieter -->
+        <section class="space-y-2">
+          <h2 class="text-lg font-semibold text-gray-800">Diensteanbieter</h2>
+          <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+            [Dein Vorname] [Dein Nachname]<br>
+            [Deine Straße] [Deine Hausnummer]<br>
+            [Deine Postleitzahl] Marburg
+          </p>
+        </section>
+
+        <!-- Kontakt -->
+        <section class="space-y-2">
+          <h2 class="text-lg font-semibold text-gray-800">Kontakt</h2>
+          <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+            E-Mail: <a href="mailto:deine-email@beispiel.de" class="text-blue-600 hover:underline">[deine-email@beispiel.de]</a><br>
+            Telefon: [Deine Telefonnummer] (optional, aber für schnelle Kontaktaufnahme empfohlen)
+          </p>
+        </section>
+
+        <!-- Redaktionelle Verantwortung -->
+        <section class="space-y-2">
+          <h2 class="text-lg font-semibold text-gray-800">Inhaltlich verantwortlich</h2>
+          <p class="text-xs text-gray-500 italic mb-1">Gemäß § 18 Abs. 2 MStV:</p>
+          <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+            [Dein Vorname] [Dein Nachname]<br>
+            [Deine Straße] [Deine Hausnummer]<br>
+            [Deine Postleitzahl] Marburg
+          </p>
+        </section>
+
+        <!-- Haftungsausschluss / Streitschlichtung -->
+        <section class="space-y-3 text-xs text-gray-500 border-t border-gray-100 pt-4">
+          <p>
+            <strong>EU-Streitschlichtung:</strong> Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+            <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">https://ec.europa.eu/consumers/odr/</a>.
+          </p>
+          <p>
+            Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+          </p>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- === EINHEITLICHER FOOTER === -->
+  <footer class="mt-8 mb-8 text-center text-xs text-gray-700 relative z-10">
+    <div class="max-w-md mx-auto px-5 py-3 bg-white/90 backdrop-blur-md rounded-xl border border-gray-200/80 shadow-md inline-flex items-center space-x-4">
+      <span class="text-gray-500 font-normal">© 2026 Dönerrat Marburg</span>
+      <span class="text-gray-300">|</span>
+      <a href="impressum.html" class="text-gray-800 hover:text-blue-600 transition-colors font-semibold underline decoration-gray-300 hover:decoration-blue-500">Impressum</a>
+      <span class="text-gray-300">|</span>
+      <a href="datenschutz.html" class="text-gray-800 hover:text-blue-600 transition-colors font-semibold underline decoration-gray-300 hover:decoration-blue-500">Datenschutz</a>
+    </div>
+  </footer>
+
+  <script>
+    // Einfache Scroll-Logik für die Hintergrundbilder (analog zur Detailseite)
+    const bg2 = document.getElementById("bg-2");
+    window.addEventListener("scroll", () => {
+      if (bg2) {
+        const scrollTop = window.scrollY;
+        const maxScroll = 300;
+        bg2.style.opacity = Math.min(scrollTop / maxScroll, 1);
+      }
+    });
+  </script>
+
+</body>
+</html>

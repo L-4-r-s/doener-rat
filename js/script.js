@@ -259,20 +259,82 @@ window.addEventListener("click", (e) => {
   if (e.target === modal) toggleModal(false);
 });
 
+// === UNIFIED SCROLL AND OVERSCROLL LOGIC FOR INDEX ===
 const bg1 = document.getElementById("bg-1");
 const bg2 = document.getElementById("bg-2");
+const contentPanel = document.getElementById('main-content-panel');
 
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const maxScroll = 500;
-  const progress = Math.min(scrollTop / maxScroll, 1);
+if (bg1 && bg2 && contentPanel) {
+  let overscrollAmount = 0;
+  const OVERSCROLL_SENSITIVITY = 2000;
+  let lastTouchY = 0;
+  
+  // Überprüft, ob das physische Ende der Seite erreicht ist
+  const isAtBottom = () => window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
+  
+  // Berechnet und setzt die Deckkraft des Inhalts-Panels
+  const updatePanelOpacity = () => {
+    const opacity = Math.max(0, 1 - (overscrollAmount / OVERSCROLL_SENSITIVITY));
+    contentPanel.style.opacity = opacity;
+  };
 
-  if (bg1 && bg2) {
+  // Normaler Scroll-Prozess
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    const maxScroll = scrollHeight - clientHeight;
+    const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
+    
+    // Hintergrundüberblendung
     bg2.style.opacity = progress;
+    
+    // Parallaxe-Effekt (beibehalten von der Index-Version)
     bg1.style.transform = `translateY(${scrollTop * 0.1}px)`;
     bg2.style.transform = `translateY(${scrollTop * 0.05}px)`;
-  }
-});
+
+    // Zurücksetzen, wenn man wieder nach oben scrollt
+    if (!isAtBottom() && overscrollAmount > 0) {
+      overscrollAmount = 0;
+      updatePanelOpacity();
+    }
+  });
+  
+  // Mausrad am Seitenende abfangen (Overscroll)
+  window.addEventListener('wheel', (e) => {
+    if (isAtBottom() && e.deltaY > 0) {
+      e.preventDefault();
+      overscrollAmount = Math.min(OVERSCROLL_SENSITIVITY + 50, overscrollAmount + e.deltaY);
+      updatePanelOpacity();
+    } else if (e.deltaY < 0 && overscrollAmount > 0) {
+      e.preventDefault();
+      overscrollAmount = Math.max(0, overscrollAmount + e.deltaY);
+      updatePanelOpacity();
+    }
+  }, { passive: false });
+
+  // Touchgesten-Start auf Mobilgeräten
+  window.addEventListener('touchstart', (e) => {
+    lastTouchY = e.touches[0].clientY;
+  }, { passive: false });
+
+  // Touch-Scrollbewegung am Seitenende abfangen
+  window.addEventListener('touchmove', (e) => {
+    const currentTouchY = e.touches[0].clientY;
+    const deltaY = lastTouchY - currentTouchY;
+    lastTouchY = currentTouchY;
+    
+    if (isAtBottom() && deltaY > 0) {
+      e.preventDefault();
+      overscrollAmount = Math.min(OVERSCROLL_SENSITIVITY + 50, overscrollAmount + deltaY);
+      updatePanelOpacity();
+    } else if (deltaY < 0 && overscrollAmount > 0) {
+      e.preventDefault();
+      overscrollAmount = Math.max(0, overscrollAmount + deltaY);
+      updatePanelOpacity();
+    }
+  }, { passive: false });
+}
 
 
 // === NEU: INFO MODAL LOGIK (KATEGORIEN ERKLÄRT) ===
