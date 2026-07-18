@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dönerladen Details</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -242,43 +240,35 @@
       document.getElementById("laden-name").textContent = laden.name;
       document.getElementById("laden-subtitle").textContent = laden.subtitle || "";
       
-    // === IMAGE CAROUSEL SETUP (v6.1 - Fixed ReferenceErrors & Encoding) ===
+    // === IMAGE CAROUSEL SETUP (v7.0 - Simplified for .jpg only) ===
     const carouselContainer = document.getElementById("carousel-container");
     carouselContainer.innerHTML = ""; 
 
-    // --- 1. Global Carousel Variables (CRITICAL: Must be declared here) ---
+    // --- 1. Global Carousel Variables ---
     let currentIndex = 0;
     let autoRotateTimer = null;
 
     const nameEncoded = encodeURIComponent(laden.name);
     const basePath = `images/${nameEncoded}`;
-    const extensions = ['.jpg', '.jpeg', '.png', '.webp']; 
     const foundImages = [];
 
     let imageIndex = 1;      
-    let detectedExt = null;  
     const MAX_SAFETY = 20;   
 
-    // --- 2. Sequential Image Probing ---
+    // --- 2. Sequential Image Probing (No extensions loop needed) ---
     async function findImages() {
         while (imageIndex <= MAX_SAFETY) {
-            let foundThisRound = false;
-            const extsToCheck = detectedExt ? [detectedExt] : extensions;
-
-            for (const ext of extsToCheck) {
-                const imagePath = `${basePath}_${imageIndex}${ext}`;
-                try {
-                    const response = await fetch(imagePath, { method: 'HEAD' });
-                    if (response.ok) {
-                        foundImages.push(imagePath);
-                        detectedExt = ext; 
-                        foundThisRound = true;
-                        break; 
-                    }
-                } catch (error) { /* Ignore network errors */ }
+            const imagePath = `${basePath}_${imageIndex}.jpg`;
+            try {
+                const response = await fetch(imagePath, { method: 'HEAD' });
+                if (response.ok) {
+                    foundImages.push(imagePath);
+                } else {
+                    break; // Stop immediately when an image is not found (e.g., image 5)
+                }
+            } catch (error) { 
+                break; // Stop on network error
             }
-
-            if (!foundThisRound) break; 
             imageIndex++;
         }
         renderCarousel();

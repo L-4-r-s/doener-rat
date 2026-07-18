@@ -1,0 +1,25 @@
+{
+  "name": "doener-rat",
+  "version": "1.0.0",
+  "description": "Most authorative Doener Kebap rating in Mittelhessen",
+  "scripts": {
+    "watch": "npx @tailwindcss/cli -i ./css/input.css -o ./css/styles.css --watch",
+    "build": "npx @tailwindcss/cli -i ./css/input.css -o ./css/styles.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L-4-r-s/doener-rat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/L-4-r-s/doener-rat/issues"
+  },
+  "homepage": "https://github.com/L-4-r-s/doener-rat#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "tailwindcss": "^4.3.3"
+  }
+}
