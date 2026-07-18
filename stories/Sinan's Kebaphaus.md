@@ -8,5 +8,5 @@ Mengenmäßig gab es bei Sinans zwischen unseren Bestellungen deutliche Schwanku
 
 Abseits des Kulinarischen gibt es wenig zu bemängeln, aber auch wenig hervorzuheben. Das Ambiente, das Layering der Zutaten und die Zeit bis zum ersten Bissen waren in Ordnung und bewegen sich im soliden Mittelfeld.
 
-Fazit:
+### Fazit
 Alles in allem konnte uns der Besuch bei Sinans Kebaphaus nicht so richtig begeistern. Der Döner ist genießbar, aber es fehlen die schlagkräftigen Argumente, warum man ausgerechnet hierher gehen sollte, wenn Marburg so viele andere Optionen bietet. Das rissanfällige Brot, die schwankenden Portionsgrößen und der recht hohe Preis für einen Hähnchen-Döner lassen Sinans im Vergleich zur Konkurrenz eher blass aussehen. Wer ein Fan von currylastigen Saucen ist oder ganz in der Nähe wohnt, könnte hier eine Nische finden.  Für alle anderen ist es ein eher teures Erlebnis ohne echten Wiedererkennungswert.

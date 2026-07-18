@@ -13,5 +13,5 @@ Ein Plus gibt es für die vegetarischen und veganen Optionen. Mit Seitan und geb
 
 Der Service war an diesem Tag professionell distanziert. Der bedienende Dönermann wirkte aufgrund des enormen Andrangs etwas angespannt und hektisch. Einen „Dönermann-Homie“, der einen mit einem Augenzwinkern begrüßt, findet man hier eher weniger – man wird eher wie ein Kunde in einem gut geölten Getriebe behandelt.
 
-Fazit:
+### Fazit
 Der Istanbul Döner ist die richtige Adresse für alle, die Wert auf hochwertiges Fleisch, echte Knoblauchsauce und verlässliche Portionsgrößen legen. Wer mit dem etwas instabilen Brot und der teils lieblosen Schichtung leben kann, bekommt hier ein qualitativ überdurchschnittliches Produkt. Ein Besuch lohnt sich besonders für Steak-Liebhaber und Vegetarier, auch wenn man zur Stoßzeit ein wenig Geduld mitbringen muss. Ein solider Döner in der Marburger Kernstadt, in den man auswärtige Dönergenießer guten Gewissens mitnehmen kann.

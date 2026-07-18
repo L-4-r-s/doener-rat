@@ -12,4 +12,5 @@ Der vegane Döner kommt hier mit gebratenem Gemüse als Fleischersatz daher. Die
 
 Mengentechnisch bewegt sich Bay Döner im soliden Mittelfeld. Der Bay Döner bringt im Durchschnitt 452 Gramm auf die Waage. Allerdings ist hier eine hohe Varianz zu beobachten – von unter 400 Gramm bis über 500 Gramm war alles dabei. In Anbetracht des wirklich günstigen Preises ist das Preis-Mengen-Verhältnis aber definitiv gut.
 
-Fazit: Bay Döner wird vermutlich kein kulinarischer Wallfahrtsort für Gourmets werden. Wer aber am Südbahnhof steht, wenig Geld ausgeben möchte und eine solide Grundlage sucht (und dabei bereit ist, das Risiko einer Saucen-Explosion einzugehen), der ist hier gut aufgehoben. Ein ehrlicher, günstiger Döner ohne viel Schnickschnack oder Highlights, aber mit nettem Personal.
+### Fazit
+Bay Döner wird vermutlich kein kulinarischer Wallfahrtsort für Gourmets werden. Wer aber am Südbahnhof steht, wenig Geld ausgeben möchte und eine solide Grundlage sucht (und dabei bereit ist, das Risiko einer Saucen-Explosion einzugehen), der ist hier gut aufgehoben. Ein ehrlicher, günstiger Döner ohne viel Schnickschnack oder Highlights, aber mit nettem Personal.
