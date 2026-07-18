@@ -4,8 +4,30 @@ Als sich die Jury dann allerdings vor dem Laden versammelte und den ersten Blick
 Auch direkt klar wurde: Hier hätte man sicherheitshalber reservieren sollen.
 Während einiger Minuten Warten im Vorraum, betrachteten wir die lecker aussehenden Fleischspieße, die dort präsentiert wurden, und bestaunten die Maschine, in der der hausgemachte Ayran umgeschlagen wurde.
 
-Dann wurden wir schließlich an den frisch freigewordenen Tisch gebeten, an welchem nach einiger Zeit dann auch unsere Bestellung aufgenommen wurde. Trotz der prall gefüllten und lecker aussehenden Fleischteller, die die ganze Zeit an uns vorbeigetragen worden waren, bestellten wir natürlich alle einen Döner. Der Preis von 7 €, der für einen Marburger Döner üblich ist, fühlte sich in dieser gehobenen Atmosphäre und dafür, dass der Döner auf einem feschen Teller an den Tisch gebracht wurde, fast billig an. Die Döner selbst waren dann auch gigantisch. Gleich mehrere Döner brachen die 600-Gramm-Marke. Doch Gewicht ist natürlich nicht alles.
-Der Döner selbst war alles in allem durchschnittlich. Es gab ausschließlich Hähnchenfleisch und kein Rotkraut im Sortiment, dafür wurde aber standardmäßig ein wenig Rucola auf den Döner gemacht. Dessen sollte man sich bewusst sein, bevor man bestellt, damit man ggf. auf diese eher gewagte Zutat verzichten kann. Das schwächste Glied des kulinarischen Döner-Vierecks bildete hier das Brot. Dieses riss gleich mehrfach, was vielleicht auch der immensen Beladung des Döners geschuldet war. Fleisch und Soße waren nichts Besonderes, aber solide, und das knackige, frische Gemüse stach positiv heraus.
+Dann wurden wir schließlich an den frisch freigewordenen Tisch gebeten, an welchem nach einiger Zeit dann auch unsere Bestellung aufgenommen wurde. Trotz der prall gefüllten und lecker aussehenden Fleischteller, die die ganze Zeit an uns vorbeigetragen worden waren, bestellten wir natürlich alle einen Döner.
+
+---
+
+### Der Döner im Detail
+
+* **Das Brot:** Das schwächste Glied des kulinarischen Döner-Vierecks bildete hier das Brot. Dieses riss gleich mehrfach, was vielleicht auch der immensen Beladung des Döners geschuldet war.
+* **Das Fleisch & die Soße:** Es gab ausschließlich Hähnchenfleisch. Fleisch und Soße waren nichts Besonderes, aber solide.
+* **Das Gemüse:** Das knackige, frische Gemüse stach positiv heraus. Es gab kein Rotkraut im Sortiment, dafür wurde aber standardmäßig ein wenig Rucola auf den Döner gemacht. Dessen sollte man sich bewusst sein, bevor man bestellt, damit man ggf. auf diese eher gewagte Zutat verzichten kann.
+
+---
+
+### Menge & Preis-Leistung
+
+Der Preis von **7,00 €**, der für einen Marburger Döner üblich ist, fühlte sich in dieser gehobenen Atmosphäre und dafür, dass der Döner auf einem feschen Teller an den Tisch gebracht wurde, fast billig an. Die Döner selbst waren dann auch gigantisch. Gleich mehrere Döner brachen die **600-Gramm-Marke**. Doch Gewicht ist natürlich nicht alles.
+
+---
+
+### Service & Restaurant-Erlebnis
 
 Lezetti erfüllt zwar keineswegs das Bild des einfachen, sympathischen Döner-Mannes um die Ecke, aber wenn man einfach nur gut in einem Restaurant essen gehen möchte, bietet sich dieses Etablissement definitiv an. Der selbstgemachte Ayran war lecker (wenn auch sehr intensiv). Wir haben nach dem Dönern noch einen Tee aufs Haus erhalten, und beim Verlassen des Restaurants wurde uns Kolonya (türkisches Duftwasser) auf die Hände getröpfelt.
-Mit diesem Eindruck und der Erinnerung an die köstlich aussehenden anderen Gerichte werden wir diesen Laden höchstwahrscheinlich noch einmal aufsuchen. Einen Döner würden wir dann aber wohl nicht bestellen. Dafür gibt es andere Lokalitäten, die besser auf die klassische Döner-Experience spezialisiert sind.
+
+---
+
+### Fazit
+
+> Mit diesem Eindruck und der Erinnerung an die köstlich aussehenden anderen Gerichte werden wir diesen Laden höchstwahrscheinlich noch einmal aufsuchen. Einen Döner würden wir dann aber wohl nicht bestellen. Dafür gibt es andere Lokalitäten, die besser auf die klassische Döner-Experience spezialisiert sind.
