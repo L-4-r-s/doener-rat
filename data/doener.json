@@ -506,10 +506,75 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5620.925125873638!2d8.771359588272134!3d50.804474490417306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc627dcd35867d%3A0xa503d9baef951327!2sS%C3%BCleyman%20usta%27nin%20yeri!5e1!3m2!1sde!2sde!4v1780257888099!5m2!1sde!2sde"
   },
   {
-    "name": "Mr. King (demnächst)"
+    "name": "Frischgenuss",
+    "preis": "8.50",
+    "geschmack": 6.9,
+    "präsentation": 8,
+    "übereinstimmung bestellung": 9.9,
+    "menge": "531",
+    "service": 8,
+    "ambiente": 8.4,
+    "layering": 6.6,
+    "zeit": 6.4,
+    "fleisch": 6.6,
+    "brot": 7.4,
+    "gemüse": 7.7,
+    "sauce": 6.1,
+    "gesamt": 6.86,
+    "besonderheiten": {
+      "positiv": [
+        "sehr aufgeräumt",
+        "Viele Sitzgelegenheiten (drin & draußen)",
+        "Gutes Fleisch",
+        "Frisches & Leckeres Gemüse",
+        "Freundliches Personal"
+      ],
+      "negativ": [
+        "Eher teuer"
+      ],
+      "neutral": [
+        "Auch türkische Bäckerei"
+      ]
+    },
+    "datum": "09.06.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d208.8655160641207!2d8.773930640739774!3d50.80970001908394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc63e6df9ddd0f%3A0xc6afc7fc6d475970!2sFrischgenuss%20D%C3%B6nerhaus%20%26%20Backstube!5e1!3m2!1sde!2sde!4v1784150940913!5m2!1sde!2sde"
   },
   {
-    "name": "Star Döner & Pizzahaus (demnächst)"
+    "name": "Star Döner & Pizzahaus",
+    "preis": "7.50",
+    "geschmack": 5.4,
+    "präsentation": 6.6,
+    "übereinstimmung bestellung": 10,
+    "menge": "484",
+    "service": 8,
+    "ambiente": 7.8,
+    "layering": 5.2,
+    "zeit": 6.3,
+    "fleisch": 4.3,
+    "brot": 4.4,
+    "gemüse": 4.6,
+    "sauce": 4.6,
+    "gesamt": 5.4,
+    "besonderheiten": {
+      "positiv": [
+        "Nettes Personal",
+        "Klassische Dönerladen Atmosphäre"
+      ],
+      "negativ": [
+        "Nur Putenspieß (eher fade im Geschmack)",
+        "Rissanfälliges Brot",
+        "Lasche Knoblauchsauce"
+      ],
+      "neutral": [
+        "Peperoni auf Döner",
+        "Sitzgelegenheiten draußen"
+      ]
+    },
+    "datum": "29.06.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40062.12898684129!2d8.820294728955105!3d50.80362452287223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc629b460cee6d%3A0x63879dc0829cfb72!2sStar%20D%C3%B6ner%20%26%20Pizzahaus!5e1!3m2!1sde!2sde!4v1784150843266!5m2!1sde!2sde"
+  },
+  {
+    "name": "Mr. King (demnächst)"
   },
   {
     "name": "Uni Döner (demnächst)"
@@ -519,8 +584,5 @@
   },
   {
     "name": "Somat (demnächst)"
-  },
-  {
-    "name": "Frischgenuss (demnächst)"
   }
 ]
