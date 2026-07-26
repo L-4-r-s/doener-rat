@@ -61,24 +61,6 @@ function formatTimeAgo(timestamp) {
   return `vor ${Math.round(daysPast / 365)} Jahren`;
 }
 
-/**
- * NEW: Increments the upvote count for a specific comment.
- * @param {string} ladenName - The ID of the Dönerladen document.
- * @param {string} commentId - The ID of the comment document to upvote.
- */
-async function upvoteComment(ladenName, commentId) {
-    const commentDocRef = doc(db, "doenerlaeden", ladenName, "kommentare", commentId);
-    try {
-        // Atomically increment the 'upvotes' field by 1
-        await updateDoc(commentDocRef, {
-            upvotes: increment(1)
-        });
-    } catch (error) {
-        console.error("Error upvoting comment:", error);
-    }
-}
-
-
 // --- Function to post/update a user's rating ---
 /**
  * Posts or updates a user's rating for a specific Dönerladen.
@@ -148,12 +130,9 @@ async function loadRatingsAndCalculateAverage(ladenName) {
     // Pre-fill user's rating and disable button if they've already rated
     if (currentUserRating !== null) {
       userRatingInput.value = currentUserRating;
-      // submitRatingButton.disabled = true; // Optionally disable if you want them to explicitly re-enable to change
-      // submitRatingButton.textContent = "Bewertung ändern"; // Change button text
     } else {
         userRatingInput.value = ''; // Clear input if no previous rating
         submitRatingButton.disabled = false;
-        // submitRatingButton.textContent = "Abschicken"; // Reset button text
     }
 
   } catch (error) {
@@ -161,7 +140,6 @@ async function loadRatingsAndCalculateAverage(ladenName) {
     avgRatingSpan.textContent = "Fehler";
   }
 }
-
 
 async function postComment(ladenName, commentText, userName) {
   try {
@@ -207,16 +185,23 @@ function renderComment(commentId, commentData, prepend = false) {
   const commentContainer = document.createElement("div");
   commentContainer.className = "py-2";
 
+  // --- NEU: XSS-sichere Header-Generierung ---
   const header = document.createElement("div");
   header.className = "flex items-center space-x-2 text-xs text-gray-600";
-  header.innerHTML = `
-    <strong class="font-semibold text-gray-800">${displayName}</strong>
-    <span>${relativeTime}</span>
-  `;
+  
+  const strong = document.createElement("strong");
+  strong.className = "font-semibold text-gray-800";
+  strong.textContent = displayName; // Verhindert HTML-Injection im Namen
+  
+  const span = document.createElement("span");
+  span.textContent = relativeTime;
+  
+  header.appendChild(strong);
+  header.appendChild(span);
 
   const commentText = document.createElement("p");
   commentText.className = "text-sm text-gray-800 py-1";
-  commentText.textContent = commentData.comment;
+  commentText.textContent = commentData.comment; // Verhindert HTML-Injection im Kommentartext
 
   const footer = document.createElement("div");
   footer.className = "flex items-center space-x-1 mt-1";
@@ -336,7 +321,6 @@ async function loadAllRemainingComments(ladenName) {
         loadAllButton.textContent = "Fehler beim Laden";
     }
 }
-
 
 export { 
   postComment, loadInitialComments, loadAllRemainingComments, renderComment,
