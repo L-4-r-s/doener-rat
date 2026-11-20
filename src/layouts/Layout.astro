@@ -1,0 +1,24 @@
+---
+import stylesheet from "../styles/global.css?url";
+
+interface Props {
+  title: string;
+  bodyClass: string;
+  styled?: boolean;
+}
+
+const { title, bodyClass, styled = true } = Astro.props;
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {styled && <link rel="stylesheet" href={stylesheet} />}
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

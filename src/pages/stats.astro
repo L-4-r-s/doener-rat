@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Döner-Rangliste – Besucherstatistik</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
-  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl">
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout title="Döner-Rangliste – Besucherstatistik" bodyClass="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4" styled={false}>
+<Fragment slot="head">
+<script is:inline src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</Fragment>
+<div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xl">
     <h1 class="text-2xl font-bold mb-4 text-center">Besucherstatistik</h1>
 
     <p class="text-lg text-center">Seitenaufrufe gesamt:</p>
@@ -17,7 +15,7 @@
     <canvas id="visitsChart" height="200"></canvas>
   </div>
 
-  <script>
+  <script is:inline>
     const API_URL = 'https://api.countapi.xyz/get/doenerrangliste-marburg/aufrufe';
     const STORAGE_KEY = 'doenerrangliste_visits_history';
 
@@ -92,5 +90,4 @@
 
     loadCounter();
   </script>
-</body>
-</html>
+</Layout>

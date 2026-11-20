@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dönerladen Details</title>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <link rel="stylesheet" href="css/styles.css" />
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen relative z-0">
-
-  <!-- Hintergrundbilder wie auf index.html -->
-  <div class="fixed inset-0 z-[-2]">
-    <img id="bg-1" src="images/bg_mb.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
-    <img id="bg-2" src="images/bg_rat.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300" />
-  </div>
+---
+import Layout from "../layouts/Layout.astro";
+import Background from "../components/Background.astro";
+import Footer from "../components/Footer.astro";
+---
+<Layout title="Dönerladen Details" bodyClass="bg-gray-50 text-gray-900 min-h-screen relative z-0">
+<Fragment slot="head">
+<script is:inline src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</Fragment>
+<!-- Hintergrundbilder wie auf index.html -->
+  <Background />
 
   <!-- NEUE STRUKTUR: Hauptinhalt mit Zentrierung und Glas-Panel -->
   <main class="p-4">
@@ -28,6 +23,10 @@
         <header>
           <h1 id="laden-name" class="text-3xl font-bold"></h1>
           <p id="laden-subtitle" class="text-lg text-gray-600 italic mt-1"></p>
+          <div class="mt-2 flex flex-wrap items-center gap-2 text-sm text-gray-600">
+            <span id="laden-status" hidden></span>
+            <time id="laden-visit-date" hidden></time>
+          </div>
         </header>
       </div>
 
@@ -102,18 +101,10 @@
   </main>
 
 <!-- === FOOTER === -->
-  <footer class="mt-12 mb-8 text-center text-xs text-gray-700 relative z-10">
-    <!-- bg-white/90 statt bg-white/60 für besseren Kontrast; text-gray-600/700 statt hellgrau -->
-    <div class="max-w-md mx-auto px-5 py-3 bg-white/90 backdrop-blur-md rounded-xl border border-gray-200/80 shadow-md inline-flex items-center space-x-4">
-      <span class="text-gray-500 font-normal">© 2026 Dönerrat Marburg</span>
-      <span class="text-gray-300">|</span>
-      <a href="impressum.html" class="text-gray-800 hover:text-blue-600 transition-colors font-semibold underline decoration-gray-300 hover:decoration-blue-500">Impressum</a>
-      <span class="text-gray-300">|</span>
-      <a href="datenschutz.html" class="text-gray-800 hover:text-blue-600 transition-colors font-semibold underline decoration-gray-300 hover:decoration-blue-500">Datenschutz</a>
-    </div>
-  </footer>
+  <Footer />
 
-  <script type="module">
+  <script is:inline type="module">
+    import { getDisplayName, getStatus, getStatusLabel, visitDate } from './js/ranking.js';
     // Import all necessary functions from firebase.js
     import { 
       postComment, loadInitialComments, loadAllRemainingComments, renderComment,
@@ -236,9 +227,20 @@
       document.getElementById("laden-story").innerHTML = marked.parse(storyText);
       
       // Populate the rest of the page
-      document.getElementById("colorstory").textContent = `Das ${laden.name} Erlebnis`;
-      document.getElementById("laden-name").textContent = laden.name;
+      document.getElementById("colorstory").textContent = `Das ${getDisplayName(laden)} Erlebnis`;
+      document.getElementById("laden-name").textContent = getDisplayName(laden);
       document.getElementById("laden-subtitle").textContent = laden.subtitle || "";
+      const statusBadge = document.getElementById('laden-status');
+      statusBadge.className = `restaurant-status status-${getStatus(laden)}`;
+      statusBadge.textContent = getStatusLabel(laden);
+      statusBadge.hidden = false;
+      const date = visitDate(laden);
+      const visitTime = document.getElementById('laden-visit-date');
+      if (date) {
+        visitTime.dateTime = date.iso;
+        visitTime.textContent = `Besucht am ${date.label}`;
+        visitTime.hidden = false;
+      }
       
     // === IMAGE CAROUSEL SETUP (v7.0 - Simplified for .jpg only) ===
     const carouselContainer = document.getElementById("carousel-container");
@@ -351,7 +353,8 @@
       if (b.value !== undefined && b.value !== "-") {
         const div = document.createElement("div");
         div.className = "bg-gray-100/80 backdrop-blur p-3 rounded shadow-sm text-center";
-        div.innerHTML = `<div class="text-lg font-bold">${b.value}</div><div class="text-sm text-gray-600">${b.label}</div>`;
+        const displayValue = b.label === "Gesamt" && typeof b.value === "number" ? b.value.toFixed(1) : b.value;
+        div.innerHTML = `<div class="text-lg font-bold">${displayValue}</div><div class="text-sm text-gray-600">${b.label}</div>`;
         grid.appendChild(div);
       }
     });
@@ -447,70 +450,5 @@
     // Load everything when the page starts
     ladeLadenDetails();
 
-    // === UNIFIED SCROLL AND OVERSCROLL LOGIC (unchanged) ===
-    const bg1 = document.getElementById("bg-1");
-    const bg2 = document.getElementById("bg-2");
-    const contentPanel = document.getElementById('main-content-panel');
-
-    if (bg1 && bg2 && contentPanel) {
-      let overscrollAmount = 0;
-      const OVERSCROLL_SENSITIVITY = 2000;
-      let lastTouchY = 0;
-      
-      const isAtBottom = () => window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
-      
-      const updatePanelOpacity = () => {
-        const opacity = Math.max(0, 1 - (overscrollAmount / OVERSCROLL_SENSITIVITY));
-        contentPanel.style.opacity = opacity;
-      };
-
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const scrollHeight = document.documentElement.scrollHeight;
-        const clientHeight = document.documentElement.clientHeight;
-        const maxScroll = scrollHeight - clientHeight;
-        const progress = maxScroll > 0 ? scrollTop / maxScroll : 0;
-        bg2.style.opacity = progress;
-
-        if (!isAtBottom() && overscrollAmount > 0) {
-          overscrollAmount = 0;
-          updatePanelOpacity();
-        }
-      });
-      
-      window.addEventListener('wheel', (e) => {
-        if (isAtBottom() && e.deltaY > 0) {
-          e.preventDefault();
-          overscrollAmount = Math.min(OVERSCROLL_SENSITIVITY + 50, overscrollAmount + e.deltaY);
-          updatePanelOpacity();
-        } else if (e.deltaY < 0 && overscrollAmount > 0) {
-          e.preventDefault();
-          overscrollAmount = Math.max(0, overscrollAmount + e.deltaY);
-          updatePanelOpacity();
-        }
-      }, { passive: false });
-
-      window.addEventListener('touchstart', (e) => {
-        lastTouchY = e.touches[0].clientY;
-      }, { passive: false });
-
-      window.addEventListener('touchmove', (e) => {
-        const currentTouchY = e.touches[0].clientY;
-        const deltaY = lastTouchY - currentTouchY;
-        lastTouchY = currentTouchY;
-        
-        if (isAtBottom() && deltaY > 0) {
-          e.preventDefault();
-          overscrollAmount = Math.min(OVERSCROLL_SENSITIVITY + 50, overscrollAmount + deltaY);
-          updatePanelOpacity();
-        } else if (deltaY < 0 && overscrollAmount > 0) {
-          e.preventDefault();
-          overscrollAmount = Math.max(0, overscrollAmount + deltaY);
-          updatePanelOpacity();
-        }
-      }, { passive: false });
-    }
   </script>
-
-</body>
-</html>
+</Layout>

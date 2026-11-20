@@ -1,77 +1,64 @@
 # Dönerrat Marburg
 
-A clean, interactive platform for exploring and rating Döner Kebaps in Marburg, Germany. The project features a detailed rating database, written reviews, interactive user ratings, and community comments.
+Döner reviews, ratings, and photos from Marburg and Mittelhessen.
 
----
+## Development
 
-## 📁 Repository Structure
+Use Node.js 22.22 or newer (Node.js 24 is used in CI).
 
-Below is an overview of the key folders and files in the repository:
-
-```text
-├── .vscode/               # Editor configurations
-├── background/           # Dynamic background-related assets
-├── css/
-│   ├── input.css          # Source Tailwind CSS definitions
-│   └── styles.css         # Compiled stylesheet (built via Tailwind CLI)
-├── data/
-│   └── doener.json        # Main database of kebab shops and official ratings
-├── images/                # Site assets, shop photos (formatted as [Name]_[Index].jpg)
-├── js/
-│   ├── firebase.js        # Firebase Firestore logic (comments, upvotes, ratings)
-│   └── script.js          # Core frontend logic (table sorting, filtering, modals)
-├── stories/               # Text reviews for individual shops in Markdown (.md) format
-├── convert_to_jpg.py      # Helper script for processing/converting review photos
-├── datenschutz.html       # GDPR privacy policy page
-├── impressum.html         # Legal disclosure (Impressum) page
-├── index.html             # Main landing page featuring the interactive leaderboard
-├── laden.html             # Dynamic template page for individual shop profiles
-├── stats.html             # Statistics dashboard
-└── todo.md                # List of planned features and improvements
+```bash
+npm ci
+npm run dev
 ```
 
----
+Open the local URL printed by Astro. Changes to pages and styles reload automatically.
 
-## 🛠️ Tech Stack & Integrations
+```bash
+npm run check    # Check Astro templates and TypeScript
+npm run build    # Generate the static site in dist/
+npm run preview  # Serve the production build locally
+```
 
-* **Frontend:** Vanilla HTML5, CSS, and modern ES6 JavaScript.
-* **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (using the `@tailwindcss/cli`).
-* **Backend Database:** [Google Firebase Firestore](https://firebase.google.com/) for handling:
-  * Anonymous unique user ratings (1-10 scale).
-  * Community comments and a Firestore-incremented comment upvote system.
-* **Libraries:** [Marked.js](https://marked.js.org/) for rendering Markdown stories on-the-fly inside the detail pages.
+`npm run watch` is an alias for the development server.
 
----
+## Project structure
 
-## 🚀 Getting Started
+```text
+src/
+  pages/          # Ranking, shop details, statistics, and legal pages
+  layouts/        # HTML document, page metadata, and stylesheet
+  components/     # Shared background and footer
+  styles/         # Tailwind source and the existing custom styles
+public/
+  data/           # doener.json: official shop information and ratings
+  stories/        # Markdown reviews
+  images/         # Original photos, backgrounds, and graphics
+  js/             # Existing ranking and Firebase browser scripts
+  background/     # Asset license information
+```
 
-### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) installed to build stylesheet assets.
+Astro generates static HTML. Tailwind builds the styles through Vite. The existing browser JavaScript still handles sorting, search, the image carousel, and Firebase community interactions. The shared templates use TypeScript for their props.
 
-### Development Setup
-1. Clone this repository to your local machine:
-   ```bash
-   git clone https://github.com/L-4-r-s/doener-rat.git
-   cd doener-rat
-   ```
+The ranking has mobile sorting controls, visible prices and visit dates, and filters for reviewed, upcoming, and closed restaurants. Official ranks stay fixed across search and sorting, with tied overall scores sharing a rank. `public/js/ranking.js` contains the shared status, date, and sorting logic; `npm run test:ranking` checks it.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+For step-by-step instructions to add a review, edit ratings, add or delete a restaurant, and publish changes, read **[the review and restaurant guide](docs/REVIEWS.md)**. It includes a complete example, photo rules, a pre-publication checklist, and troubleshooting.
 
-3. Run the Tailwind watcher during development:
-   ```bash
-   npm run watch
-   ```
+Run `npm run check:content` after content changes. It checks the JSON, field names, scores, duplicate restaurant names, exact review filenames, and photo numbering. `npm run check` includes this check, and CI runs it too.
 
-4. Build the minified CSS for production:
-   ```bash
-   npm run build
-   ```
+## Hosting
 
-5. Start a local server using Python:
-   ```bash
-   python -m http.server
-   ```
-   Once started, navigate to [http://localhost:8000/](http://localhost:8000/) in your web browser to view the application.
+The production output is `dist/`. The build keeps the current URLs, including `index.html`, `laden.html?name=…`, `stats.html`, `impressum.html`, and `datenschutz.html`. Static assets keep their existing URLs too.
+
+The original repository currently publishes `main` from the repository root through GitHub Pages. **Before merging the Astro migration, switch Pages → Source to GitHub Actions.** Keeping the old source setting could publish an incomplete site because the HTML now needs to be built. After merging and passing checks, manually run **Deploy site** on `main`. This workflow is restricted to the original repository and never runs automatically, including for subsequent content updates. The check workflow validates changes without publishing them. Follow the [first-deployment and rollback guide](docs/DEPLOYMENT.md) for the full sequence. See also [Astro's GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
+
+For a Pages preview under a repository subpath, build with the corresponding base:
+
+```bash
+ASTRO_BASE_PATH=/doener-rat/ npm run build
+```
+
+`public/CNAME` contains the existing production domain. Use that file only for the production deployment; omit it from a fork's Pages deployment.
+
+## Migration scope
+
+The initial Astro migration preserved the published site's layout, wording, photos, review files, and Firebase integration while adding shared templates, a development server, a production build, TypeScript checks, and CI. Subsequent feature branches remove the scrolling background reveal and add ranking controls, visit dates, and restaurant statuses.

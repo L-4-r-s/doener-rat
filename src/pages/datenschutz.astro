@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datenschutzerklärung - Dönerrat Marburg</title>
-  <link rel="stylesheet" href="css/styles.css" />
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen relative z-0">
-
-  <!-- Hintergrundbilder (analog zu index/laden/impressum) -->
-  <div class="fixed inset-0 z-[-2]">
-    <img id="bg-1" src="images/bg_mb.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
-    <img id="bg-2" src="images/bg_rat.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300" />
-  </div>
+---
+import Layout from "../layouts/Layout.astro";
+import Background from "../components/Background.astro";
+import Footer from "../components/Footer.astro";
+---
+<Layout title="Datenschutzerklärung - Dönerrat Marburg" bodyClass="bg-gray-50 text-gray-900 min-h-screen relative z-0">
+<!-- Hintergrundbilder (analog zu index/laden/impressum) -->
+  <Background />
 
   <main class="p-4">
     <div class="max-w-3xl mx-auto">
@@ -131,26 +124,6 @@
   </main>
 
   <!-- === EINHEITLICHER FOOTER === -->
-  <footer class="mt-8 mb-8 text-center text-xs text-gray-700 relative z-10">
-    <div class="max-w-md mx-auto px-5 py-3 bg-white/90 backdrop-blur-md rounded-xl border border-gray-200/80 shadow-md inline-flex items-center space-x-4">
-      <span class="text-gray-500 font-normal">© 2026 Dönerrat Marburg</span>
-      <span class="text-gray-300">|</span>
-      <a href="impressum.html" class="text-gray-800 hover:text-blue-600 transition-colors font-semibold underline decoration-gray-300 hover:decoration-blue-500">Impressum</a>
-      <span class="text-gray-300">|</span>
-      <a href="datenschutz.html" class="text-gray-800 hover:text-blue-600 transition-colors font-semibold underline decoration-gray-300 hover:decoration-blue-500">Datenschutz</a>
-    </div>
-  </footer>
+  <Footer marginTop="mt-8" />
 
-  <script>
-    const bg2 = document.getElementById("bg-2");
-    window.addEventListener("scroll", () => {
-      if (bg2) {
-        const scrollTop = window.scrollY;
-        const maxScroll = 300;
-        bg2.style.opacity = Math.min(scrollTop / maxScroll, 1);
-      }
-    });
-  </script>
-
-</body>
-</html>
+</Layout>

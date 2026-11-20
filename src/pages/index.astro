@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Döner-Rangliste Marburg</title>
-  <link rel="stylesheet" href="css/styles.css" />
-</head>
-<body class="bg-gray-50 text-gray-900 transition-colors duration-300 relative z-0">
-
-  <!-- Hintergrundbilder -->
-  <div class="fixed inset-0 z-[-2]">
-    <img id="bg-1" src="images/bg_mb.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
-    <img id="bg-2" src="images/bg_rat.jpg" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300" />
-  </div>
+---
+import Layout from "../layouts/Layout.astro";
+import Background from "../components/Background.astro";
+import Footer from "../components/Footer.astro";
+---
+<Layout title="Döner-Rangliste Marburg" bodyClass="bg-gray-50 text-gray-900 transition-colors duration-300 relative z-0">
+<!-- Hintergrundbilder -->
+  <Background />
 
   <header class="bg-white/90 backdrop-blur sticky top-0 z-50 shadow">
     <div class="max-w-6xl mx-auto p-4">
       <h1 class="text-2xl font-bold flex items-center justify-center">
         <img src="images/kebab_icon.png" alt="Dönerrat Icon" class="h-8 mr-3">
-        Dönerrat Marburg - Stand Juli 2026
+        Dönerrat Marburg - Stand September 2026
       </h1>
     </div>
   </header> 
@@ -26,7 +19,7 @@
   <!-- Hauptinhalt -->
   <main class="p-4">
     <div class="flex justify-center">
-      <div id="main-content-panel" class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 space-y-4 w-full md:w-auto">
+      <div id="main-content-panel" class="bg-white/80 backdrop-blur-md rounded-xl shadow-lg p-6 space-y-4 w-full min-w-0 max-w-full md:w-auto">
         
         <!-- NEU: Suchfeld und Info-Button in einem Flex-Container -->
         <div class="flex flex-col sm:flex-row gap-3">
@@ -34,6 +27,7 @@
             <input 
               type="text" 
               id="search-input" 
+              aria-label="Restaurants suchen"
               placeholder="Suchen..." 
               class="w-full p-2 pl-8 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-shadow"
             >
@@ -48,13 +42,46 @@
           </button>
         </div>
 
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-end">
+          <label class="flex flex-1 flex-col gap-1 text-sm font-medium text-gray-700" for="status-filter">
+            Restaurants
+            <select id="status-filter" class="w-full rounded-lg border border-gray-300 bg-white p-2 text-gray-900">
+              <option value="all">Alle Restaurants</option>
+              <option value="reviewed">Bewertet</option>
+              <option value="pending">Demnächst</option>
+              <option value="closed">Geschlossen</option>
+            </select>
+          </label>
+          <label class="flex flex-1 flex-col gap-1 text-sm font-medium text-gray-700" for="sort-select">
+            Sortieren nach
+            <select id="sort-select" class="w-full rounded-lg border border-gray-300 bg-white p-2 text-gray-900">
+              <option value="gesamt-desc">Gesamt: beste zuerst</option>
+              <option value="gesamt-asc">Gesamt: niedrigste zuerst</option>
+              <option value="preis-asc">Preis: günstigste zuerst</option>
+              <option value="preis-desc">Preis: teuerste zuerst</option>
+              <option value="geschmack-desc">Geschmack: beste zuerst</option>
+              <option value="geschmack-asc">Geschmack: niedrigste zuerst</option>
+              <option value="name-asc">Name: A–Z</option>
+              <option value="name-desc">Name: Z–A</option>
+              <option value="menge-desc">Menge: größte zuerst</option>
+              <option value="menge-asc">Menge: kleinste zuerst</option>
+              <option value="datum-desc">Besucht: neueste zuerst</option>
+              <option value="datum-asc">Besucht: älteste zuerst</option>
+            </select>
+          </label>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-gray-600">
+          <p id="results-count" role="status" aria-live="polite"></p>
+          <p>Platz nach Gesamtwertung. Gleiche Wertung = gleicher Platz.</p>
+        </div>
+
         <div class="text-center mb-4 mt-2 md:hidden">
           <button id="toggle-details-btn" class="bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors shadow">
             Details anzeigen
           </button>
         </div>
 
-        <div id="doener-table-container" class="responsive-table details-hidden">
+        <div id="doener-table-container" class="responsive-table details-hidden overflow-x-auto">
           <table class="border-collapse text-sm whitespace-nowrap">
               <thead class="bg-gray-100 text-left">
                 <tr>
@@ -79,6 +106,7 @@
             <tbody id="ranking-body"></tbody>
           </table>
         </div>
+        <p id="no-results" class="rounded-lg bg-gray-50 p-4 text-center text-sm text-gray-700" hidden>Keine Restaurants gefunden. Ändere die Suche oder den Filter.</p>
       </div>
     </div>
   </main>
@@ -100,7 +128,7 @@
 
       <!-- Modal Body (Scrollbar wenn nötig) -->
       <div class="p-6 overflow-y-auto space-y-4 text-gray-700 text-sm md:text-base">
-        <p class="font-medium text-blue-700 bg-blue-50 p-3 rounded-lg border border-blue-100">Jede Kategorie (außer der Preis und die Menge) wird auf einer Skala von 1 (schlecht) bis 10 (gut) bewertet.</p>
+        <p class="font-medium text-blue-700 bg-blue-50 p-3 rounded-lg border border-blue-100">Jede Kategorie (außer Preis und Menge) wird auf einer Skala von 1 (schlecht) bis 10 (gut) bewertet. Für Zeit und Service kann auch ausdrücklich eine 0 vergeben werden.</p>
         
         <ul class="space-y-3">
           <li><strong>💸 Preis:</strong> Der Preis eines normalen Döners in € (Kosten Hähnchen und Kalb unterschiedlich viel wird der Durchschnitt angegeben).</li>
@@ -108,10 +136,10 @@
           <li><strong>🎨 Präsentation:</strong> Ist der Döner auf dem Teller appetitlich angerichtet inkl. Papierserviette? </li>
           <li><strong>✅ Übereinstimmung Bestellung:</strong> Wurde der Döner so zubereitet wie bestellt (richtige Sauce, ohne Zutat XY...)?</li>
           <li><strong>⚖️ Menge:</strong> Das Gewicht in Gramm. </li>
-          <li><strong>🤝 Service:</strong> Freundlichkeit, Aufmerksamkeit und allgemeiner Umgang mit den Gästen.</li>
+          <li><strong>🤝 Service:</strong> Freundlichkeit, Aufmerksamkeit und allgemeiner Umgang mit den Gästen (0 bis 10 Punkte).</li>
           <li><strong>🛋️ Ambiente:</strong> Sauberkeit des Ladens, optisch Ansprechende Zutatenauslage, Sitzmöglichkeiten und "Dönermann-Vibe".</li>
           <li><strong>🥪 Layering:</strong> Die Verteilung der Zutaten. Hat man beim ersten Bissen nur Salat und am Ende nur Fleisch (1), oder ist jeder Bissen ein Zusammenspiel aus allen Zutaten (10)?</li>
-          <li><strong>⏱️ Zeit:</strong> Die Wartezeit von der Bestellung bis zum Dönergenuss.</li>
+          <li><strong>⏱️ Zeit:</strong> Die Bewertung der Wartezeit von der Bestellung bis zum Dönergenuss (0 bis 10 Punkte, keine Minutenangabe).</li>
           <li><strong>🥩🥖 Einzelkomponenten:</strong> <b><em>Fleisch, Brot, Gemüse & Sauce</em></b> werden nochmals einzeln auf ihren Geschmack geprüft.</li>
           <li><strong>💯 Gesamt:</strong> Der Gesamteindruck inkl. Geschmack, Preis-Leistung, Ambiente und Service. Dies ist kein Durchschnitt über die anderen Kategorien - jeder Tester darf selber priorisieren.</li>
         </ul>
@@ -124,17 +152,7 @@
     </div>
   </div>
 <!-- === FOOTER === -->
-  <footer class="mt-12 mb-8 text-center text-xs text-gray-700 relative z-10">
-    <!-- bg-white/90 statt bg-white/60 für besseren Kontrast; text-gray-600/700 statt hellgrau -->
-    <div class="max-w-md mx-auto px-5 py-3 bg-white/90 backdrop-blur-md rounded-xl border border-gray-200/80 shadow-md inline-flex items-center space-x-4">
-      <span class="text-gray-500 font-normal">© 2026 Dönerrat Marburg</span>
-      <span class="text-gray-300">|</span>
-      <a href="impressum.html" class="text-gray-800 hover:text-blue-600 transition-colors font-semibold underline decoration-gray-300 hover:decoration-blue-500">Impressum</a>
-      <span class="text-gray-300">|</span>
-      <a href="datenschutz.html" class="text-gray-800 hover:text-blue-600 transition-colors font-semibold underline decoration-gray-300 hover:decoration-blue-500">Datenschutz</a>
-    </div>
-  </footer>
+  <Footer />
 
-  <script src="js/script.js"></script>
-</body>
-</html>
+  <script is:inline type="module" src="js/script.js"></script>
+</Layout>

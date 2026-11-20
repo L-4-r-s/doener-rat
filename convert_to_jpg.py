@@ -3,7 +3,7 @@ from PIL import Image
 
 # 1. Path to your images folder. 
 # Relative to where you run this script, or use an absolute path like 'C:/Users/Name/Project/images'
-folder_path = "images" 
+folder_path = "public/images"
 
 # Extensions to convert (case-insensitive)
 source_extensions = ('.png', '.jpeg', '.webp')

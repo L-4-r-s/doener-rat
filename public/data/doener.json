@@ -1,6 +1,7 @@
 [
   {
     "name": "Amed Pizza & Döner",
+    "status": "reviewed",
     "preis": "7.70",
     "geschmack": 4.8,
     "präsentation": 4.7,
@@ -33,6 +34,7 @@
   },
   {
     "name": "Castello Pizza & Dönerhaus",
+    "status": "reviewed",
     "preis": "5",
     "geschmack": 5.4,
     "präsentation": 6.4,
@@ -68,6 +70,7 @@
   },
   {
     "name": "Lezzet-i Mangal",
+    "status": "reviewed",
     "preis": "7",
     "geschmack": 7,
     "präsentation": 8.2,
@@ -107,6 +110,7 @@
   },
   {
     "name": "Stadt Döner - Jawoll Jawoll (geschlossen)",
+    "status": "closed",
     "preis": "7",
     "geschmack": 8.6,
     "präsentation": 8.8,
@@ -142,6 +146,7 @@
   },
   {
     "name": "Südviertel Döner",
+    "status": "reviewed",
     "preis": "8",
     "geschmack": 7,
     "präsentation": 6.9,
@@ -175,6 +180,7 @@
   },
   {
     "name": "Leon's Döner & Pizza",
+    "status": "reviewed",
     "preis": "8",
     "geschmack": 6,
     "präsentation": 7.4,
@@ -209,6 +215,7 @@
   },
   {
     "name": "Memo's Döner Pizzahaus",
+    "status": "reviewed",
     "preis": "7",
     "geschmack": 5.7,
     "präsentation": 6,
@@ -242,6 +249,7 @@
   },
   {
     "name": "Sinan's Kebaphaus",
+    "status": "reviewed",
     "preis": "7.50",
     "geschmack": 4.7,
     "präsentation": 5.6,
@@ -279,6 +287,7 @@
   },
   {
     "name": "Sefa's Döner und Pizzahaus",
+    "status": "reviewed",
     "preis": "8",
     "geschmack": 8,
     "präsentation": 6.7,
@@ -310,6 +319,7 @@
   },
   {
     "name": "Crunchy Kebab",
+    "status": "reviewed",
     "preis": "7.50",
     "geschmack": 7.1,
     "präsentation": 7,
@@ -342,6 +352,7 @@
   },
   {
     "name": "Bay Döner",
+    "status": "reviewed",
     "preis": "7",
     "geschmack": 6,
     "präsentation": 5.5,
@@ -374,6 +385,7 @@
   },
   {
     "name": "Istanbul Döner",
+    "status": "reviewed",
     "preis": "7.50",
     "geschmack": 7.6,
     "präsentation": 6.1,
@@ -408,6 +420,7 @@
   },
   {
     "name": "Helal Döner",
+    "status": "reviewed",
     "preis": "8",
     "geschmack": 6.8,
     "präsentation": 7.4,
@@ -439,6 +452,7 @@
   },
   {
     "name": "Haus des Döners",
+    "status": "reviewed",
     "preis": "8.50",
     "geschmack": 5.4,
     "präsentation": 6.3,
@@ -473,6 +487,7 @@
   },
   {
     "name": "Süleyman Usta",
+    "status": "reviewed",
     "preis": "8",
     "geschmack": 3.4,
     "präsentation": 6,
@@ -507,7 +522,8 @@
   },
   {
     "name": "Frischgenuss",
-    "preis": "8.50",
+    "status": "reviewed",
+    "preis": "8",
     "geschmack": 6.9,
     "präsentation": 8,
     "übereinstimmung bestellung": 9.9,
@@ -541,6 +557,7 @@
   },
   {
     "name": "Star Döner & Pizzahaus",
+    "status": "reviewed",
     "preis": "7.50",
     "geschmack": 5.4,
     "präsentation": 6.6,
@@ -574,15 +591,144 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40062.12898684129!2d8.820294728955105!3d50.80362452287223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc629b460cee6d%3A0x63879dc0829cfb72!2sStar%20D%C3%B6ner%20%26%20Pizzahaus!5e1!3m2!1sde!2sde!4v1784150843266!5m2!1sde!2sde"
   },
   {
-    "name": "Mr. King (demnächst)"
+    "name": "Mr. King",
+    "status": "reviewed",
+    "preis": "7",
+    "geschmack": 6.1,
+    "präsentation": 6.8,
+    "übereinstimmung bestellung": 8.1,
+    "menge": "432",
+    "service": 8.3,
+    "ambiente": 7.6,
+    "layering": 5.7,
+    "zeit": 9.1,
+    "fleisch": 5.4,
+    "brot": 6.7,
+    "gemüse": 6.9,
+    "sauce": 5.9,
+    "gesamt": 6.0,
+    "besonderheiten": {
+      "positiv": [
+        "Stabiles Brot",
+        "Viele Sitzgelegenheiten",
+        "Nettes Personal",
+        "Lange Öffnungszeiten"
+      ],
+      "negativ": [
+        "Hähnchen im Kalbsdöner",
+        "Steak-Spieß",
+        "Eher kleiner Döner"
+      ],
+      "neutral": [
+        "Dill im Döner",
+        "Steak-Spieß"
+      ]
+    },
+    "datum": "26.10.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d189.7886819399042!2d8.772081770002847!3d50.80866617065799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc6280b063ac53%3A0xf65a47d203905c56!2sMr.%20King%20Marburg%20Jawoll%20Jawoll!5e1!3m2!1sde!2sde!4v1794241253142!5m2!1sde!2sde"
   },
   {
-    "name": "Uni Döner (demnächst)"
+    "name": "Uni Döner",
+    "status": "reviewed",
+    "preis": "7.50",
+    "geschmack": 5.8,
+    "präsentation": 5.8,
+    "übereinstimmung bestellung": 10.0,
+    "menge": "525",
+    "service": 7.5,
+    "ambiente": 7.2,
+    "layering": 4.8,
+    "zeit": 8.8,
+    "fleisch": 6.2,
+    "brot": 5.0,
+    "gemüse": 6.6,
+    "sauce": 6.0,
+    "gesamt": 6.2,
+    "besonderheiten": {
+      "positiv": [
+        "Schnelle Zubereitung",
+        "Sesam auf dem Brot",
+        "Viele Sitzgelegenheiten"
+      ],
+      "negativ": [
+        "Fleischdöner sehr trocken",
+        "Brot teiglastig und undicht",
+        "Schwaches Layering"
+      ],
+      "neutral": [
+        "Vegane scharfe Sauce"
+      ]
+    },
+    "subtitle": "",
+    "datum": "24.07.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2521.1999761096217!2d8.772440499999998!3d50.808933499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc630029bd2e5b%3A0xc6f56ebabb929d82!2sUni%20D%C3%B6ner!5e0!3m2!1sen!2snl!4v1792360684084!5m2!1sen!2snl"
   },
   {
-    "name": "Royal Döner Kebab und Pizzahaus (demnächst)"
+    "name": "Somat",
+    "status": "reviewed",
+    "preis": "8",
+    "geschmack": 6.5,
+    "präsentation": 6.7,
+    "übereinstimmung bestellung": 10,
+    "menge": "482",
+    "service": 2.7,
+    "ambiente": 8.3,
+    "layering": 5.8,
+    "zeit": 5.2,
+    "fleisch": 5.8,
+    "brot": 5.2,
+    "gemüse": 6.7,
+    "sauce": 7,
+    "gesamt": 6.8,
+    "besonderheiten": {
+      "positiv": [
+        "Große vegetarische und vegane Auswahl",
+        "Schickes Ambiente",
+        "Viele Sitzgelegenheiten (drin & draußen)"
+      ],
+      "negativ": [
+        "Eher teuer",
+        "Zwei bereits bezahlte Bestellungen vergessen"
+      ],
+      "neutral": [
+        "Nur Hähnchenfleisch"
+      ]
+    },
+    "subtitle": "",
+    "datum": "21.09.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2521.267891956554!2d8.7715225!3d50.807675100000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc637ef8fdf185%3A0x2ac9a98a16cb1f0e!2sSomat%20D%C3%B6ner!5e0!3m2!1sen!2snl!4v1792360683310!5m2!1sen!2snl"
   },
   {
-    "name": "Somat (demnächst)"
+    "name": "Euro Döner und Tenders",
+    "status": "reviewed",
+    "preis": "5.00",
+    "geschmack": 4.3,
+    "präsentation": 4.5,
+    "übereinstimmung bestellung": 10,
+    "menge": "516",
+    "service": 7.4,
+    "ambiente": 4.9,
+    "layering": 4.1,
+    "zeit": 0,
+    "fleisch": 3.4,
+    "brot": 5,
+    "gemüse": 4.1,
+    "sauce": 5.9,
+    "gesamt": 4.25,
+    "besonderheiten": {
+      "positiv": [
+        "Sehr billig"
+      ],
+      "negativ": [
+        "AI Slop Website",
+        "Sehr langsam",
+        "(bitte Erfahrungsbericht lesen)"
+      ],
+      "neutral": [
+      ]
+    },
+    "subtitle": "",
+    "datum": "18.08.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2521.157609044322!2d8.772245!3d50.809718499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc634fd4b03aa3%3A0xb6b4aaf948df134b!2sEuro%20Doner%20%26%20Tenders!5e0!3m2!1sen!2snl!4v1792360685199!5m2!1sen!2snl"
   }
 ]

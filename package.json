@@ -2,9 +2,20 @@
   "name": "doener-rat",
   "version": "1.0.0",
   "description": "Most authorative Doener Kebap rating in Mittelhessen",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
   "scripts": {
-    "watch": "npx @tailwindcss/cli -i ./css/input.css -o ./css/styles.css --watch",
-    "build": "npx @tailwindcss/cli -i ./css/input.css -o ./css/styles.css --minify"
+    "dev": "astro dev",
+    "watch": "astro dev",
+    "check": "npm run check:content && astro check",
+    "check:content": "node scripts/check-content.mjs",
+    "test:content": "node --test scripts/check-content.test.mjs",
+    "test:ranking": "node --test scripts/ranking.test.mjs",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "repository": {
     "type": "git",
@@ -18,8 +29,11 @@
   },
   "homepage": "https://github.com/L-4-r-s/doener-rat#readme",
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.3",
+    "@astrojs/check": "^0.9.9",
     "@tailwindcss/typography": "^0.5.20",
-    "tailwindcss": "^4.3.3"
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3"
   }
 }
