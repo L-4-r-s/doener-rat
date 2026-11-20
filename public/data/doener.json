@@ -523,7 +523,7 @@
   {
     "name": "Frischgenuss",
     "status": "reviewed",
-    "preis": "8.50",
+    "preis": "8",
     "geschmack": 6.9,
     "präsentation": 8,
     "übereinstimmung bestellung": 9.9,
@@ -591,40 +591,72 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40062.12898684129!2d8.820294728955105!3d50.80362452287223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc629b460cee6d%3A0x63879dc0829cfb72!2sStar%20D%C3%B6ner%20%26%20Pizzahaus!5e1!3m2!1sde!2sde!4v1784150843266!5m2!1sde!2sde"
   },
   {
-    "name": "Mr. King (demnächst)",
-    "status": "pending"
+    "name": "Mr. King",
+    "status": "reviewed",
+    "preis": "7",
+    "geschmack": 6.1,
+    "präsentation": 6.8,
+    "übereinstimmung bestellung": 8.1,
+    "menge": "432",
+    "service": 8.3,
+    "ambiente": 7.6,
+    "layering": 5.7,
+    "zeit": 9.1,
+    "fleisch": 5.4,
+    "brot": 6.7,
+    "gemüse": 6.9,
+    "sauce": 5.9,
+    "gesamt": 6.0,
+    "besonderheiten": {
+      "positiv": [
+        "Stabiles Brot",
+        "Viele Sitzgelegenheiten",
+        "Nettes Personal",
+        "Lange Öffnungszeiten"
+      ],
+      "negativ": [
+        "Hähnchen im Kalbsdöner",
+        "Steak-Spieß",
+        "Eher kleiner Döner"
+      ],
+      "neutral": [
+        "Dill im Döner",
+        "Steak-Spieß"
+      ]
+    },
+    "datum": "26.10.2026",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d189.7886819399042!2d8.772081770002847!3d50.80866617065799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc6280b063ac53%3A0xf65a47d203905c56!2sMr.%20King%20Marburg%20Jawoll%20Jawoll!5e1!3m2!1sde!2sde!4v1794241253142!5m2!1sde!2sde"
   },
   {
-    "name": "Uni Döner (demnächst)",
+    "name": "Uni Döner",
     "status": "reviewed",
     "preis": "7.50",
     "geschmack": 5.8,
-    "präsentation": 5.4,
+    "präsentation": 5.8,
     "übereinstimmung bestellung": 10.0,
-    "menge": "521",
-    "service": 7.4,
-    "ambiente": 7.0,
+    "menge": "525",
+    "service": 7.5,
+    "ambiente": 7.2,
     "layering": 4.8,
     "zeit": 8.8,
-    "fleisch": 6.0,
+    "fleisch": 6.2,
     "brot": 5.0,
-    "gemüse": 6.5,
-    "sauce": 6.2,
+    "gemüse": 6.6,
+    "sauce": 6.0,
     "gesamt": 6.2,
     "besonderheiten": {
       "positiv": [
-        "Alle fünf Bestellungen wie bestellt",
         "Schnelle Zubereitung",
-        "Sesam auf dem Brot kam bei einem Tester besonders gut an"
+        "Sesam auf dem Brot",
+        "Viele Sitzgelegenheiten"
       ],
       "negativ": [
-        "Fleischdöner teils gegen Ende sehr trocken",
-        "Brot teiglastig und teils undicht",
-        "Schwaches Layering",
-        "Zutaten in der vollen Theke nicht sichtbar"
+        "Fleischdöner sehr trocken",
+        "Brot teiglastig und undicht",
+        "Schwaches Layering"
       ],
       "neutral": [
-        "Falafeldöner mit veganer scharfer Sauce probiert"
+        "Vegane scharfe Sauce"
       ]
     },
     "subtitle": "",
@@ -632,43 +664,34 @@
     "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2521.1999761096217!2d8.772440499999998!3d50.808933499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bc630029bd2e5b%3A0xc6f56ebabb929d82!2sUni%20D%C3%B6ner!5e0!3m2!1sen!2snl!4v1792360684084!5m2!1sen!2snl"
   },
   {
-    "name": "Royal Döner Kebab und Pizzahaus (demnächst)",
-    "status": "closed"
-  },
-  {
-    "name": "Somat (demnächst)",
+    "name": "Somat",
     "status": "reviewed",
-    "preis": "7.60",
-    "geschmack": 6.6,
-    "präsentation": 6.4,
+    "preis": "8",
+    "geschmack": 6.5,
+    "präsentation": 6.7,
     "übereinstimmung bestellung": 10,
-    "menge": "471",
-    "service": 3.2,
-    "ambiente": 8,
+    "menge": "482",
+    "service": 2.7,
+    "ambiente": 8.3,
     "layering": 5.8,
-    "zeit": 4.5,
-    "fleisch": 6,
-    "brot": 5,
-    "gemüse": 6.4,
+    "zeit": 5.2,
+    "fleisch": 5.8,
+    "brot": 5.2,
+    "gemüse": 6.7,
     "sauce": 7,
     "gesamt": 6.8,
     "besonderheiten": {
       "positiv": [
         "Große vegetarische und vegane Auswahl",
-        "Frisch wirkende Zutaten",
-        "Angenehmer Laden mit Pflanzen und hohen Decken",
-        "Knoblauchsauce schmeckt deutlich nach Knoblauch",
-        "Bar- und Kartenzahlung"
+        "Schickes Ambiente",
+        "Viele Sitzgelegenheiten (drin & draußen)"
       ],
       "negativ": [
-        "Brot zäh, dünn und zu klein für die Füllung",
-        "Zutaten teils schlecht verteilt",
-        "Teilweise sehr dicke Hähnchenstücke",
+        "Eher teuer",
         "Zwei bereits bezahlte Bestellungen vergessen"
       ],
       "neutral": [
-        "Hähnchen als einzige Fleischoption",
-        "Fleisch- und Seitan-Döner 8 €, ein Döner ohne Fleisch 6 €"
+        "Nur Hähnchenfleisch"
       ]
     },
     "subtitle": "",
@@ -679,7 +702,7 @@
     "name": "Euro Döner und Tenders",
     "status": "reviewed",
     "preis": "5.00",
-    "geschmack": 4.4,
+    "geschmack": 4.3,
     "präsentation": 4.5,
     "übereinstimmung bestellung": 10,
     "menge": "516",
@@ -694,20 +717,14 @@
     "gesamt": 4.25,
     "besonderheiten": {
       "positiv": [
-        "Döner und Falafeldöner für 5 €",
-        "Alle Bestellungen wie bestellt",
-        "Scharfe Sauce mit Tomatennote gut bewertet"
+        "Sehr billig"
       ],
       "negativ": [
-        "Alle acht Zeitbewertungen bei 0 Punkten; ein Tester notierte 41 Minuten",
-        "Verbrannte Fleischstücke bemängelt",
-        "Zwei Tester waren unsicher, ob einzelne Fleischstücke richtig durchgegart waren",
-        "Brot durch Sauce teils stark aufgeweicht",
-        "Wenig Platz bemängelt"
+        "AI Slop Website",
+        "Sehr langsam",
+        "(bitte Erfahrungsbericht lesen)"
       ],
       "neutral": [
-        "Falafeldöner mit Knoblauchsauce probiert",
-        "Fleisch und Falafel unterschiedlich bewertet"
       ]
     },
     "subtitle": "",

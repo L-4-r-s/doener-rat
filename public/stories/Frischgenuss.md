@@ -17,7 +17,7 @@ Schon der Laden selbst strahlt Döner-Kultur pur aus. Würde man in einem Kinder
 
 ### Menge & Preis-Leistung
 
-Mit **8,50 €** ist der Döner zwar definitiv im gehobenen Preissegment angesiedelt, doch im Gegensatz zu anderen teuren Vertretern in Marburg ist der Preis hier durch die beachtliche Fleischqualität und eine sehr stattliche Menge größtenteils nachzuvollziehen.
+Mit **8,50 €** für einen Kalbfleisch-Döner (7,50€ für Hähnchen) ist der Döner zwar definitiv im gehobenen Preissegment angesiedelt, doch im Gegensatz zu anderen teuren Vertretern in Marburg ist der Preis hier durch die beachtliche Fleischqualität und eine sehr stattliche Menge größtenteils nachzuvollziehen.
 
 ---
 
